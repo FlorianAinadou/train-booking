@@ -1,5 +1,5 @@
 # train-booking-al-20-21
-* Auteurs: **Team D**
+* Auteurs: **Team C**
     * AINADOU Florian
     * DJEKINOU Paul-Marie
     * KOFFI Paul
