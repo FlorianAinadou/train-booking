@@ -1,7 +1,23 @@
-Week 39:
+# Week 40:
 
-Scope definition, main scenarios
+### Achieved
+Components Diagram, and final scope definition 
 
-Week 40:
+### For the following week:
+- Begin different apps development
 
-Components Diagram, and final scope definition
+### Risks:
+- Choice of technologies 
+- Tasks repartition
+
+### Flag (green)
+
+
+# Week 39:
+
+### Achieved
+
+Scope definition, main scenarios 
+### Flag (green)
+
+
