@@ -21,6 +21,6 @@ hs_err_pid*
 **/.project
 **/.settings
 
-lib
+#il faudra essayer de mettre les autres lib à la main parce que ça bloque flutter
 
 __pycache__
