@@ -13,7 +13,10 @@
 - Choice of technologies 
 - Tasks repartition
 
-### Flag (orange)
+```diff
+! ### Flag (Yellow)
+```
+
 
 # Week 41:
 
@@ -29,7 +32,7 @@
 - Choice of technologies 
 - Tasks repartition
 
-### Flag (orange)
+### Flag (Yellow)
 
 
 # Week 40:
