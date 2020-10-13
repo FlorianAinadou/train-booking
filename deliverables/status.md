@@ -5,16 +5,17 @@
 - Detailed description of the component diagram available from page 6 of the [architecture.pdf](./architecture.pdf) document.
 - Architectural choices made for frontend, backend, database and API documentation.
 
-### For the following week:
+### For the following week
 - setup of backend and frontend technologies
 - implementation of the component diagram architecture in the code
 
-### Risks:
+### Risks
 - Choice of technologies 
 - Tasks repartition
 
+### Flag
 ```diff
-! ### Flag (Yellow)
+! (Yellow)
 ```
 
 
@@ -23,16 +24,19 @@
 ### Achieved
 - Review of Components Diagram 
 
-### For the following week:
+### For the following week
 - Choice of technologies for system implementation
 - Justification of these technologies
 
-### Risks:
+### Risks
 - bad review of the component diagram
 - Choice of technologies 
 - Tasks repartition
 
-### Flag (Yellow)
+### Flag
+```diff
+! (Yellow)
+```
 
 
 # Week 40:
@@ -40,14 +44,17 @@
 ### Achieved
 Components Diagram, and final scope definition 
 
-### For the following week:
+### For the following week
 - Begin different apps development
 
-### Risks:
+### Risks
 - Choice of technologies 
 - Tasks repartition
 
-### Flag (green)
+### Flag
+```diff
++ (Green)
+```
 
 
 # Week 39:
@@ -55,6 +62,9 @@ Components Diagram, and final scope definition
 ### Achieved
 
 Scope definition, main scenarios 
-### Flag (green)
+### Flag
+```diff
++ (Green)
+```
 
 
