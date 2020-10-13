@@ -5,17 +5,10 @@
     * KOFFI Paul
     * NABAGOU Djotiham
   * Version: en développement
-  * Statuts d'Intégration continue : [![Build Status]
+  * Statuts d'Intégration continue : À venir
   
 # Vue d'ensemble
- Cette étude de cas est utilisée pour illustrer les différentes technologies impliquées dans le cours d'Architecture Logicielle donné à Polytech Nice - Sophia Antipolis en 5e année. Ce code de démonstration nécessite les logiciels suivants pour fonctionner correctement :
- 
- À modifier..........................................................
-   * Environnement de Build & de configuration J2E : Maven 3        .
-   * Environnement de déploiement : Docker 2.2.0.5 (Stable)         .
-   * Langage d'implémentation J2E : Java 8                          .
-   * Langage d'implémentation .Net : Mono > 3.12                    .
-   ..................................................................
+ Cette étude de cas est utilisée pour illustrer les différentes technologies impliquées dans le cours d'Architecture Logicielle donné à Polytech Nice - Sophia Antipolis en 5e année
    
   ## Vision du produit
   Train booking est un système de réservation de billets de train ayant pour objectif de fournir aux utilisateurs un moyen dématérialisé d'effectuer leurs réservations.
@@ -24,26 +17,25 @@
     
   L'architecture logicielle à développer dans ce projet s'appuiera sur la pile suivante :
   <p align="center">
-      <img src="./docs/archi.png"/>
+      <img src="./deliverables/train-booking-components-diagram.png"/>
   </p>
   
   ## Comment utiliser ce repository
   * La branche `master` (la branche par défaut) représente la dernière version stable du système.
   * La branche `develop` représente le système en cours de développement.
-    * Les issues peuvent être créés en utilisant le [système de ticket de Github](https://github.com/wak-nda/train-booking-al-20-21/issues)
+    * Les issues peuvent être créés en utilisant le [système de ticket de Github](https://github.com/wak-nda/train-booking-al-20-21-team-c/issues)
   
   ### Récupération du projet
-  À modifier..........................................................
-  Ce projet contient des sous-modules github et nécessite de ce fait de suivre les instructions suivantes pour effectuer une récupération complète du projet.
   1. Effectuer un clone classique du projet en faisant ```git clone url_du_repo``` ou en récupérant le zip depuis cette page.
-  2. Lancer le script [gitUpdateAll.sh](./gitUpdateAll.sh) se trouvant dans à la racine.
     
   ### Compilation
+  À venir...
   
   ### Exécution
+  À venir...
   
   ## Pile technologique
-  
+  À venir...
   <p align="center">
     <img src="./docs/stack.jpg"/>
   </p>
