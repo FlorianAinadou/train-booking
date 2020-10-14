@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'components/train_page.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
 
@@ -26,6 +28,9 @@ class HomePage extends StatelessWidget {
               border: OutlineInputBorder(),
               labelText: "Ville d'arrivée",
             ),
+          ),
+          Expanded(
+            child: TrainPage(),
           )
         ],
       ),
