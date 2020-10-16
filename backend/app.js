@@ -1,40 +1,34 @@
-var app = require('koa')()
-  , logger = require('koa-logger')
-  , json = require('koa-json')
-  , views = require('koa-views')
-  , onerror = require('koa-onerror');
+const Koa = require('koa');
+const cors = require('@koa/cors');
+const bodyParser = require('koa-bodyparser');
+const mongoose = require('mongoose');
+const logger = require('koa-logger');
+const config = require('./config');
+//const sdk = require('./src/server/sdk');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
 
-// error handler
-onerror(app);
+const users  = require('./src/server/routes/users');
 
-// global middlewares
-app.use(views('views', {
-  root: __dirname + '/views',
-  default: 'jade'
-}));
-app.use(require('koa-bodyparser')());
-app.use(json());
+const app = new Koa();
+const PORT = 9000;
+
+app.use(bodyParser());
 app.use(logger());
+app.use(cors({origin: '*', exposeHeaders: '*'}));
+app.use(users.routes());
 
-app.use(function *(next){
-  var start = new Date;
-  yield next;
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
+mongoose.connect(`mongodb+srv://${config.configDB.userName}:${config.configDB.password}@${config.configDB.host}/${config.configDB.name}?retryWrites=true&w=majority`, {
+  useNewUrlParser: true,
+  useCreateIndex: true
 });
 
-app.use(require('koa-static')(__dirname + '/public'));
+mongoose.set('debug', true);
 
-// routes definition
-app.use(index.routes(), index.allowedMethods());
-app.use(users.routes(), users.allowedMethods());
-
-// error-handling
-app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)
+const server = app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
 });
 
-module.exports = app;
+
+module.exports = {
+  server
+};
