@@ -4,8 +4,8 @@
     * DJEKINOU Paul-Marie
     * KOFFI Paul
     * NABAGOU Djotiham
-  * Version: en développement
-  * Statuts d'Intégration continue : À venir
+* Version: en développement
+* Statuts d'Intégration continue : À venir
   
 # Vue d'ensemble
  Cette étude de cas est utilisée pour illustrer les différentes technologies impliquées dans le cours d'Architecture Logicielle donné à Polytech Nice - Sophia Antipolis en 5e année
