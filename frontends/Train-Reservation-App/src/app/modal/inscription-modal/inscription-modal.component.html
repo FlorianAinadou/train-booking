@@ -1,0 +1,191 @@
+<!--Modal d'inscription-->
+  <div class="modal-header">
+    <h4 class="modal-title policeHobo" style=" border-bottom : 2px solid blue;" id="modal-basic-inscription">
+      Inscrivez-Vous !
+    </h4>
+    <button style="outline-style:none;" type="button" class="close myButton" id="noBorder" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')" #close>
+      <span aria-hidden="true" class="myClose" style="font-size : 50px;">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div style="text-align: center; ">
+      <img class="round" style="height: 4rem;" src="../../../assets/img/transport-public-user-interface-train-icon-design.jpg" alt="imgNotFound">
+      <button (click)="t.select('tab-selectbyid2')"  style=" background: transparent; border: none !important; font-size:0;" #md></button>
+    </div>
+    <p>
+      <ngb-progressbar value="{{progressValue}}" style="position: relative; bottom: 0px;"></ngb-progressbar>
+    </p>
+
+    <!--<button  #boolAdmin (click)="t.select('tab-selectbyid2')"></button>-->
+    <!--<button (click)="t.select('tab-selectbyid1')" style=" background: transparent; border: none !important; font-size:0;" #b2></button>-->
+    <ngb-tabset #t="ngbTabset" [justify]="currentJustify" #v>
+
+      <ngb-tab id="tab-selectbyid1"  [disabled]="passedOne">
+        <ng-template ngbTabTitle><b style="color: black">Etape 1</b></ng-template>
+        <ng-template ngbTabContent>
+          <form style="text-align: center;" [formGroup]="inscriptionFormOne">
+            <div class="myInput">
+            </div>
+            <br>
+            <div class="myInput">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="lastName">
+                    <!--<span>Nom</span>-->
+                    <br>
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" class="MyInputConnexion-custom" id="lastName" placeholder="Nom"
+                           [formControlName]="'lastName'">
+                    <span class="barI">
+                      <span *ngIf="inscriptionOneSubmitted && g.lastName.errors && g.lastName.errors.required"
+                            class="myError">Nom Requis</span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-sm-6">
+                  <label for="password">
+                    <!--<span style="font-weight: bold;">Pseudo</span>-->
+                    <br>
+                    <i class="fas fa-key"></i>
+                    <input type="password" class="MyInputConnexion-custom" id="password" placeholder="Mot de passe"
+                           [formControlName]="'password'">
+                    <span class="barI">
+                      <span *ngIf="inscriptionOneSubmitted && g.password.errors && g.password.errors.required"
+                            class="myError">Password Requis</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="myInput">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="pseudo">
+                    <!--<span style="font-weight: bold;">Pseudo</span>-->
+                    <br>
+                    👨‍🎓
+                    <input type="text" class="MyInputConnexion-custom" id="pseudo" placeholder="Prénom"
+                           [formControlName]="'firstName'">
+                    <span class="barI">
+                         <span
+                           *ngIf="inscriptionOneSubmitted && g.firstName.errors && g.firstName.errors.required"
+                           class="myError">Prénom Requis</span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-sm-6">
+                  <label for="passwordConfirmation">
+                    <!--<span style="font-weight: bold;">Pseudo</span>-->
+                    <br>
+                    <i class="fas fa-key"></i>
+                    <input type="password" class="MyInputConnexion-custom" id="passwordConfirmation"
+                           placeholder="Confirmer MDP" [formControlName]="'confirmPassword'">
+                    <span class="barI">
+                      <span
+                        *ngIf="inscriptionOneSubmitted && g.confirmPassword.errors && g.confirmPassword.errors.required"
+                        class="myError">Password Requis</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <br>
+
+
+            <button type="submit" #One class="btn-con" (click)="inscriptionStepOne();"><i style="color: #eeeeee;"
+                                                                                    class="fas fa-user-plus"></i>
+            </button>
+          </form>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab-selectbyid2" [disabled]="passedTwo">
+        <ng-template ngbTabTitle><b>Etape 2</b></ng-template>
+        <ng-template ngbTabContent>
+          <form style="text-align: center;" [formGroup]="inscriptionFormTwo">
+            <br>
+            <div class="myInput">
+              <div class="row">
+                <div class="col-sm-6">
+                  Date 🗓
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                           name="dp" [formControlName]="'dateF'" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <i class="fas fa-calendar"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <span
+                    *ngIf="inscriptionTwoSubmitted && s.dateF.errors && s.dateF.errors.required"
+                    class="myError">Date de n requis</span>
+                </div>
+                <div class="col-sm-6">
+                  <label for="sexe">
+                    Sexe <i class="fas fa-mars"></i> | <i class="fas fa-venus"></i> <br>
+                    <select name="sexe" class="form-control form-control-sm" id="sexe" [formControlName]="'sex'">
+                      <option>
+                        M
+                      </option>
+                      <option>
+                        F
+                      </option>
+                    </select>
+                  </label>
+                  <span
+                    *ngIf="inscriptionTwoSubmitted && s.sex.errors && s.sex.errors.required"
+                    class="myError">Requis</span>
+                </div>
+              </div>
+            </div>
+            <br>
+
+
+            <div class="myInput">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="passwordConfirmation">
+                    <!--<span style="font-weight: bold;">Pseudo</span>-->
+                    <br>
+                    <i>📍</i>
+                    <input type="text" class="MyInputConnexion-custom" id="D"
+                           placeholder="Nationnalité" [formControlName]="'nat'">
+                    <span class="barI">
+                         <span
+                           *ngIf="inscriptionTwoSubmitted && s.nat.errors && s.nat.errors.required"
+                           class="myError">Nationnalité Requise</span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-sm-6">
+                  <label for="email">
+                    <br>
+                    <i class="fas fa-at"></i>
+                    <input type="text" class="MyInputConnexion-custom" id="email" placeholder="Email"
+                           [formControlName]="'email'">
+                    <span class="barI">
+                      <span *ngIf="inscriptionTwoSubmitted && s.email.errors && s.email.errors.required"
+                            class="myError">Email Requis</span>
+             <span *ngIf="inscriptionTwoSubmitted && s.email.errors && s.email.errors.email"
+                   class="myError">Email Invalide</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <br>
+
+
+            <button type="submit" class="btn-con" (click)="inscriptionTwo()"><i style="color: #eeeeee;"
+                                                                           class="fas fa-user-plus"></i></button>
+          </form>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <div class="modal-footer" style="border-top : 0;">
+    <!--<button type="button" class="btn btn-danger btn-outline-dark" (click)="modal.close('Save click')">close</button>-->
+  </div>

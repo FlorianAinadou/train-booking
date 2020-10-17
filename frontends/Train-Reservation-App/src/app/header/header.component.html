@@ -1,0 +1,15 @@
+<div class="toolbar" role="banner">
+  <img alt="logo" width="70" src="../../../assets/img/2cd43b_89641d234e1d4393944627dc2448b0df_mv2.png"
+  />
+
+  <span class="policeHero"> Train Booking</span>
+  <div class="spacer"></div>
+  <a *ngIf="!userConnected" aria-label="Angular on twitter" target="_blank" rel="noopener" (click)="openInscription()"
+     title="Twitter">
+    <i class="fas fa-user-plus fa-3x colI"></i>
+  </a>
+  <a *ngIf="userConnected" aria-label="Angular on twitter" target="_blank" rel="noopener" (click)="deconnexion()"
+     title="deconnexion">
+    <i class="fas fa-window-close fa-3x colI"></i>
+  </a>
+</div>
