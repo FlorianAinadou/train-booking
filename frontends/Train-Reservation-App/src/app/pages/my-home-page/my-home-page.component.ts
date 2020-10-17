@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+import {far} from '@fortawesome/free-regular-svg-icons';
+import {faFilm} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
 
@@ -35,24 +35,26 @@ export class MyHomePageComponent implements OnInit {
   }
 
   connectMe(details: string[]): void {
-    this.userConnected = true;
-    this.currentUser = "Paul Koffi";
-    // window.scrollTo(0, 0);
-    // this.userService.getUser(details[0], details[1]);
-    // this.userService.user$.subscribe((user) => {
-    //   if (user) {
-    //     this.userConnected = true;
-    //     this.currentUser = user.name;
-    //     window.scrollTo(0, 0);
-    //   }
-    // });
-    // this.alert[0].message = "L'authentification a échoué, veuillez réessayer !!";
-    // setTimeout(() => {
-    //   this.alert[0].message = null;
-    // }, 2000);
 
+    // window.scrollTo(0, 0);
+    this.userService.getUser(details[0], details[1]);
+    this.userService.user$.subscribe((user) => {
+      if (user) {
+        console.table(user);
+        this.userConnected = true;
+        this.currentUser = user.name;
+        window.scrollTo(0, 0);
+      } else {
+        this.alert[0].message = "L'authentification a échoué, veuillez réessayer !!";
+        setTimeout(() => {
+          this.alert[0].message = null;
+        }, 2000);
+      }
+    });
+
+    // this.userConnected = true;
+    // this.currentUser = "Paul Koffi";
     console.log(this.currentUser);
-    console.log("oco");
   }
 
   deconnectMe(rep: boolean): void {

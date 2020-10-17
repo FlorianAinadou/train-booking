@@ -131,14 +131,14 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
 
       const dat = Date.now();
       const myUser = {
-        'email': em,
+        'mail': em,
         'password': cps,
         'id_user': dat,
-        'prenom': firstName,
-        'sexe': sex,
-        'nom': lastName,
-        'dateNaissance': dateS,
-        'nationalite': nat
+        'firstName': firstName,
+        'gender': sex,
+        'lastName': lastName,
+        'birthday': dateS,
+        'nationality': nat
       };
       this.userService.addUser(myUser);
       console.log("GO se connecter !");
@@ -149,7 +149,7 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
       details.push(ps);
       setTimeout(() => {
         const el: HTMLElement = this.close.nativeElement as HTMLElement;
-        console.log("GO se connecter !");
+        // console.log("GO se connecter !");
         el.click();
         // this.OnConnect.emit(details);
       }, 500);

@@ -8,6 +8,7 @@ const sdk = require('./src/server/sdk');
 
 
 const trainSelector  = require('./src/server/routes/trainSelector');
+const customerRegistration  = require('./src/server/routes/customerRegistration');
 
 const app = new Koa();
 const PORT = 9000;
@@ -16,6 +17,7 @@ app.use(bodyParser());
 app.use(logger());
 app.use(cors({origin: '*', exposeHeaders: '*'}));
 app.use(trainSelector.routes());
+app.use(customerRegistration.routes());
 
 mongoose.connect(`mongodb+srv://${config.configDB.userName}:${config.configDB.password}@${config.configDB.host}/${config.configDB.name}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,

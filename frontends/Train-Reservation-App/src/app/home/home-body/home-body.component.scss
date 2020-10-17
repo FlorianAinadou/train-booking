@@ -23,14 +23,14 @@
 
 .rel {
   position: relative;
-  top: -88px;
-  color: darkred !important;
+  top: -96px;
+  color: white !important;
 }
 
 .relBlack {
   position: relative;
-  top: -88px;
-  color: #060e23 !important;
+  top: -96px;
+  color: black !important;
 
 }
 
@@ -187,11 +187,13 @@ p {
 
 .content {
   display: flex;
+  //margin-top: -20px;
   margin: 82px auto 32px;
   padding: 0 16px;
   max-width: 960px;
   flex-direction: column;
   align-items: center;
+  //background: #222426 !important;
 }
 
 svg.material-icons {
@@ -439,3 +441,6 @@ svg#clouds {
   }
 }
 
+.black {
+  background: #222426 !important;
+}

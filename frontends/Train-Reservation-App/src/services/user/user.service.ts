@@ -3,14 +3,14 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
-
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  // private userUrl = ' http://localhost:';
+  private userUrl = ' http://localhost:9000/api/user/';
   private user = null;
 
   public user$: BehaviorSubject<User> = new BehaviorSubject(this.user);
@@ -36,30 +36,35 @@ export class UserService {
 
   public addUser(task) {
     alert('GO se connecter !"');
-    // this.http.post(this.userUrl, task).subscribe(s => {
-    //   console.log(s);
-    // });
+    this.http.post(this.userUrl + 'signup', task).subscribe(s => {
+      console.log(s);
+    });
   }
 
 
   public getUser(email, password) {
-    // this.http.get<User>(this.userUrl + email + '/' + password).subscribe(s => {
-    //   this.user = s;
-    //   this.user$.next(s);
-    //   // Stocker en mémoire
-    //   if (s) {
-    //     // alert('CONNECTE');
-    //     this.authentification$.next(false);
-    //     localStorage.setItem('currentUserEmail', s.email);
-    //     localStorage.setItem('currentUserName', s.name);
-    //     localStorage.setItem('currentUserId', s.id_user.toString());
-    //     this.router.navigate(['/home/user']);
-    //   } else {
-    //     alert('Echec de l"authentification ! 🔑📌');
-    //     this.authentification$.next(true);
-    //   }
-    //   // console.log('rep =  ', s);
-    // });
+    const myUser = {
+      'mail': email,
+      'password': password
+    };
+    this.http.post(this.userUrl + 'login', myUser).subscribe(s => {
+      console.table("resp "+s);
+      // this.user = s;
+      // this.user$.next(s);
+      // Stocker en mémoire
+      // if (s) {
+        // alert('CONNECTE');
+        // this.authentification$.next(false);
+        // localStorage.setItem('currentUserEmail', s.email);
+        // localStorage.setItem('currentUserName', s.name);
+        // localStorage.setItem('currentUserId', s.id_user.toString());
+        // this.router.navigate(['/home/user']);
+      // } else {
+      //   alert('Echec de l"authentification ! 🔑📌');
+      //   this.authentification$.next(true);
+      // }
+      // console.log('rep =  ', s);
+    });
   }
 
   public getCurrentUser() {
@@ -70,6 +75,7 @@ export class UserService {
     //   // console.log('Rep USER ' + s);
     // });
   }
+
   //
   getCurrent() {
     return localStorage.getItem('currentUserEmail');
