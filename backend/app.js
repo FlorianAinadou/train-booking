@@ -4,10 +4,10 @@ const bodyParser = require('koa-bodyparser');
 const mongoose = require('mongoose');
 const logger = require('koa-logger');
 const config = require('./config');
-//const sdk = require('./src/server/sdk');
+const sdk = require('./src/server/sdk');
 
 
-const users  = require('./src/server/routes/users');
+const trainSelector  = require('./src/server/routes/trainSelector');
 
 const app = new Koa();
 const PORT = 9000;
@@ -15,7 +15,7 @@ const PORT = 9000;
 app.use(bodyParser());
 app.use(logger());
 app.use(cors({origin: '*', exposeHeaders: '*'}));
-app.use(users.routes());
+app.use(trainSelector.routes());
 
 mongoose.connect(`mongodb+srv://${config.configDB.userName}:${config.configDB.password}@${config.configDB.host}/${config.configDB.name}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
