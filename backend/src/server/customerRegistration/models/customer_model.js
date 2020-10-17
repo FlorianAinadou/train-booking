@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //Model definition
 
 CustomerSchema = new Schema({
-    id : {
+    idCustomer : {
         type: Number,
         require: true
     },
@@ -34,4 +34,4 @@ CustomerSchema = new Schema({
 mongoose.model('customer', CustomerSchema);
 const Customer = mongoose.model('customer');
 
-module.exports = Customer;
+module.exports = Customer
