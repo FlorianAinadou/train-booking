@@ -1,3 +1,26 @@
+# Week 43:
+
+### Achieved
+- We made new modifications of the component diagram for more details on different machines used, shared online database and more description about shared data between components. The picture of architecture is available [here](./train-booking-components-diagram.png).
+- Architecture document updated for technical justifications. Available from page 7 of [architecture.pdf](./architecture.pdf) document.
+- The backend has been set up and components like CustomerRegistration, TrainSelector and the bank extern are done.
+- The flutter mobile app has been set up, and the homepage is in progress
+- For Angular, we set up the five first stories (user management and train management)
+
+### For the following week
+- implement the two last components in the backend (BookingComponent and PaymentComponent)
+- Continuing implement flutter interfaces for reservations and user profile
+
+### Risks
+- Integration (communication between all components)
+- CI/CD
+- Tasks repartition
+
+### Flag
+```diff
+! (Yellow)
+```
+
 # Week 42:
 
 ### Achieved
