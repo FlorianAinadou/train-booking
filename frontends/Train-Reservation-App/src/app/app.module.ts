@@ -21,6 +21,7 @@ import {InscriptionModalComponent} from "./modal/inscription-modal/inscription-m
 import {HeaderComponent} from "./header/header.component";
 import {HomeBodyComponent} from "./home/home-body";
 import {ConnexionModalComponent} from "./modal/connexion-modal/connexion-modal.component";
+import {ReservationsPageComponent} from "./pages/reservations-page";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {ConnexionModalComponent} from "./modal/connexion-modal/connexion-modal.c
     InscriptionModalComponent,
     ConnexionModalComponent,
     HeaderComponent,
-    HomeBodyComponent
+    HomeBodyComponent,
+    ReservationsPageComponent
   ],
   imports: [
     BrowserModule,

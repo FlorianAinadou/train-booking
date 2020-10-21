@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AsyncSubject, BehaviorSubject, Observable, throwError} from 'rxjs';
+import {AsyncSubject, BehaviorSubject, Observable, Subject, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
@@ -17,7 +17,7 @@ export class UserService {
   public user$: AsyncSubject<User> = new AsyncSubject();
   public authentification$: AsyncSubject<boolean> = new AsyncSubject();
   private connected = false;
-
+  private subject = new Subject<any>();
 
   constructor(private http: HttpClient, private router: Router) {
 
@@ -26,14 +26,8 @@ export class UserService {
   public deconnected() {
     localStorage.removeItem('currentUserEmail');
     localStorage.removeItem('currentUserName');
-    localStorage.removeItem('currentUserId');
-    // this.router.navigate(['/']);
-    // console.log(localStorage.getItem('currentUserEmail'));
-    // this.http.get<User>(this.userUrl + 'deconnected' + '/' + 'deconnected').subscribe(s => {
-    //   this.user = null;
-    //   this.user$.next(null);
-    //   this.router.navigate(['/']);
-    // });
+    localStorage.removeItem('currentUserToken');
+    this.connected = false;
   }
 
   public addUser(task) {
@@ -41,52 +35,6 @@ export class UserService {
     this.http.post(this.userUrl + 'signup', task).subscribe(s => {
       console.log(s);
     });
-  }
-
-
-  public async getUser(email, password) {
-    const myUser = {
-      'mail': email,
-      'password': password
-    };
-    await this.http.post(this.userUrl + 'login', myUser).subscribe(s => {
-      // const newUser: User = {};
-      // newUser.email = email;
-      this.connected = true;
-      // this.user = newUser;
-      // console.table("resp " + s);
-      // const fakeUser: User = {};
-
-      // fakeUser.name = "NONAME13";
-      // this.user = fakeUser;
-      // this.user$.next(fakeUser);
-      // this.authentification$.next(true);
-
-      // this.user = s;
-      // this.user$.next(s);
-      // Stocker en mémoire
-      // if (s) {
-      // alert('CONNECTE');
-      // this.authentification$.next(false);
-      // localStorage.setItem('currentUserEmail', s.email);
-      // localStorage.setItem('currentUserName', s.name);
-      // localStorage.setItem('currentUserId', s.id_user.toString());
-      // this.router.navigate(['/home/user']);
-      // } else {
-      //   alert('Echec de l"authentification ! 🔑📌');
-      //   this.authentification$.next(true);
-      // }
-      // console.log('rep =  ', s);
-    }, e => {
-      alert("failure");
-      // this.authentification$.next(false);
-      // const fakeUser: User = {};
-      // fakeUser.name = "NONAME12";
-      // this.user = fakeUser;
-      // this.user$.next(fakeUser);
-    });
-
-    return this.connected;
   }
 
   getUserConnect(email, password): Observable<any> {
@@ -101,15 +49,21 @@ export class UserService {
       )
   }
 
-  decodeToken(myRawToken){
+  decodeToken(myRawToken, mail, name) {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(myRawToken);
     const expirationDate = helper.getTokenExpirationDate(myRawToken);
     const isExpired = helper.isTokenExpired(myRawToken);
-    console.log(myRawToken);
-    console.log(decodedToken);
-    console.log(expirationDate);
-    console.log(isExpired);
+    this.connected = true;
+    // console.log(myRawToken);
+    // console.log(decodedToken);
+    // console.log(expirationDate);
+    // console.log(isExpired);
+    if (!isExpired) {
+      localStorage.setItem('currentUserEmail', mail);
+      localStorage.setItem('currentUserName', name);
+      localStorage.setItem('currentUserToken', decodedToken);
+    }
   }
 
   public resetAuthentification() {
@@ -130,13 +84,36 @@ export class UserService {
     return throwError(errorMessage);
   }
 
-  //
-  getCurrent() {
-    return localStorage.getItem('currentUserEmail');
+
+  getCurrentUser() {
+    return JSON.stringify({
+      name: localStorage.getItem('currentUserName'),
+      mail: localStorage.getItem('currentUserEmail')
+    });
+  }
+
+  getCurrentUserName() {
+    return localStorage.getItem('currentUserName');
   }
 
   getAuth() {
-    return this.connected;
+    // alert(localStorage.getItem("currentUserEmail"));
+    return localStorage.getItem("currentUserEmail") !== null;
   }
 
+  redirectHomePage() {
+    this.router.navigate(['/']);
+  }
+
+  sendData(message: string) {
+    this.subject.next(message);
+  }
+
+  clearData() {
+    this.subject.next();
+  }
+
+  getData(): Observable<any> {
+    return this.subject.asObservable();
+  }
 }

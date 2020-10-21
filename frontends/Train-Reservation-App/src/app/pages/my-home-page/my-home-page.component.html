@@ -9,17 +9,17 @@
   [userConnected]="userConnected"
   [authentificationFailedHome]="authentificationFailed"
   [userConnectedName]="currentUser"
-  (OnConnect)="connectMe($event)"
   (OnDeconnexion)="deconnectMe($event)"
 ></app-header>
 
 
 
 
-<div class="bodyStyle">
-  <app-home-body [userConnected]="userConnected"
-                 [authentificationFailedHome]="authentificationFailed"
-                 [userConnectedName]="currentUser"(OnConnect)="connectMe($event)"></app-home-body>
+<div class="styleG">
+<!--  <app-home-body [userConnected]="userConnected"-->
+<!--                 [authentificationFailedHome]="authentificationFailed"-->
+<!--                 [userConnectedName]="currentUser"(OnConnect)="connectMe($event)"></app-home-body>-->
+   <router-outlet (activate)="onActivate($event)"></router-outlet>
 </div>
 
 <p class="modal-title policeHobo" *ngIf="alert[0].message"  style=" position: relative; margin-top: 149px; font-size: 19px; text-align: center;">

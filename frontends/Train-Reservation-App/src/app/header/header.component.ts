@@ -15,6 +15,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../services/user/user.service';
 import {Router} from '@angular/router';
 import {InscriptionModalComponent} from '../modal/inscription-modal/inscription-modal.component';
+import {Subscription} from "rxjs";
 
 // import {ConnexionModalComponent} from '../modal/connexion-modal/connexion-modal.component';
 
@@ -42,17 +43,16 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
               private router: Router, private modalService: NgbModal, public userService: UserService) {
 
     console.log('HEADER ******** Connecté ' + this.userConnected + '  Name  ' + this.userConnectedName);
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('Connecté ' + this.userConnected + '  Name  ' + this.userConnectedName + '  animation ' + this.authentificationFailedHome);
-    // Auth réussie
-    if (this.userConnected) {
-      if (this.modalReferenceConnexion) {
-        this.modalReferenceConnexion.close();
-      }
-    }
+    // console.log('Connecté ' + this.userConnected + '  Name  ' + this.userConnectedName + '  animation ' + this.authentificationFailedHome);
+    // // Auth réussie
+    // if (this.userConnected) {
+    //   if (this.modalReferenceConnexion) {
+    //     this.modalReferenceConnexion.close();
+    //   }
+    // }
   }
 
   ngOnInit() {
@@ -66,9 +66,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
   // Modal de l'inscription
   openInscription() {
     this.modalReferenceInscription = this.modalService.open(InscriptionModalComponent);
-    this.modalReferenceInscription.componentInstance.OnConnect.subscribe(event => {
-      this.OnConnect.emit(event);
-    });
+    // this.modalReferenceInscription.componentInstance.OnConnect.subscribe(event => {
+    //   this.OnConnect.emit(event);
+    // });
   }
 
   /* Fin Script MoDAl */
@@ -76,6 +76,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
   deconnexion() {
     // window.scrollTo(0, 0);
     this.OnDeconnexion.emit(true);
+  }
+
+  redirect(){
+    this.userService.redirectHomePage();
+  }
+
+  ngOnDestroy() {
+
   }
 
 }

@@ -76,11 +76,17 @@ router.post('/api/user/login', async (ctx) => {
             }
         ;
         var token = jwt.sign(payload, KEY, {algorithm: 'HS256', expiresIn: "15d"});
+        const response =
+            {
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "token": token
+            }
         console.log("Login Success");
-        f.success(ctx, JSON.stringify(token));
+        f.success(ctx, JSON.stringify(response));
     } else {
         console.error("Login Failure");
-        f.failure(ctx,  JSON.stringify("There's no user matching that"));
+        f.failure(ctx, JSON.stringify("There's no user matching that"));
     }
 });
 
@@ -98,7 +104,6 @@ router.post('/api/data', async (ctx) => {
         f.failure(ctx, "Bad Token");
     }
 });
-
 
 
 module.exports = router;

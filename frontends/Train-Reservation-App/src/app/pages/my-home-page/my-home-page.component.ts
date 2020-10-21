@@ -30,15 +30,19 @@ export class MyHomePageComponent implements OnInit {
   constructor(public userService: UserService, public router: Router) {
     // library.add(fas, far);
     // library.add(faFilm);
-    document.body.style.backgroundColor = '#fff';
+    // document.body.style.backgroundColor = '#fff';
     this.alert.push({'type': 'danger', 'message': null});
+    this.userConnected = this.userService.getAuth();
+    // alert("REP "+this.userConnected);
   }
 
-  async connectMe(details: string[]): Promise<void> {
+  async connectMe(details: string[],componentReference): Promise<void> {
     this.userService.getUserConnect(details[0], details[1]).subscribe(res => {
           this.userConnected = true;
-          this.currentUser = "Paul Koffi";
-          this.userService.decodeToken(res);
+          this.currentUser = res["firstName"].concat(" ",res["lastName"].toString());
+          console.table(res);
+          this.userService.decodeToken(res["token"],details[0],this.currentUser);
+          componentReference.connected(this.currentUser);
     }, error => {
           this.alert[0].message = "L'authentification a échoué, veuillez réessayer !!";
           setTimeout(() => {
@@ -50,12 +54,22 @@ export class MyHomePageComponent implements OnInit {
   deconnectMe(rep: boolean): void {
     this.userConnected = false;
     this.currentUser = null;
-    // this.userService.deconnected();
-    console.log("deco");
+    this.userService.deconnected();
+    // console.log("deco");
+    this.userService.sendData("deconnected");
   }
 
   ngOnInit() {
 
   }
 
+  onActivate(componentReference) {
+    console.log(componentReference);
+    // componentReference.anyFunction();
+    componentReference.OnConnect.subscribe(async (data) => {
+      // Will receive the data from child here
+       console.log("SUB");
+       await this.connectMe(data,componentReference);
+    })
+  }
 }
