@@ -1,0 +1,56 @@
+<!--Modal de connexion-->
+  <div class="modal-header">
+    <h4 class="modal-title policeHobo" style=" border-bottom : 2px solid blue;" id="modal-basic-connexion">Connectez -
+      Vous
+      !</h4>
+    <button #close style="outline-style:none;" type="button" class="close myButton" id="noBorder" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true" class="myClose" style="font-size : 50px;">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div style="text-align: center; ">
+      <img class="round" style="height: 4rem;" src="../../../assets/img/transport-public-user-interface-train-icon-design.jpg" alt="imgNotFound">
+    </div>
+    <form style="text-align: center; margin-top: 20px;" [formGroup]="connexionForm">
+      <div class="myInput">
+        <label for="mail">
+          <i class="far fa-user"></i> <br>
+          <input type="text" class="MyInput-custom" id="mail" placeholder="mail" [formControlName]="'email'">
+          <span class="bar">
+            <span *ngIf="connexionSubmitted && f.email.errors && f.email.errors.required"
+                  class="myError">Email Requis</span>
+             <span *ngIf="connexionSubmitted && f.email.errors && f.email.errors.email"
+                   class="myError">Email Invalide</span>
+          </span>
+          <!--<br *ngIf="connexionSubmitted && f.email.errors">-->
+
+          <!--<span *ngIf="connexionSubmitted && f.email.errors && f.email.errors.required" class="myError">Email Requis</span>-->
+          <!--<span *ngIf="connexionSubmitted && f.email.errors && f.email.errors.email" class="myError">Email Invalide</span>-->
+        </label>
+      </div>
+      <br>
+      <div class="myInput" style="margin-top: 20px;">
+        <label for="password">
+          <i class="fas fa-key"></i> <br>
+          <input class="MyInput-custom" type="password" id="description" placeholder="Password"
+                 [formControlName]="'password'">
+          <span class="bar">
+            <span *ngIf="connexionSubmitted && f.password.errors && f.password.errors.required" class="myError">Password Requis</span>
+            <span *ngIf="authentificationFailedHomeC && connexionSubmitted" class="myError policeHobo">Echec d'Authentification</span>
+          </span>
+        </label>
+      </div>
+      <br>
+
+      <button style="margin-top: 18px;" type="submit" class="btn-con" (click)="connexion()"><i style="color: #eeeeee;"
+                                                                                              class="fas fa-check-double"></i>
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer" style="border-top : 0;">
+    <i class="fas fa-question-circle"></i>
+    <a class="mdp" href="javascript:">Mot de passe Oublié</a>
+    <!--<button type="button" class="btn btn-danger btn-outline-dark" (click)="modal.close('Save click')">close</button>-->
+  </div>
+

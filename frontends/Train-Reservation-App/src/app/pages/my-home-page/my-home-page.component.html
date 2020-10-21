@@ -1,0 +1,28 @@
+<ngx-loading-bar
+  [color]="'#0cc5ff'"
+  [height]="'4px'"
+  [includeSpinner]="'false'"
+  [diameter]="'20px'"
+></ngx-loading-bar>
+
+<app-header
+  [userConnected]="userConnected"
+  [authentificationFailedHome]="authentificationFailed"
+  [userConnectedName]="currentUser"
+  (OnDeconnexion)="deconnectMe($event)"
+></app-header>
+
+
+
+
+<div class="styleG">
+<!--  <app-home-body [userConnected]="userConnected"-->
+<!--                 [authentificationFailedHome]="authentificationFailed"-->
+<!--                 [userConnectedName]="currentUser"(OnConnect)="connectMe($event)"></app-home-body>-->
+   <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>
+
+<p class="modal-title policeHobo" *ngIf="alert[0].message"  style=" position: relative; margin-top: 149px; font-size: 19px; text-align: center;">
+  <ngb-alert [dismissible]="false" *ngIf="alert[0].message" [type]="alert[0].type"
+             (close)="alert[0].message = null">{{ alert[0].message }}</ngb-alert>
+</p>
