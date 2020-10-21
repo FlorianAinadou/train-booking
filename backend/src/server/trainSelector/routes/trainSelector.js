@@ -1,7 +1,7 @@
 const Router = require('koa-router');
 const router = new Router();
-const f = require('../utils/functions');
-const sdk = require('../sdk');
+const f = require('../../utils/functions');
+const sdk = require('../sdk/trainSelector');
 
 router.get('/trainSelector/:id', async (ctx) => {
   try {

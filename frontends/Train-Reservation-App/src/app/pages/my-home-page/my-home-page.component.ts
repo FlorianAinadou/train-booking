@@ -34,27 +34,17 @@ export class MyHomePageComponent implements OnInit {
     this.alert.push({'type': 'danger', 'message': null});
   }
 
-  connectMe(details: string[]): void {
-
-    // window.scrollTo(0, 0);
-    this.userService.getUser(details[0], details[1]);
-    this.userService.user$.subscribe((user) => {
-      if (user) {
-        console.table(user);
-        this.userConnected = true;
-        this.currentUser = user.name;
-        window.scrollTo(0, 0);
-      } else {
-        this.alert[0].message = "L'authentification a échoué, veuillez réessayer !!";
-        setTimeout(() => {
-          this.alert[0].message = null;
-        }, 2000);
-      }
+  async connectMe(details: string[]): Promise<void> {
+    this.userService.getUserConnect(details[0], details[1]).subscribe(res => {
+          this.userConnected = true;
+          this.currentUser = "Paul Koffi";
+          this.userService.decodeToken(res);
+    }, error => {
+          this.alert[0].message = "L'authentification a échoué, veuillez réessayer !!";
+          setTimeout(() => {
+            this.alert[0].message = null;
+          }, 2000);
     });
-
-    // this.userConnected = true;
-    // this.currentUser = "Paul Koffi";
-    console.log(this.currentUser);
   }
 
   deconnectMe(rep: boolean): void {

@@ -4,11 +4,10 @@ const bodyParser = require('koa-bodyparser');
 const mongoose = require('mongoose');
 const logger = require('koa-logger');
 const config = require('./config');
-const sdk = require('./src/server/sdk');
 
 
-const trainSelector  = require('./src/server/routes/trainSelector');
-const customerRegistration  = require('./src/server/routes/customerRegistration');
+const trainSelector  = require('./src/server/trainSelector/routes/trainSelector');
+const customerRegistration  = require('./src/server/customerRegistration/routes/customerRegistration');
 
 const app = new Koa();
 const PORT = 9000;

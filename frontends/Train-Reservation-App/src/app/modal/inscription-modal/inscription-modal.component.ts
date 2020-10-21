@@ -67,8 +67,8 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
     this.inscriptionFormTwo = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       sex: ['', Validators.required],
-      nat: ['', Validators.required],
-      dateF: ['', Validators.required]
+      address: ['', Validators.required],
+      tel : ['', Validators.required]
     });
   }
 
@@ -106,22 +106,9 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
 
       const em = this.inscriptionFormTwo.get('email').value;
       const sex = this.inscriptionFormTwo.get('sex').value;
-      const nat = this.inscriptionFormTwo.get('nat').value;
-      const dateF = this.inscriptionFormTwo.get('dateF').value;
-      let dateS = '';
-      if (dateF['month'] > 9) {
-        if (dateF['day'] > 9) {
-          dateS = dateS.concat(dateF['year'].toString(), '-', dateF['month'].toString(), '-', dateF['day'].toString());
-        } else {
-          dateS = dateS.concat(dateF['year'].toString(), '-', dateF['month'].toString(), '-0', dateF['day'].toString());
-        }
-      } else {
-        if (dateF['day'] > 9) {
-          dateS = dateS.concat(dateF['year'].toString(), '-0', dateF['month'].toString(), '-', dateF['day'].toString());
-        } else {
-          dateS = dateS.concat(dateF['year'].toString(), '-0', dateF['month'].toString(), '-0', dateF['day'].toString());
-        }
-      }
+      const address = this.inscriptionFormTwo.get('address').value;
+      const tel  = this.inscriptionFormTwo.get('tel').value;
+
       // console.log(dateS);
       // console.log(dateF['year']);
       const lastName = this.inscriptionFormOne.get('lastName').value;
@@ -137,8 +124,8 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
         'firstName': firstName,
         'gender': sex,
         'lastName': lastName,
-        'birthday': dateS,
-        'nationality': nat
+        'tel': tel,
+        'address': address
       };
       this.userService.addUser(myUser);
       console.log("GO se connecter !");

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-UserSchema = new Schema({
+CustomerSchema = new Schema({
     firstName: {
         type: String,
         required: [true, 'first name is required']
@@ -12,23 +12,28 @@ UserSchema = new Schema({
     },
     email: {
         type: String,
+        require: true
     },
     password: {
         type: String,
+        require: true
     },
     gender: {
         type: String,
+        require: true
     },
-    nationality: {
+    address: {
         type: String,
+        require: true
     },
-    birthday: {
-        type: Date
+    phone_number: {
+        type: String,
+        require: true
     }
 });
 
 
-mongoose.model('user', UserSchema);
-const User = mongoose.model('user');
+mongoose.model('customer', CustomerSchema);
+const Customer = mongoose.model('customer');
 
-module.exports = User;
+module.exports = Customer;

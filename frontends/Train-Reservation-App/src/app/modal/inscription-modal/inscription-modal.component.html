@@ -109,21 +109,20 @@
             <div class="myInput">
               <div class="row">
                 <div class="col-sm-6">
-                  Date 🗓
-                  <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd"
-                           name="dp" [formControlName]="'dateF'" ngbDatepicker #d="ngbDatepicker">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                        <i class="fas fa-calendar"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <span
-                    *ngIf="inscriptionTwoSubmitted && s.dateF.errors && s.dateF.errors.required"
-                    class="myError">Date de n requis</span>
+                  <label for="passwordConfirmation">
+                    <!--<span style="font-weight: bold;">Pseudo</span>-->
+                    <br>
+                    <i>📞</i>
+                    <input type="text" class="MyInputConnexion-custom" id="tel"
+                           placeholder="Télephone" [formControlName]="'tel'">
+                    <span class="barI">
+                         <span
+                           *ngIf="inscriptionTwoSubmitted && s.tel.errors && s.tel.errors.required"
+                           class="myError">Telephone Requis</span>
+                    </span>
+                  </label>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 sexe">
                   <label for="sexe">
                     Sexe <i class="fas fa-mars"></i> | <i class="fas fa-venus"></i> <br>
                     <select name="sexe" class="form-control form-control-sm" id="sexe" [formControlName]="'sex'">
@@ -152,11 +151,11 @@
                     <br>
                     <i>📍</i>
                     <input type="text" class="MyInputConnexion-custom" id="D"
-                           placeholder="Nationnalité" [formControlName]="'nat'">
+                           placeholder="Adresse" [formControlName]="'address'">
                     <span class="barI">
                          <span
-                           *ngIf="inscriptionTwoSubmitted && s.nat.errors && s.nat.errors.required"
-                           class="myError">Nationnalité Requise</span>
+                           *ngIf="inscriptionTwoSubmitted && s.address.errors && s.address.errors.required"
+                           class="myError">Adresse Requise</span>
                     </span>
                   </label>
                 </div>
