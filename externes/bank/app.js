@@ -6,7 +6,7 @@ const logger = require('koa-logger');
 const app = new Koa();
 const PORT = 7000;
 
-const paidRoute  = require('./src/server/routes/paidRoute');
+const paidRoute  = require('./src/server/routes/checkPaymentStatusRoute');
 
 app.use(bodyParser());
 app.use(logger());

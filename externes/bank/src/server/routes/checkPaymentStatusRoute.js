@@ -1,11 +1,11 @@
 const Router = require('koa-router');
 const router = new Router();
 const f = require('../utils/functions');
-const sdk = require('../sdk/paidsdk');
+const sdk = require('../sdk/checkPaymentStatusSdk');
 
 router.get('/paid/:idCard/:price', async (ctx) => {
   try {
-    const paid = await sdk.canPaid(ctx.params.idCard.toString(), ctx.params.price);
+    const paid = await sdk.checkPaymentStatus(ctx.params.idCard.toString(), ctx.params.price);
     f.success(ctx, paid);
     console.log(paid.toString())
   } catch {

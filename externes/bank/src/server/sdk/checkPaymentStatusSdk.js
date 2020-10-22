@@ -1,6 +1,6 @@
 const accounts = require('../../../mocks/customerAccounts.json')
 
-async function canPaid(idCard, price) {
+async function checkPaymentStatus(idCard, price) {
     for (account of accounts) {
         if(account['idCard'] === idCard && (account['amount'] - price) >= 0){
             return {"data": true}
@@ -14,6 +14,6 @@ async function getAccounts() {
 }
 
 module.exports = {
-    canPaid,
+    checkPaymentStatus,
     getAccounts
 };
