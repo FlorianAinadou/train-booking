@@ -1,25 +1,17 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const rp = require('request-promise');
 
-//Model definition
+let TrainsList= null;
 
-TrainSchema = new Schema({
-    id : {
-        type: Number,
-        require: true
-    },
-    date : {
-        type: Date,
-        require: true
-    },
-    routes : {
-        type : Array,
-        require: true
-    }
-});
+//The url we want is: 'www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
+url = "http://127.0.0.1:8000/trainList/"
 
+async function getTrainList() {
+    const result = await rp(url);
+    const tab = [];
+    TrainsList = JSON.parse(result);
+    return TrainsList;
+}
 
-mongoose.model('train', TrainSchema);
-const Train = mongoose.model('train');
-
-module.exports = Train;
+module.exports = {
+    getTrainList
+};

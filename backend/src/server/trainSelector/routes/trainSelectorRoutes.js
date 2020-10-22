@@ -3,11 +3,10 @@ const router = new Router();
 const f = require('../../utils/functions');
 const sdk = require('../sdk/trainSelector');
 
-router.get('/trainSelector/:id', async (ctx) => {
+router.get('/trainSelector/:departureStation/:arrivalStation', async (ctx) => {
   try {
-    const train = await sdk.getTrainById(ctx.params.id);
+    const train = await sdk.getTrainByForm(ctx.params.departureStation, ctx.params.arrivalStation);
     f.success(ctx, train);
-    console.log(train.toString())
   } catch {
     f.failure(ctx, "failed");
   }

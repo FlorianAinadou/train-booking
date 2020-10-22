@@ -1,12 +1,12 @@
 const Koa = require('koa');
 const cors = require('@koa/cors');
 const bodyParser = require('koa-bodyparser');
-const mongoose = require('mongoose');
+
 const logger = require('koa-logger');
-const config = require('./config');
 
 
-const trainSelector  = require('./src/server/trainSelector/routes/trainSelector');
+
+const trainSelector  = require('./src/server/trainSelector/routes/trainSelectorRoutes');
 const customerRegistration  = require('./src/server/customerRegistration/routes/customerRegistration');
 
 const app = new Koa();
@@ -18,12 +18,7 @@ app.use(cors({origin: '*', exposeHeaders: '*'}));
 app.use(trainSelector.routes());
 app.use(customerRegistration.routes());
 
-mongoose.connect(`mongodb+srv://${config.configDB.userName}:${config.configDB.password}@${config.configDB.host}/${config.configDB.name}?retryWrites=true&w=majority`, {
-  useNewUrlParser: true,
-  useCreateIndex: true
-});
 
-mongoose.set('debug', true);
 
 const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);

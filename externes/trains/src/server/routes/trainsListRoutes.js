@@ -3,11 +3,12 @@ const router = new Router();
 const f = require('../utils/functions');
 const sdk = require('../sdk/trainsList');
 
-router.get('/trains', async (ctx) => {
+
+router.get('/trainList/', async (ctx) => {
   try {
-    const trains = await sdk.getTrainsList();
-    f.success(ctx, trains);
-    console.log(trains.toString())
+    const train = await sdk.getTrainsList();
+    f.success(ctx, train);
+    console.log(train.toString())
   } catch {
     f.failure(ctx, "failed");
   }
