@@ -2,6 +2,7 @@ const TrainsList = require('../models/Train');
 
 
 async function getTrainByForm(departureStation, arrivalStation ) {
+
     let list = await TrainsList.getTrainList();
     let listToReturn=[];
     list.forEach(train => {
