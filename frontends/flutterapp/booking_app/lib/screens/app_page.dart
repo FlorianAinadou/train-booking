@@ -1,3 +1,4 @@
+import 'package:booking_app/screens/ticketspage/tickets_page.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/screens/homepage/home_page.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
@@ -13,6 +14,7 @@ class _AppPageState extends State<AppPage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomePage(),
+    TicketsPage(),
   ];
 
   void _onTabTapped(int index) {
@@ -44,7 +46,7 @@ class _AppPageState extends State<AppPage> {
           ),
         ],
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue,
         onTap: _onTabTapped,
       ),
     );
