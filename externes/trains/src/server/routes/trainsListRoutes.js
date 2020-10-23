@@ -4,7 +4,7 @@ const f = require('../utils/functions');
 const sdk = require('../sdk/trainsList');
 
 
-router.get('/trainList/', async (ctx) => {
+router.get('/trainList', async (ctx) => {
   try {
     const train = await sdk.getTrainsList();
     f.success(ctx, train);
