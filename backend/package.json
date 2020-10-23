@@ -15,11 +15,13 @@
     "mocha": "^7.0.0"
   },
   "dependencies": {
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
     "@koa/cors": "^3.0.0",
     "@koa/multer": "^2.0.2",
-    "axios": "^0.19.1",
-    "koa": "^2.11.0",
+    "axios": "^0.19.2",
     "jsonwebtoken": "^8.5.1",
+    "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.8.6",
