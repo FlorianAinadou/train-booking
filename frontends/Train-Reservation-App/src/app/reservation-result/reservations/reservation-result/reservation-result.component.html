@@ -1,0 +1,58 @@
+
+<!--<ng-template #tipContentA >-->
+<!--  <h6>Archiver !</h6>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tipContentV >-->
+<!--  <h6>Valider l'année !</h6>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tipContentR >-->
+<!--  <h6>Invalider l'année  !</h6>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tipContentD >-->
+<!--  <h6>Désarchiver !</h6>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tipContentFailed >-->
+<!--  <h6>Echec du contrat !</h6>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tipContentRE>-->
+<!--  <h6>Raison Echec : {{contrat.raisonEchec}}</h6>-->
+<!--</ng-template>-->
+
+<!--<ng-template #tipContentSuccess >-->
+<!--  <h6>Réussite du contrat !</h6>-->
+<!--</ng-template>-->
+
+<div class="row">
+  <div class="col-lg-4" (click)="select()">
+    <img class="reduce" src="../../../../assets/img/Train_RIB_ADC_2.png">
+    <!--{{contrat.etudiant.nom}}-->
+    <!--<p class="policeHobo" style="font-size: 15px; padding-bottom: 0px" >-->
+      <!--{{contrat.etudiant.nom}}-->
+    <!--</p>-->
+    <!--<span style="font-size: 15px;">{{contrat.etudiant.nom}}</span>-->
+  </div>
+  <div class="col-lg-4" (click)="select()"  style="font-size: 15px; text-align: center; margin-top: 25px">
+    {{reservation.price}} €<br> {{reservation.seats}} places restantes
+  </div>
+  <div class="col-lg-4"  style="font-size: 15px; text-align: center; margin-top: 20px">
+
+    <!--### Contrat en cours-->
+<!--    <i class="fas fa-vote-yea fa-2x  myButton zoom"  (click)="successOrFailure(1)"  *ngIf="contrat.validation===2" style="color: #398058" [ngbTooltip]="tipContentV" placement="left"></i>-->
+<!--    <i class="fas fa-times-circle fa-2x myButton zoom"  (click)="successOrFailure(0)" *ngIf="contrat.validation===2" style="padding-left: 10px; color: #f23d32;" [ngbTooltip]="tipContentR" placement="left"></i>-->
+
+    <!--### Valider / Echec-->
+    <i class="fas fa-plus-circle fa-2x  myButton"   style="color: green" ></i>
+<!--    <i class="fas fa-file-signature fa-2x  myButton"  *ngIf="contrat.validation===0" style="color: darkred" [ngbTooltip]="tipContentFailed" placement="left"></i>-->
+<!--    <i class="fas fa-2x fa-eye myButton zoom"   *ngIf="contrat.validation===0" style="padding-left: 10px" [ngbTooltip]="tipContentRE  " placement="left"></i>-->
+
+    <!--### Archivage / Pas-->
+    <!--<i class="fa fa-2x fa-file-archive myButton zoom"  (click)="archived()" *ngIf="contrat.archived===false" style="padding-left: 10px" [ngbTooltip]="tipContentA  " placement="left"></i>-->
+<!--    <i class="far fa-folder-open fa-2x myButton zoom" (click)="archived()"  *ngIf="contrat.archived===true" style="padding-left: 10px;" [ngbTooltip]="tipContentD" placement="left"></i>-->
+  </div>
+</div>
+<!--{{contrat.etudiant.nom}}-->

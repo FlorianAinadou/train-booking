@@ -22,6 +22,10 @@ import {HeaderComponent} from "./header/header.component";
 import {HomeBodyComponent} from "./home/home-body";
 import {ConnexionModalComponent} from "./modal/connexion-modal/connexion-modal.component";
 import {ReservationsPageComponent} from "./pages/reservations-page";
+import {ReservationsFilterPageComponent} from "./pages/reservations-filter-page";
+import {ReservationResultComponent} from "./reservation-result/reservations/reservation-result";
+import {ReservationResultListComponent} from "./reservation-result/reservations/reservation-result-list";
+import {ReservationsDisplayPageComponent} from "./pages/reservations-display-page";
 
 
 @NgModule({
@@ -33,7 +37,11 @@ import {ReservationsPageComponent} from "./pages/reservations-page";
     ConnexionModalComponent,
     HeaderComponent,
     HomeBodyComponent,
-    ReservationsPageComponent
+    ReservationsPageComponent,
+    ReservationsFilterPageComponent,
+    ReservationResultComponent,
+    ReservationResultListComponent,
+    ReservationsDisplayPageComponent
   ],
   imports: [
     BrowserModule,

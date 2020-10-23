@@ -10,12 +10,12 @@ import {Reservation} from "../../../models/reservation";
 
 @Component({
   selector: 'app-reservations-page',
-  templateUrl: './reservations-page.component.html',
-  styleUrls: ['./reservations-page.component.scss']
+  templateUrl: './reservations-display-page.component.html',
+  styleUrls: ['./reservations-display-page..component.scss']
 })
 
 
-export class ReservationsPageComponent implements OnInit {
+export class ReservationsDisplayPageComponent implements OnInit {
   // @ViewChild('map')
   // public mapElement: HomeMapComponent;
 
@@ -23,7 +23,7 @@ export class ReservationsPageComponent implements OnInit {
 
 
   constructor(public userService: UserService, public router: Router) {
-    document.body.style.backgroundColor = '#fff';
+
 
   }
 

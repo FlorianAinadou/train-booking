@@ -6,6 +6,7 @@ import {NotFoundPageComponent} from "./pages/not-found-page/not-found-page.compo
 import {MyHomePageComponent} from "./pages/my-home-page";
 import {HomeBodyComponent} from "./home/home-body";
 import {ReservationsPageComponent} from "./pages/reservations-page";
+import {ReservationsDisplayPageComponent} from "./pages/reservations-display-page";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,13 +17,14 @@ const routes: Routes = [
       {path: '', component: HomeBodyComponent},
       // {path: 'home', component: HomeBodyComponent},
       // {path: '', redirectTo: 'home'},
-      // {path: 'home/reservations', component: ReservationsPageComponent},
+      // {path: 'home/reservations', component: ReservationsFilterPageComponent},
       {path: 'reservations', component: ReservationsPageComponent},
+      {path: 'displayReservations', component: ReservationsDisplayPageComponent},
       {path: '**', redirectTo: '/404'},
       {path: '404', component: NotFoundPageComponent},
     ]
   },
-  // {path: 'horeservations', component: ReservationsPageComponent},
+  // {path: 'horeservations', component: ReservationsFilterPageComponent},
   {path: '**', redirectTo: '/404'},
   {path: '404', component: NotFoundPageComponent},
 ];

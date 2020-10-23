@@ -1,0 +1,98 @@
+.reduce {
+  border-radius: 50%;
+  width : 80px;
+  //margin-left: 25px;
+  //margin-top: -15px;
+}
+
+.zoom {
+  color : darkred;
+  transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+  color : darkred;
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+#yel {
+  color: #0e1e23;
+}
+
+.myButton {
+  color: black;
+  text-align : right;
+  margin-top: 15px;
+}
+
+.myButton:hover {
+  color: darkred;
+}
+
+.student {
+  width: 20rem;;
+  background: #2fc9ff;
+  border : 4px solid;
+  padding: 20px;
+}
+
+#bold {
+  font-weight: bold;
+}
+
+.edit:hover {
+  color : greenyellow;
+}
+
+.student:hover {
+  cursor: pointer;
+}
+
+// Nouveau style
+.espace {
+  border-bottom: 2px solid black;
+}
+
+.espaceT {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #bbbbbb;
+}
+
+@media screen and (max-width: 1200px) {
+  .espaceT{
+    border-bottom: 0px;
+  }
+}
+.cardV {
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 5px 5px 1px rgba(0,0,0,.12);
+  padding-left: 2em;
+  padding-right: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-left: 100px;
+  // border-radius: $borderRadius;
+  background-color: white;
+}
+
+.studentV {
+  width: 34rem;;
+  background: white;
+  border : 0px solid;
+}
+
+
+.textE {
+  font-style: normal;
+  line-height: 1.6;
+  font-size: 10px;
+  //color: white;
+  color: #ffffff !important;
+}
+
+.titleE{
+  font-style: normal;
+  line-height: 1.6;
+  color: white;
+  padding-left: 30px;
+}

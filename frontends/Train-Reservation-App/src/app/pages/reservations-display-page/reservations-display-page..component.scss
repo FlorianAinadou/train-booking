@@ -13,6 +13,7 @@
   top: 80px;
   background: white !important;
   margin-bottom: 5px;
+  overflow: hidden;
 }
 
 .myBackground {
@@ -112,5 +113,27 @@
 
 .bodyR {
   background: white !important;
-  margin-top: 70px;
+  position: relative;
+  top: 70px;
+  //margin-top: 100px;
+  overflow: hidden !important;
+  //margin-bottom: 20px;
 }
+
+
+
+
+
+
+//html {
+//  box-sizing: border-box;
+//}
+
+//*, *:before, *:after {
+//  box-sizing: inherit;
+//}
+
+//body, html {
+//  height: 100%;
+//}
+

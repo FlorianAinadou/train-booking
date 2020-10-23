@@ -160,7 +160,7 @@ p {
 }
 
 .toolbar {
-  position: absolute;
+  position: fixed;
   margin-bottom: 0 !important;
   top: 0;
   left: 0;
@@ -171,6 +171,7 @@ p {
   background-color: #1976d2;
   color: white;
   font-weight: 600;
+  z-index: 1000;
 }
 
 .toolbar img {
