@@ -1,3 +1,25 @@
+# Week 44:
+
+### Achieved
+- Mobile app interfaces (homepage, booking & tickets) implemented and updated from mocked data
+- Web app interfaces (booking & payment) implemented and updated
+- Angular frontend connected to the backend
+- Backend routes implemented and updated
+
+### For the following week
+- Connect mobile app to the backend
+- Continuing to implement backend routes and frontend interfaces
+- User registration and authentification
+- Démo preparation
+
+### Risks
+- CI/CD
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 43:
 
 ### Achieved
