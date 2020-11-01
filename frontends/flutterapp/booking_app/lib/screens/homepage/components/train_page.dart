@@ -1,8 +1,11 @@
+import 'dart:convert';
+
+import 'package:booking_app/common/components/loader.dart';
+import 'package:booking_app/services/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/models/train_model.dart';
-import 'package:booking_app/screens/homepage/components/train_list.dart';
-import 'package:booking_app/mocks/trains_mocks.dart';
 import 'train_card.dart';
+import 'package:http/http.dart' as http;
 
 class TrainPage extends StatelessWidget {
   TrainPage({
@@ -11,18 +14,53 @@ class TrainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: _getTrains(fetchMockedData()),
+    return FutureBuilder(
+      future: _getAvailableTrains(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<Widget> availableTrains = snapshot.data;
+          int taille = availableTrains.length;
+          if (taille != 0)
+            return ListView(
+              children: availableTrains,
+            );
+          else
+            return Text(
+              "Aucun train disponible pour cet itinéraire, veuillez réessayer plus tard...",
+              style: TextStyle(
+                fontFamily: 'Pacifico',
+                color: Colors.black,
+                fontSize: 24,
+              ),
+              textAlign: TextAlign.center,
+            );
+        } else {
+          return Loader();
+        }
+      },
     );
   }
 
-  List<TrainModel> fetchMockedData() {
-    return TRAINS_MOCKS.map((model) => TrainModel.fromMap(model)).toList();
-  }
-
-  List<Widget> _getTrains(data) {
+  Future<List<Widget>> _getAvailableTrains() async {
     dynamic items = <Widget>[];
-    for (dynamic d in data) {
+    // get from backend
+    var data = await http.get(host + test);
+    var jsonData = json.decode(utf8.decode(data.bodyBytes));
+    List<Train> trains = [];
+    //print(data.body);
+    for (var t in jsonData) {
+      print(t["trainId"]);
+      Train train = Train(
+          trainId: t["trainId"],
+          date: t["date"],
+          routes: t["routes"],
+          full: t["full"],
+          price: t["price"],
+          remainingSeats: t["remainingSeats"]);
+      trains.add(train);
+    }
+    // build flutter components
+    for (dynamic d in trains) {
       items.add(Column(
         children: <Widget>[
           TrainCard(train: d),

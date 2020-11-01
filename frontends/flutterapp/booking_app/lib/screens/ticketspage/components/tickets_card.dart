@@ -14,7 +14,7 @@ class TicketsCard extends StatelessWidget {
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Color(0xFFB3E5FC),
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(60),
       ),
       child: Column(
         //mainAxisAlignment: MainAxisAlignment.center,

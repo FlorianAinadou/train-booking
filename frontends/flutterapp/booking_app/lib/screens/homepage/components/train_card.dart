@@ -4,7 +4,7 @@ import 'package:booking_app/models/train_model.dart';
 class TrainCard extends StatelessWidget {
   const TrainCard({Key key, @required this.train}) : super(key: key);
 
-  final TrainModel train;
+  final Train train;
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +13,14 @@ class TrainCard extends StatelessWidget {
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Color(0xFFB3E5FC),
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(60),
       ),
       child: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           RichText(
             text: TextSpan(
-              text: train.name + ' - TGV ?',
+              text: 'ID : ' + train.trainId.toString() + ' - TGV ?',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
@@ -73,7 +73,7 @@ class TrainCard extends StatelessWidget {
                             ),
                           ),*/
                           TextSpan(
-                            text: 'Ville A\n',
+                            text: train.routes[0].toString() + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -81,7 +81,7 @@ class TrainCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: 'Heure A',
+                            text: 'Heure ?',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -121,7 +121,7 @@ class TrainCard extends StatelessWidget {
                             ),
                           ),*/
                           TextSpan(
-                            text: 'Ville B\n',
+                            text: train.routes[train.routes.length-1].toString() + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -129,7 +129,7 @@ class TrainCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: 'Heure B',
+                            text: 'Heure ?',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,

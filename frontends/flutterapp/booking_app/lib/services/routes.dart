@@ -1,2 +1,3 @@
 // API ROUTES
-final String host = 'http://192.168.38.194:9090/';
+final String test = 'trainSelector/Nice/Marseille';
+final String host = 'http://192.168.1.97:9000/';

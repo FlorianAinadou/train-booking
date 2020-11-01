@@ -1,21 +1,42 @@
 import 'package:flutter/material.dart';
 
-class TrainModel {
-  final int id;
-  final String name;
+class Train {
+  final int trainId;
+  //final String trainName;
+  final String date;
+  final List<dynamic> routes;
+  final bool full;
+  final int price;
+  final int remainingSeats;
 
-  TrainModel({
-    @required this.id,
-    @required this.name,
-  })  : assert(id != null),
-        assert(name != null);
+  Train({
+    @required this.trainId,
+    @required this.date,
+    @required this.routes,
+    @required this.full,
+    @required this.price,
+    @required this.remainingSeats,
+  })  : assert(trainId != null);
 
-  TrainModel.fromMap(Map<String, dynamic> map)
-      : id = map["id"],
-        name = map["name"];
+  Train.fromMap(Map<String, dynamic> map)
+      : trainId = map["trainId"],
+        date = map["date"],
+        routes = map["routes"],
+        full = map["full"],
+        price = map["price"],
+        remainingSeats = map["remainingSeats"];
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "name": name,
+        "trainId": trainId,
+        "date": date,
+        "routes": routes,
+        "full": full,
+        "price": price,
+        "remainingSeats": remainingSeats,
       };
+
+  @override
+  String toString() {
+    return 'Train{trainId: $trainId, date: $date, routes: $routes, full: $full, price: $price, remainingSeats: $remainingSeats}';
+  }
 }
