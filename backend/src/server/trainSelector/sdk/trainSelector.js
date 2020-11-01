@@ -2,8 +2,10 @@ const TrainsList = require('../models/Train');
 
 
 async function getTrainByForm(departureStation, arrivalStation ) {
+    console.log("HELLLLLOOOOOOOOOOOOOOOOOOOOOO for SDK");
 
     let list = await TrainsList.getTrainList();
+    console.log(list)
     let listToReturn=[];
     list.forEach(train => {
         if (train["routes"].includes(departureStation) && train["routes"].includes(arrivalStation)){

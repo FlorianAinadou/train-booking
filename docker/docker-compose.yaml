@@ -24,7 +24,7 @@ services:
   wakanda_backend:
     image: djotiham/wakanda_backend
     container_name: wakanda_backend
-    network_mode: host
+    # network_mode: host
     expose:
         - "9000"
     ports:
@@ -32,3 +32,6 @@ services:
     depends_on:
       - wakanda_externe_bank_service
       - wakanda_externe_trains_service
+    links:
+      - wakanda_externe_trains_service
+      - wakanda_externe_bank_service
