@@ -7,4 +7,16 @@ cd backend
 
 cd ..
 
+cd externes
+cd bank 
+ 
+./build.sh
+
+cd ..
+cd trains
+
+./build.sh
+
+cd ../..
+
 docker-compose up -d

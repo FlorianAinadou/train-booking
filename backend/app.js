@@ -7,7 +7,7 @@ const trainSelector  = require('./src/server/trainSelector/routes/trainSelectorR
 const customerRegistration  = require('./src/server/customerRegistration/routes/customerRegistration');
 
 const bookingComponent = require('./src/server/bookingComponent/routes/bookingRoutes');
-const config = require("../externes/trains/config");
+const config = require("./config");
 const mongoose = require('mongoose');
 
 const paymentComponent = require('./src/server/paymentComponent/routes/paymentRoute')

@@ -1,6 +1,24 @@
-version: '3.0'
+version: '2.1'
 
 services:
+
+  # delivery service (NodeJs)
+  wakanda_externe_trains_service:
+    image: djotiham/wakanda_externe_trains_service
+    container_name: wakanda_externe_trains_service
+    expose:
+        - "8000"
+    ports:
+      - "8000:8000"
+
+  # delivery service (NodeJs)
+  wakanda_externe_bank_service:
+    image: djotiham/wakanda_externe_bank_service
+    container_name: wakanda_externe_bank_service
+    expose:
+        - "7000"
+    ports:
+      - "7000:7000"
 
 # delivery service (NodeJs)
   wakanda_backend:
@@ -11,3 +29,6 @@ services:
         - "9000"
     ports:
       - "9000:9000"
+    depends_on:
+      - wakanda_externe_bank_service
+      - wakanda_externe_trains_service
