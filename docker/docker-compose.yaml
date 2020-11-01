@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+
+# delivery service (NodeJs)
+  wakanda_backend:
+    image: djotiham/wakanda_backend
+    container_name: wakanda_backend
+    network_mode: host
+    expose:
+        - "9000"
+    ports:
+      - "9000:9000"
