@@ -1,36 +1,14 @@
-import 'package:booking_app/models/ticket_model.dart';
+import 'package:booking_app/common/values/box_shadows.dart';
+import 'package:booking_app/common/values/screen_dimensions.dart';
 import 'package:flutter/material.dart';
-
-BoxShadow enabledBox = BoxShadow(
-  color: Colors.lightBlue,
-  spreadRadius: 2,
-  blurRadius: 2,
-);
-
-BoxShadow disabledBox = BoxShadow(
-  color: Colors.black26,
-  spreadRadius: 2,
-  blurRadius: 2,
-);
-
-BoxShadow todayTicketsBox = enabledBox;
-BoxShadow passedTicketsBox = disabledBox;
-BoxShadow futureTicketsBox = disabledBox;
 
 class TicketsStatusBoxes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
-    double screenHeight = size.height;
-    double screenWidth = size.width;
-
     return Container(
-      //color: Colors.red,
       height: 40.0,
-      width: screenWidth,
+      width: ScreenDimensions(context).width,
       margin: EdgeInsets.only(top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
