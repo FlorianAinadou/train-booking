@@ -30,8 +30,8 @@ router.post('/booking/addReservation', async (ctx) => {
     f.success(ctx,  JSON.stringify(bookings));
 });
 
-router.del('/booking/removeBookingByBookingId', async (ctx) => {
-    const bookings = await reservation.removeBookingByBookingId(ctx.request.body.bookingId, ctx.request.body.userMail);
+router.del('/booking/removeBookingByBookingId/:bookingId', async (ctx) => {
+    const bookings = await reservation.removeBookingByBookingId(ctx.params.bookingId);
     f.success(ctx, bookings);
 });
 

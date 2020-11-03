@@ -26,6 +26,7 @@ export class ReservationsDisplayPageComponent implements OnInit {
 
   constructor(public reservationService: ReservationService, public router: Router) {
     this.loadReservation();
+    document.body.style.backgroundColor = '#fff';
   }
 
 
@@ -54,7 +55,7 @@ export class ReservationsDisplayPageComponent implements OnInit {
           let r: Reservation = {
             price: price.toString(),
             seats: entry["placeNumber"],
-            id: entry["_id"],
+            id: entry["bookingId"],
             routes: routes
           };
           this.propositions.push(r);
@@ -65,6 +66,17 @@ export class ReservationsDisplayPageComponent implements OnInit {
 
       if (res.length > 0) {
         this.emptyList = false;
+      }
+    }, error => {
+
+    });
+  }
+
+  removeReservation(reservation) {
+    this.reservationService.removeReservation(reservation.id).subscribe(re => {
+      this.propositions = this.propositions.filter(({id}) => id !== reservation.id);
+      if(this.propositions.length == 0){
+        this.emptyList = true;
       }
     }, error => {
 

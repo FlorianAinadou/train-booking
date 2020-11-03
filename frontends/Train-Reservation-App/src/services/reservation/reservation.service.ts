@@ -35,18 +35,6 @@ export class ReservationService {
       )
   }
 
-  getUserConnect(email, password): Observable<any> {
-    const myUser = {
-      'mail': email,
-      'password': password
-    };
-    return this.http.post<any>(this.userUrl + 'login', myUser)
-      .pipe(
-        retry(1),
-        catchError(this.errorHandl)
-      )
-  }
-
   getReservationResult(departure, arrival): Observable<any> {
     return this.http.get<any>(this.userUrl + departure + '/' + arrival)
       .pipe(
@@ -65,6 +53,14 @@ export class ReservationService {
 
   getMyReservationList(): Observable<any> {
     return this.http.get<any>(this.reservationUrl + 'getBookingByMail/' + this.getCurrentUserMail())
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+  }
+
+  removeReservation(id): Observable<any> {
+    return this.http.delete<any>(this.reservationUrl + 'removeBookingByBookingId/'+id)
       .pipe(
         retry(1),
         catchError(this.errorHandl)

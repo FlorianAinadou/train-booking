@@ -26,7 +26,7 @@
 
   <div class="bodyR" style="margin-bottom: 4px;" *ngIf="!emptyList">
     <div *ngFor="let p of propositions; let i = index">
-      <app-reservation-result-list [reservation]="p"></app-reservation-result-list>
+      <app-reservation-result-list [reservation]="p" (OnRemove)="removeReservation($event)"></app-reservation-result-list>
     </div>
   </div>
 
