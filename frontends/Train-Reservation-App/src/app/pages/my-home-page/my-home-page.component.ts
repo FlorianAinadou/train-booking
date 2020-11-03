@@ -31,6 +31,8 @@ export class MyHomePageComponent implements OnInit {
     // library.add(fas, far);
     // library.add(faFilm);
     // document.body.style.backgroundColor = '#fff';
+    this.checkScroll();
+
     this.alert.push({'type': 'danger', 'message': null});
     this.userConnected = this.userService.getAuth();
     // alert("REP "+this.userConnected);
@@ -72,4 +74,21 @@ export class MyHomePageComponent implements OnInit {
        await this.connectMe(data,componentReference);
     })
   }
+
+  scrollToElement($element): void {
+    // console.log($element);
+    $element.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
+  }
+
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    //console.log('[scroll]', scrollPosition);
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
+
 }

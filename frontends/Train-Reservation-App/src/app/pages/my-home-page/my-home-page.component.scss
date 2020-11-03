@@ -8,4 +8,68 @@
 .styleG {
   background: #222426;
   margin-top: -22px !important;
+  //overflow-x: hidden !important;
+}
+
+.scrollToTop{
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  line-height: 40px;
+  text-align: center;
+  background: #0063e8;
+  color: #fff;
+  z-index: 400;
+}
+
+.scrollToTop:hover {
+  background: darkblue;
+}
+
+
+
+// ################ ANIMATION SCROLL
+
+$red:#F44336;
+
+@mixin transform($in) {
+  transform:$in;
+  -webkit-transform:$in;
+  -moz-transform:$in;
+  -o-transform:$in;
+  -ms-transform:$in;
+}
+
+@mixin animation($in) {
+  animation:$in;
+  -webkit-animation:$in;
+  -moz-animation:$in;
+  -o-animation:$in;
+  //-ms-animation:$in;
+}
+
+.scrollToTop {
+  color:#fff;
+
+  &:hover {
+    border-color:$red;
+    color:$red;
+
+    @include animation(shakeThatBooty 0.3s linear 1);
+  }
+}
+
+@keyframes shakeThatBooty {
+  33% {
+    @include transform(rotateZ(15deg));
+  }
+  67% {
+    @include transform(rotateZ(-15deg));
+  }
+  100% {
+    @include transform(rotateZ(15deg));
+  }
 }

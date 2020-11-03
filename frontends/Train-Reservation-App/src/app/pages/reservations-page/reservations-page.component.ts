@@ -6,6 +6,7 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 import {faFilm} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
+import {Reservation} from "../../../models/reservation";
 
 @Component({
   selector: 'app-reservations-page',
@@ -22,6 +23,7 @@ export class ReservationsPageComponent implements OnInit {
 
 
   constructor(public userService: UserService, public router: Router) {
+    document.body.style.backgroundColor = '#fff';
 
   }
 

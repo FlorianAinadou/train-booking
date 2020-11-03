@@ -22,6 +22,12 @@ import {HeaderComponent} from "./header/header.component";
 import {HomeBodyComponent} from "./home/home-body";
 import {ConnexionModalComponent} from "./modal/connexion-modal/connexion-modal.component";
 import {ReservationsPageComponent} from "./pages/reservations-page";
+import {ReservationsFilterPageComponent} from "./pages/reservations-filter-page";
+import {ReservationResultComponent} from "./reservation-result/reservations/reservation-result";
+import {ReservationResultListComponent} from "./reservation-result/reservations/reservation-result-list";
+import {ReservationsDisplayPageComponent} from "./pages/reservations-display-page";
+import {UserService} from "../services/user/user.service";
+import {ReservationService} from "../services/reservation/reservation.service";
 
 
 @NgModule({
@@ -33,7 +39,11 @@ import {ReservationsPageComponent} from "./pages/reservations-page";
     ConnexionModalComponent,
     HeaderComponent,
     HomeBodyComponent,
-    ReservationsPageComponent
+    ReservationsPageComponent,
+    ReservationsFilterPageComponent,
+    ReservationResultComponent,
+    ReservationResultListComponent,
+    ReservationsDisplayPageComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +60,7 @@ import {ReservationsPageComponent} from "./pages/reservations-page";
     // FontAwesomeModule,
     ReactiveFormsModule // Import all dependencies
   ],
-  providers: [NgbTabsetConfig],
+  providers: [NgbTabsetConfig,UserService,ReservationService],
   entryComponents: [InscriptionModalComponent,ConnexionModalComponent],
   bootstrap: [AppComponent]
 })
