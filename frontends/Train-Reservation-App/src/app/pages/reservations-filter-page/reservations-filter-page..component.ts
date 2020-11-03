@@ -17,7 +17,7 @@ import {ReservationService} from "../../../services/reservation/reservation.serv
 })
 
 
-export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
+export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
   // @ViewChild('map')
   // public mapElement: HomeMapComponent;
 
@@ -30,7 +30,7 @@ export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
   display = false;
   text = "Search";
 
-  constructor(public userService: UserService, public router: Router,private renderer: Renderer2,public formBuilder: FormBuilder,public reservationService: ReservationService) {
+  constructor(public userService: UserService, public router: Router, private renderer: Renderer2, public formBuilder: FormBuilder, public reservationService: ReservationService) {
     this.searchForm = this.formBuilder.group({
       d: ['', Validators.required],
       a: ['', Validators.required]
@@ -67,9 +67,9 @@ export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
     });
   }
 
-  search(){
+  search() {
     this.formSubmitted = true;
-    if(this.text=="Search"){
+    if (this.text == "Search") {
       if (this.searchForm.invalid) {
         return;
       } else {
@@ -88,18 +88,18 @@ export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
             };
             this.propositions.push(r);
           }
-          if (res.length>0){
+          if (res.length > 0) {
             this.display = true;
             this.l.nativeElement.classList.add('large');
             this.text = "Clear";
-          }else{
+          } else {
             alert("Aucun trajet n'est disponible pour le moment....😣");
           }
         }, error => {
 
         });
       }
-    }else {
+    } else {
       this.text = "Search";
       this.propositions = [];
       this.display = false;
@@ -114,7 +114,12 @@ export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
     return this.searchForm.controls;
   }
 
-  selectReservation(reservation){
+  selectReservation(reservation) {
+    console.table(reservation);
+    this.reservationService.addReservation(reservation.id).subscribe(res => {
+      console.log("Id " + res);
+    }, error => {
 
+    });
   }
 }

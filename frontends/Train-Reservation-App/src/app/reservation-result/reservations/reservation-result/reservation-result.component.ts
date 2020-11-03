@@ -73,7 +73,8 @@ export class ReservationResultComponent implements OnInit,AfterViewInit {
 
   // ### Selection d'un contrat
   select() {
-    // this.OnSelect.emit(this.contrat);
+    console.log("event");
+    this.OnSelect.emit(this.reservation);
   }
 
   // ### Validation / Echec d'un contrat

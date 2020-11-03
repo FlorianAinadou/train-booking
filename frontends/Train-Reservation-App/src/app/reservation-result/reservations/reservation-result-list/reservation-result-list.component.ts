@@ -13,8 +13,8 @@ export class ReservationResultListComponent implements OnInit, AfterViewInit {
 
   // numbers: number[] = [];
   //
-  // // @Input()
-  // reservationsList: Reservation[] = [];
+  @Input()
+  reservation: Reservation;
   // @ViewChild('hamburger') hamburger;
   // @ViewChild('icon') icon;
   // @ViewChild('effect') effect;
@@ -57,6 +57,7 @@ export class ReservationResultListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     document.body.style.backgroundColor = 'darkgrey';
+    console.table(this.reservation);
     // ### Ouvrir le filtre par défaut
   }
 

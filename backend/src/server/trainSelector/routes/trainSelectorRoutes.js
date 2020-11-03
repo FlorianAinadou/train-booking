@@ -12,6 +12,14 @@ router.get('/trainSelector/:departureStation/:arrivalStation', async (ctx) => {
   }
 });
 
+router.get('/trainSelector/:id', async (ctx) => {
+  try {
+    const train = await sdk.getTrainById(ctx.params.id);
+    f.success(ctx, train);
+  } catch {
+    f.failure(ctx, "failed");
+  }
+});
 
 
 module.exports = router;

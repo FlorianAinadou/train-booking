@@ -12,14 +12,59 @@ import {catchError, retry} from "rxjs/operators";
 export class ReservationService {
 
   private userUrl = ' http://localhost:9000/trainSelector/';
+  private reservationUrl = ' http://localhost:9000/booking/';
+
 
   constructor(private http: HttpClient, private router: Router) {
 
   }
 
 
+
+  addReservation(trainId): Observable<any> {
+    const myReservation = {
+      'trainId': trainId,
+      'userMail': this.getCurrentUserMail(),
+      'placeNumber' : Date.now().toString()
+    };
+    console.table(myReservation);
+    return this.http.post<any>(this.reservationUrl + 'addReservation', myReservation)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+  }
+
+  getUserConnect(email, password): Observable<any> {
+    const myUser = {
+      'mail': email,
+      'password': password
+    };
+    return this.http.post<any>(this.userUrl + 'login', myUser)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+  }
+
   getReservationResult(departure, arrival): Observable<any> {
     return this.http.get<any>(this.userUrl + departure + '/' + arrival)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+  }
+
+  getTrainById(id): Observable<any> {
+    return this.http.get<any>(this.userUrl + id)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+  }
+
+  getMyReservationList(): Observable<any> {
+    return this.http.get<any>(this.reservationUrl + 'getBookingByMail/' + this.getCurrentUserMail())
       .pipe(
         retry(1),
         catchError(this.errorHandl)
@@ -38,6 +83,10 @@ export class ReservationService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
+  }
+
+  getCurrentUserMail() {
+    return localStorage.getItem("currentUserEmail");
   }
 
 }

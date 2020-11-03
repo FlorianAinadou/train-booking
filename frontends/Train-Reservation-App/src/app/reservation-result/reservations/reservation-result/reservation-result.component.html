@@ -28,7 +28,7 @@
 <!--</ng-template>-->
 
 <div class="row">
-  <div class="col-lg-4" (click)="select()">
+  <div class="col-lg-4">
     <img class="reduce" src="../../../../assets/img/Train_RIB_ADC_2.png">
     <!--{{contrat.etudiant.nom}}-->
     <!--<p class="policeHobo" style="font-size: 15px; padding-bottom: 0px" >-->
@@ -46,7 +46,7 @@
 <!--    <i class="fas fa-times-circle fa-2x myButton zoom"  (click)="successOrFailure(0)" *ngIf="contrat.validation===2" style="padding-left: 10px; color: #f23d32;" [ngbTooltip]="tipContentR" placement="left"></i>-->
 
     <!--### Valider / Echec-->
-    <i class="fas fa-plus-circle fa-2x  myButton zoom"   style="color: black" ></i>
+    <i class="fas fa-plus-circle fa-2x  myButton zoom"   style="color: black" (click)="select()"></i>
 <!--    <i class="fas fa-file-signature fa-2x  myButton"  *ngIf="contrat.validation===0" style="color: darkred" [ngbTooltip]="tipContentFailed" placement="left"></i>-->
 <!--    <i class="fas fa-2x fa-eye myButton zoom"   *ngIf="contrat.validation===0" style="padding-left: 10px" [ngbTooltip]="tipContentRE  " placement="left"></i>-->
 
