@@ -8,7 +8,7 @@ async function getBookingByIdAndEmail(bookingId, userMail) {
 }
 
 async function getBookingByEmail(userMail) {
-    return await BookingModel.find({'userMail': userMail});
+    return await BookingModel.find({'userMail': userMail, 'paid': false});
 }
 
 
