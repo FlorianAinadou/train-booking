@@ -50,7 +50,7 @@ export class ReservationResultListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    document.body.style.backgroundColor = 'darkgrey';
+    // document.body.style.backgroundColor = 'darkgrey';
     console.table(this.reservation);
     // ### Ouvrir le filtre par défaut
   }
