@@ -15,15 +15,9 @@ export class ReservationResultListComponent implements OnInit, AfterViewInit {
   //
   @Input()
   reservation: Reservation;
-  // @ViewChild('hamburger') hamburger;
-  // @ViewChild('icon') icon;
-  // @ViewChild('effect') effect;
-  // // public contratSelected: Contrat;
-  // changeIcon = false;
-  // filterHidden = true;
-  // n:number;
-  // // output
-  // display = true;
+
+  @Output() OnRemove = new EventEmitter<Reservation>();
+
 
 
   constructor(private renderer: Renderer2) {
@@ -90,6 +84,10 @@ export class ReservationResultListComponent implements OnInit, AfterViewInit {
 
   contractClosed(): void {
     // this.contratSelected = undefined;
+  }
+
+  remove(){
+    this.OnRemove.emit(this.reservation);
   }
 
   increment(){

@@ -26,10 +26,9 @@ async function addReservation( userMail, placeNumber, trainId) {
 
 
 
-async function removeBookingByBookingId(bookingId, userMail) {
+async function removeBookingByBookingId(bookingId) {
     await BookingModel.findOneAndRemove({
-        "bookingId": bookingId,
-        "userMail": userMail
+        "bookingId": bookingId
     }, function (err, booking) {
         if (err)
             return false;
