@@ -4,6 +4,7 @@
   [includeSpinner]="'false'"
   [diameter]="'20px'"
 ></ngx-loading-bar>
+<span #target></span>
 
 <app-header
   [userConnected]="userConnected"
@@ -11,11 +12,12 @@
   [userConnectedName]="currentUser"
   (OnDeconnexion)="deconnectMe($event)"
 ></app-header>
+<!--<span #target></span>-->
 
 
 
 
-<div class="styleG">
+<div class="styleG" >
 <!--  <app-home-body [userConnected]="userConnected"-->
 <!--                 [authentificationFailedHome]="authentificationFailed"-->
 <!--                 [userConnectedName]="currentUser"(OnConnect)="connectMe($event)"></app-home-body>-->
@@ -26,3 +28,4 @@
   <ngb-alert [dismissible]="false" *ngIf="alert[0].message" [type]="alert[0].type"
              (close)="alert[0].message = null">{{ alert[0].message }}</ngb-alert>
 </p>
+<a href="javascript:" (click)="scrollToElement(target)" *ngIf="isShow"  class="scrollToTop"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>

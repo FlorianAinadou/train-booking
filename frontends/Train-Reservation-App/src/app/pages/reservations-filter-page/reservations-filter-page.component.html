@@ -23,24 +23,36 @@
                    alt="">
 
 <!--              <div class="container">-->
-                <div class="row">
+              <form  [formGroup]="searchForm">
+              <div class="row">
                   <div class="col-3 input-effect" #imp>
-                    <input class="effect-20 " type="text" placeholder=""/>
+                    <input class="effect-20 " type="text" placeholder="" [formControlName]="'d'"/>
                     <label style="color: black;">Station de départ</label>
+                    <span class="barI">
+                         <span
+                           *ngIf="formSubmitted && g.d.errors && g.d.errors.required"
+                           class="myError"> ⛔ Requis</span>
+                    </span>
                     <span class="focus-border">
             	      <i></i>
                    </span>
                   </div>
 
                   <div class="col-3 input-effect">
-                    <input class="effect-20 " type="text" placeholder=""/>
+                    <input class="effect-20 " type="text" placeholder="" [formControlName]="'a'"/>
                     <label style="color: black;">Station d'arrivée</label>
+                    <span class="barI">
+                         <span
+                           *ngIf="formSubmitted && g.a.errors && g.a.errors.required"
+                           class="myError"> ⛔ Requis</span>
+                    </span>
                     <span class="focus-border">
             	      <i></i>
                    </span>
                   </div>
 <!--                </div>-->
               </div>
+              </form>
 
               <div class="row">
                 <a class="push"  style="position: relative; top: -50px;" href="javascript:" (click)="search()">{{text}}</a>

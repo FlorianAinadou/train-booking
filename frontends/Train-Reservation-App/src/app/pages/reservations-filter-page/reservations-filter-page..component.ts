@@ -7,6 +7,8 @@ import {faFilm} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
 import {Reservation} from "../../../models/reservation";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ReservationService} from "../../../services/reservation/reservation.service";
 
 @Component({
   selector: 'app-reservations-filter-page',
@@ -21,16 +23,18 @@ export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
 
   @ViewChild('imp') imp;
   @ViewChild('l') l;
+  public searchForm: FormGroup;
+  formSubmitted = false;
 
   propositions: Reservation[] = [];
   display = false;
   text = "Search";
 
-  constructor(public userService: UserService, public router: Router,private renderer: Renderer2) {
-
-
-
-
+  constructor(public userService: UserService, public router: Router,private renderer: Renderer2,public formBuilder: FormBuilder,public reservationService: ReservationService) {
+    this.searchForm = this.formBuilder.group({
+      d: ['', Validators.required],
+      a: ['', Validators.required]
+    });
   }
 
 
@@ -64,27 +68,37 @@ export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
   }
 
   search(){
+    this.formSubmitted = true;
     if(this.text=="Search"){
-      let r: Reservation = {
-        price: "10",
-        seats: "5",
-        id: "45555"
-      };
+      if (this.searchForm.invalid) {
+        return;
+      } else {
 
-      let re: Reservation = {
-        price: "19",
-        seats: "4",
-        id: "45555"
-      };
+        const departure = this.searchForm.get('d').value;
+        const arrival = this.searchForm.get('a').value;
 
-      this.propositions.push(r);
-      this.propositions.push(re);
-      this.propositions.push(re);
-      this.propositions.push(re);
+        this.reservationService.getReservationResult(departure, arrival).subscribe(res => {
+          for (let entry of res) {
+            // console.table(entry);
+            let r: Reservation = {
+              price: entry["price"],
+              seats: entry["remainingSeats"],
+              id: entry["_id"],
+              routes: entry["routes"]
+            };
+            this.propositions.push(r);
+          }
+          if (res.length>0){
+            this.display = true;
+            this.l.nativeElement.classList.add('large');
+            this.text = "Clear";
+          }else{
+            alert("Aucun trajet n'est disponible pour le moment....😣");
+          }
+        }, error => {
 
-      this.display = true;
-      this.l.nativeElement.classList.add('large');
-       this.text = "Clear";
+        });
+      }
     }else {
       this.text = "Search";
       this.propositions = [];
@@ -94,6 +108,10 @@ export class ReservationsFilterPageComponent implements OnInit,AfterViewInit {
 
 
     // console.table(this.propositions);
+  }
+
+  get g() {
+    return this.searchForm.controls;
   }
 
   selectReservation(reservation){

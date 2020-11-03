@@ -1,5 +1,24 @@
 //@import "compass/css3";
 //@import '../../../pages/contracts-page/contracts-page.component.scss';
+button.myButton:hover{
+  color : darkred;
+}
+
+.myError{
+  color : darkred;
+  position: relative;
+  //left: 45px;
+  //top: 35px;
+}
+
+.myInput .barI {
+  position: absolute;
+  //left: 15%;
+  background-color: #757575;
+  height: 2px;
+  top: 80px;
+  width: 70%;
+}
 
 body{
   background: white !important;

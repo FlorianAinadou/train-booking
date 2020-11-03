@@ -26,6 +26,8 @@ import {ReservationsFilterPageComponent} from "./pages/reservations-filter-page"
 import {ReservationResultComponent} from "./reservation-result/reservations/reservation-result";
 import {ReservationResultListComponent} from "./reservation-result/reservations/reservation-result-list";
 import {ReservationsDisplayPageComponent} from "./pages/reservations-display-page";
+import {UserService} from "../services/user/user.service";
+import {ReservationService} from "../services/reservation/reservation.service";
 
 
 @NgModule({
@@ -58,7 +60,7 @@ import {ReservationsDisplayPageComponent} from "./pages/reservations-display-pag
     // FontAwesomeModule,
     ReactiveFormsModule // Import all dependencies
   ],
-  providers: [NgbTabsetConfig],
+  providers: [NgbTabsetConfig,UserService,ReservationService],
   entryComponents: [InscriptionModalComponent,ConnexionModalComponent],
   bootstrap: [AppComponent]
 })

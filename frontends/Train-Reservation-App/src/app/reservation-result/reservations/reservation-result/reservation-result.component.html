@@ -36,8 +36,8 @@
     <!--</p>-->
     <!--<span style="font-size: 15px;">{{contrat.etudiant.nom}}</span>-->
   </div>
-  <div class="col-lg-4" (click)="select()"  style="font-size: 15px; text-align: center; margin-top: 25px">
-    {{reservation.price}} €<br> {{reservation.seats}} places restantes
+  <div class="col-lg-4" (click)="select()"  style="font-size: 15px; text-align: center; ">
+    💸{{reservation.price}} €<br> 💺 {{reservation.seats}} places restantes <br> 🗺 {{reservation.routes}}
   </div>
   <div class="col-lg-4"  style="font-size: 15px; text-align: center; margin-top: 20px">
 
@@ -46,7 +46,7 @@
 <!--    <i class="fas fa-times-circle fa-2x myButton zoom"  (click)="successOrFailure(0)" *ngIf="contrat.validation===2" style="padding-left: 10px; color: #f23d32;" [ngbTooltip]="tipContentR" placement="left"></i>-->
 
     <!--### Valider / Echec-->
-    <i class="fas fa-plus-circle fa-2x  myButton"   style="color: green" ></i>
+    <i class="fas fa-plus-circle fa-2x  myButton zoom"   style="color: black" ></i>
 <!--    <i class="fas fa-file-signature fa-2x  myButton"  *ngIf="contrat.validation===0" style="color: darkred" [ngbTooltip]="tipContentFailed" placement="left"></i>-->
 <!--    <i class="fas fa-2x fa-eye myButton zoom"   *ngIf="contrat.validation===0" style="padding-left: 10px" [ngbTooltip]="tipContentRE  " placement="left"></i>-->
 
