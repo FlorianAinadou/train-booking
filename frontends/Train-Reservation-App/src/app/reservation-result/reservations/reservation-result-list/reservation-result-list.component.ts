@@ -17,6 +17,7 @@ export class ReservationResultListComponent implements OnInit, AfterViewInit {
   reservation: Reservation;
 
   @Output() OnRemove = new EventEmitter<Reservation>();
+  @Output() OnBuy = new EventEmitter<Reservation>();
 
 
 
@@ -88,6 +89,10 @@ export class ReservationResultListComponent implements OnInit, AfterViewInit {
 
   remove(){
     this.OnRemove.emit(this.reservation);
+  }
+
+  purchase(){
+    this.OnBuy.emit(this.reservation);
   }
 
   increment(){
