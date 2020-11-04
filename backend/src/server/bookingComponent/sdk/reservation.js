@@ -30,8 +30,6 @@ async function removeBookingByBookingId(bookingId,userMail) {
     await BookingModel.findOneAndRemove({
         "bookingId": bookingId,
         'userMail': userMail
-    },{
-        "paid" : true
     }, function (err, booking) {
         if (err)
             return false;
@@ -40,9 +38,12 @@ async function removeBookingByBookingId(bookingId,userMail) {
 }
 
 
-async function setBookingPayStatus(bookingId,mail) {
-    await BookingModel.findOneAndRemove({
-        "bookingId": bookingId
+async function setBookingPayStatus(bookingId,userMail) {
+    await BookingModel.findOneAndUpdate({
+        "bookingId": bookingId,
+        'userMail': userMail
+    },{
+        "paid" : true
     }, function (err, booking) {
         if (err)
             return false;
