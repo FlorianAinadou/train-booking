@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build:
+  unit:
 
     runs-on: ubuntu-latest
 
@@ -16,6 +16,25 @@ jobs:
       run:
         shell: bash
         working-directory: ./backend
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+  cucumber:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./test
 
     steps:
       - uses: actions/checkout@v2
