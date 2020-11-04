@@ -3,9 +3,9 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 
 const http = require('http')
 
-Given('Un customer souhaite réverser un train', function () {
-    this.today = 'Sunday';
-  });
+    Given('Un customer souhaite réverser un train', function () {
+        this.today = 'Sunday';
+    });
   
   When('il part de la gare de {string} vers la gare de {string}',
     function (depart,arrivee) {
@@ -70,24 +70,61 @@ Given('Un customer souhaite réverser un train', function () {
   
   Then('il regarde ces réservations via son mail {string} et voit {int} réservation', function (email,numberOfReservations) {
     
-    const options = {
-        hostname: 'localhost',
-        port: 9000,
-        path: '/booking/getBookingByMail/'+email,
-        method: 'GET'
-      }
+        const options = {
+            hostname: 'localhost',
+            port: 9000,
+            path: '/booking/getBookingByMail/'+email,
+            method: 'GET'
+        }
 
-    const req = http.request(options, res => {
-        assert.strictEqual(res.statusCode,200)
-    
-        res.on('data', d => {
-            // process.stdout.write(d)
-            // assert.strictEqual(JSON.parse(d).length,numberOfReservations)
+        const req = http.request(options, res => {
+            assert.strictEqual(res.statusCode,200)
+        
+            res.on('data', d => {
+                // process.stdout.write(d)
+                // assert.strictEqual(JSON.parse(d).length,numberOfReservations)
+            })
         })
-    })
-  
-    req.on('error', error => {
-        console.error(error)
-    })
-    req.end()
-});
+    
+        req.on('error', error => {
+            console.error(error)
+        })
+        req.end()
+    });
+
+    Then("il paie son billet de {int}€ qui a l'id {string} avec son mail {string}", function (price,bookingId,email) {
+        const data = JSON.stringify({
+            "bookingId": bookingId,
+            "userMail": email,
+            "price": price
+        })
+    
+        const options = {
+              hostname: 'localhost',
+              port: 9000,
+              path: '/payment/payReservation',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': data.length
+              }
+            }
+    
+        const req = http.request(options, res => {
+            // console.log(`statusCode: ${res.statusCode}`)
+            assert.strictEqual(res.statusCode,200)
+        
+            res.on('data', d => {
+                // process.stdout.write(d)
+                // setMessage(JSON.parse(d))
+                // console.log(getMessage())
+            })
+        })
+        
+        req.on('error', error => {
+            console.error(error)
+        })
+        
+        req.write(data)
+        req.end()
+    });
