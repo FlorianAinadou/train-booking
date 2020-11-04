@@ -14,5 +14,11 @@ router.get('/pay/:idCard/:price', async (ctx) => {
 });
 
 
+router.post('/payment/payReservation', async (ctx) => {
+  const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId,ctx.request.body.userMail,ctx.request.body.price);
+  f.success(ctx, JSON.stringify(bookings));
+});
+
+
 
 module.exports = router;

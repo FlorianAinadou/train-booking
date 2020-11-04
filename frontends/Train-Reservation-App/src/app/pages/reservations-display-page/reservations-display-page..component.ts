@@ -75,7 +75,7 @@ export class ReservationsDisplayPageComponent implements OnInit {
   removeReservation(reservation) {
     this.reservationService.removeReservation(reservation.id).subscribe(re => {
       this.propositions = this.propositions.filter(({id}) => id !== reservation.id);
-      if(this.propositions.length == 0){
+      if (this.propositions.length == 0) {
         this.emptyList = true;
       }
     }, error => {
@@ -83,4 +83,18 @@ export class ReservationsDisplayPageComponent implements OnInit {
     });
   }
 
+  purchaseReservation(reservation) {
+    this.reservationService.purchaseReservation(reservation.price,reservation.id).subscribe(re => {
+      console.log("R "+re);
+      if(re){
+        this.propositions = this.propositions.filter(({id}) => id !== reservation.id);
+        if (this.propositions.length == 0) {
+          this.emptyList = true;
+        }
+      }
+    }, error => {
+
+    });
+
+  }
 }

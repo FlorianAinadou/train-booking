@@ -29,7 +29,8 @@ async function addUser(fname, lname, email, password, tel, address, gender) {
             "password": password,
             "address": address,
             "phone_number": tel,
-            "gender": gender
+            "gender": gender,
+            "cardId" : "1R5321T4T64163134"
         }, function (err, user) {
             if (err) console.log(err);
         });

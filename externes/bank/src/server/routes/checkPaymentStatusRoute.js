@@ -7,7 +7,6 @@ router.get('/paid/:idCard/:price', async (ctx) => {
   try {
     const paid = await sdk.checkPaymentStatus(ctx.params.idCard.toString(), ctx.params.price);
     f.success(ctx, paid);
-    console.log(paid.toString())
   } catch {
     f.failure(ctx, "failed");
   }

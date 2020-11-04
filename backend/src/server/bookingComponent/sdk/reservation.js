@@ -37,10 +37,22 @@ async function removeBookingByBookingId(bookingId) {
 }
 
 
-
+async function setBookingPayStatus(bookingId,userMail) {
+    await BookingModel.findOneAndUpdate({
+        "bookingId": bookingId,
+        'userMail': userMail
+    },{
+        "paid" : true
+    }, function (err, booking) {
+        if (err)
+            return false;
+    });
+    return true;
+}
 
 
 module.exports = {
     addReservation,
-    removeBookingByBookingId
+    removeBookingByBookingId,
+    setBookingPayStatus
 };

@@ -18,10 +18,6 @@ BookingSchema = new Schema({
         type: Boolean,
         require: true
     },
-    price: {
-        type: Boolean,
-        require: true
-    },
     placeNumber: {
         type: String,
         require: true
