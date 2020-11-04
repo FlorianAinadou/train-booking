@@ -34,7 +34,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./test
+        working-directory: ./tests
 
     steps:
       - uses: actions/checkout@v2
