@@ -39,14 +39,15 @@ class CircularButton extends StatelessWidget {
             SizedBox(
               width: 10,
             ),
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 18,
-                //fontWeight: FontWeight.w300,
-                color: Colors.white,
+            if (text != null)
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: 18,
+                  //fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                ),
               ),
-            ),
           ],
         ),
       ),

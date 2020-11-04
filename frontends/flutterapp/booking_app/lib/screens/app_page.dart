@@ -1,4 +1,4 @@
-import 'package:booking_app/common/values/booleans.dart';
+import 'package:booking_app/common/values/variables.dart';
 import 'package:booking_app/common/values/box_shadows.dart';
 import 'package:booking_app/screens/booking/booking_page.dart';
 import 'package:booking_app/screens/ticketspage/tickets_page.dart';
