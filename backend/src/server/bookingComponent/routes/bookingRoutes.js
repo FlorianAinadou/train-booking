@@ -14,6 +14,11 @@ router.get('/booking/getBookingByMail/:userMail', async (ctx) => {
     f.success(ctx, bookings);
 });
 
+router.get('/booking/getPaidBookingByMail/:userMail', async (ctx) => {
+    const bookings = await booking.getPaidBookingByEmail(ctx.params.userMail);
+    f.success(ctx, bookings);
+});
+
 router.put('/booking/payReservation', async (ctx) => {
     const bookings = await booking.payReservationByIdAndEmail(ctx.request.body.bookingId,ctx.request.body.params.userMail);
     f.success(ctx, bookings);

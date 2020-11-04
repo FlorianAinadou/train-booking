@@ -11,6 +11,10 @@ async function getBookingByEmail(userMail) {
     return await BookingModel.find({'userMail': userMail, 'paid': false});
 }
 
+async function getPaidBookingByEmail(userMail) {
+    return await BookingModel.find({'userMail': userMail, 'paid': true});
+}
+
 
 async function payReservationByIdAndEmail(bookingId, userMail) {
     return BookingModel.findOneAndUpdate({'email': bookingId, 'userMail': userMail}, {'paid': true}, {
@@ -45,5 +49,6 @@ module.exports = {
     getBookingByIdAndEmail,
     payReservationByIdAndEmail,
     addPaidReservation,
-    getBookingByEmail
+    getBookingByEmail,
+    getPaidBookingByEmail
 };
