@@ -1,4 +1,7 @@
 const {strRandom} = require("../utils/idGenerator");
+const customerRegistration = require('../../customerRegistration/sdk/customerFinder');
+const rpa = require('request-promise');
+
 let bookingIdSize = 6;
 
 const BookingModel = require('../models/Booking');
@@ -12,10 +15,16 @@ async function getBookingByEmail(userMail) {
 }
 
 
-async function payReservationByIdAndEmail(bookingId, userMail) {
-    return BookingModel.findOneAndUpdate({'email': bookingId, 'userMail': userMail}, {'paid': true}, {
-        new: true
-    });
+async function payReservationByIdAndEmail(bookingId, userMail,price) {
+    const customer = customerRegistration.getUserByEmail(userMail);
+    const url = "http://127.0.0.1:7000/paid/";
+    const result = await rpa(url+customer.cardId+"/"+price);
+    const rep  = JSON.parse(result);
+    if(rep["data"]){
+        BookingModel.findOneAndUpdate({'email': bookingId, 'userMail': userMail}, {'paid': true});
+        return true;
+    }
+    return false;
 }
 
 async function addPaidReservation(userMail, placeNumber, trainId) {
