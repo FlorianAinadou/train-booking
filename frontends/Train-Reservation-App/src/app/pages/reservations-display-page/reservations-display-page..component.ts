@@ -84,7 +84,7 @@ export class ReservationsDisplayPageComponent implements OnInit {
   }
 
   purchaseReservation(reservation) {
-    this.reservationService.purchaseReservation(reservation.id,reservation.price).subscribe(re => {
+    this.reservationService.purchaseReservation(reservation.price,reservation.id).subscribe(re => {
       console.log("R "+re);
       if(re){
         this.propositions = this.propositions.filter(({id}) => id !== reservation.id);

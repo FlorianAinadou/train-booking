@@ -6,10 +6,12 @@ async function checkPaymentStatus(idCard, price) {
     for (account of accounts) {
         if( account['idCard'].localeCompare(idCard) === 0){
             const p = account['amount'] - price;
-            return p >= 0;
+            if(p >= 0){
+                return true
+            }
         }
     }
-    return {"data": false}
+    return false
 }
 
 

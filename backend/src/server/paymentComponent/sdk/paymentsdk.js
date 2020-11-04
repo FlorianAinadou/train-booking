@@ -7,17 +7,14 @@ const bookingReservation = require('../../bookingComponent/sdk/reservation');
 url = "http://localhost:7000/paid/";
 
 async function pay(idCard,price) {
-    const result = await rp(url+""+idCard+"/"+price);
-    bankResponse = JSON.parse(result);
-    return bankResponse;
+    return await rp(url+""+idCard+"/"+price);
 }
 
 
 async function payReservationByIdAndEmail(bookingId, userMail,price) {
     const customer = await customerRegistration.getUserByEmail(userMail);
     const rep  = await pay(customer.cardId,price);
-    // console.table(rep);
-    if(rep["data"]){
+    if(rep){
         await bookingReservation.setBookingPayStatus(bookingId,userMail);
         return true;
     }
