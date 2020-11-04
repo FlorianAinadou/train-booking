@@ -7,7 +7,7 @@ import 'package:booking_app/common/values/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'components/train_page.dart';
+import 'components/trains_page.dart';
 
 import 'package:intl/intl.dart'; //for date format
 import 'package:intl/date_symbol_data_local.dart'; //for date locale

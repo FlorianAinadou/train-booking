@@ -27,7 +27,7 @@ class TrainPage extends StatelessWidget {
     List<Train> trains = [];
     //print(data.body);
     for (var t in jsonData) {
-      print(t["trainId"]);
+      //print(t["trainId"]);
       Train train = Train(
           trainId: t["trainId"],
           date: t["date"],

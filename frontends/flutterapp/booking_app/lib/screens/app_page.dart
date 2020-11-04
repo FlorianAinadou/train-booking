@@ -24,7 +24,7 @@ class _AppPageState extends State<AppPage> {
   void _onTabTapped(int index) {
     setState(() {
       if (index == 1) todayTickets = true;
-      print(todayTickets);
+      //print(todayTickets);
       _currentIndex = index;
     });
   }

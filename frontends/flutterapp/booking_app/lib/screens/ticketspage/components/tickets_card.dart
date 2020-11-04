@@ -1,11 +1,13 @@
 import 'package:booking_app/models/ticket_model.dart';
+import 'package:booking_app/models/train_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
 class TicketsCard extends StatelessWidget {
-  final Ticket ticket;
+  //final Ticket ticket;
+  final Train train;
 
-  const TicketsCard({Key key, this.ticket}) : super(key: key);
+  const TicketsCard({Key key, this.train}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class TicketsCard extends StatelessWidget {
         children: <Widget>[
           RichText(
             text: TextSpan(
-              text: ticket.departureDateTime.split(' ')[0].toString(),
+              text: train.date.split('T')[0].toString() + '   ' + train.date.split('T')[1].toString().split('.')[0].toString(),
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
@@ -74,7 +76,7 @@ class TicketsCard extends StatelessWidget {
                             ),
                           ),*/
                           TextSpan(
-                            text: ticket.departureCity + '\n',
+                            text: train.routes[0] + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -82,9 +84,9 @@ class TicketsCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: ticket.departureDateTime
+                            text: '~'/*ticket.departureDateTime
                                 .split(' ')[1]
-                                .toString(),
+                                .toString()*/,
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -124,7 +126,7 @@ class TicketsCard extends StatelessWidget {
                             ),
                           ),*/
                           TextSpan(
-                            text: ticket.arrivalCity + '\n',
+                            text: train.routes[train.routes.length-1] + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -132,8 +134,8 @@ class TicketsCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text:
-                                ticket.arrivalDateTime.split(' ')[1].toString(),
+                            text: '~'
+                                /*ticket.arrivalDateTime.split(' ')[1].toString()*/,
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,

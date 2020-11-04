@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:booking_app/common/values/box_shadows.dart';
 import 'package:booking_app/mocks/tickets_mocks.dart';
 import 'package:booking_app/models/ticket_model.dart';
+import 'package:booking_app/screens/ticketspage/components/ordered_tickets_page.dart';
 import 'package:booking_app/screens/ticketspage/components/tickets_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -25,13 +28,13 @@ class _TicketsPageState extends State<TicketsPage>
     return TICKETS_MOCKS.map((model) => Ticket.fromMap(model)).toList();
   }
 
-  List<Widget> _getTickets(data) {
+  /*List<Widget> _getTickets(data) {
     dynamic items = <Widget>[];
     for (dynamic d in data) {
       items.add(TicketsCard(ticket: d));
     }
     return items;
-  }
+  }*/
 
   @override
   void initState() {
@@ -169,19 +172,24 @@ class _TicketsPageState extends State<TicketsPage>
               ],
             ),
           ),
-          body: TabBarView(
-            controller: _tabController,
-            children: <Widget>[
-              ListView(
-                children: _getTickets(fetchMockedData()),
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/home_page2_1.jpg"),
+                fit: BoxFit.cover,
               ),
-              ListView(
-                children: _getTickets(fetchMockedData()),
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+              child: TabBarView(
+                controller: _tabController,
+                children: <Widget>[
+                  OrderedTicketsPage(period: 1,),
+                  OrderedTicketsPage(period: 2,),
+                  OrderedTicketsPage(period: 3,),
+                ],
               ),
-              ListView(
-                children: _getTickets(fetchMockedData()),
-              ),
-            ],
+            ),
           )),
     );
   }
