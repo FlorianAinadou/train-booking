@@ -29,6 +29,10 @@ CustomerSchema = new Schema({
     phone_number: {
         type: String,
         require: true
+    },
+    cardId: {
+        type: String,
+        require: true
     }
 });
 

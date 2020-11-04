@@ -1,4 +1,4 @@
-const accounts = require('../../../mocks/customerAccounts.json')
+const accounts = require('../../../mocks/customerAccounts.json');
 
 async function checkPaymentStatus(idCard, price) {
     for (account of accounts) {
@@ -8,6 +8,7 @@ async function checkPaymentStatus(idCard, price) {
         return {"data": false}
     }
 }
+
 
 async function getAccounts() {
     return accounts
