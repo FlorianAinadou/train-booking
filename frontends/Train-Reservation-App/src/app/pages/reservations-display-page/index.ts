@@ -1,1 +1,1 @@
-export { ReservationsDisplayPageComponent } from './reservations-display-page..component';
+export { ReservationsDisplayPageComponent } from './reservations-display-page.component';

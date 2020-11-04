@@ -12,6 +12,10 @@ async function getBookingByEmail(userMail) {
     return await BookingModel.find({'userMail': userMail, 'paid': false});
 }
 
+async function getPaidBookingByEmail(userMail) {
+    return await BookingModel.find({'userMail': userMail, 'paid': true});
+}
+
 async function addPaidReservation(userMail, placeNumber, trainId) {
     let bookingId;
     if (trainId !== undefined) {
@@ -38,5 +42,6 @@ async function addPaidReservation(userMail, placeNumber, trainId) {
 module.exports = {
     getBookingByIdAndEmail,
     addPaidReservation,
-    getBookingByEmail
+    getBookingByEmail,
+    getPaidBookingByEmail
 };
