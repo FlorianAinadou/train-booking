@@ -1,1 +1,1 @@
-export { ReservationsFilterPageComponent } from './reservations-filter-page..component';
+export { ReservationsFilterPageComponent } from './reservations-filter-page.component';

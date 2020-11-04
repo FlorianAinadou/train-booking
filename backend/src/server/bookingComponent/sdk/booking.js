@@ -12,20 +12,10 @@ async function getBookingByEmail(userMail) {
     return await BookingModel.find({'userMail': userMail, 'paid': false});
 }
 
-<<<<<<< HEAD
 async function getPaidBookingByEmail(userMail) {
     return await BookingModel.find({'userMail': userMail, 'paid': true});
 }
 
-
-async function payReservationByIdAndEmail(bookingId, userMail) {
-    return BookingModel.findOneAndUpdate({'email': bookingId, 'userMail': userMail}, {'paid': true}, {
-        new: true
-    });
-}
-
-=======
->>>>>>> d51bacd6187109280436d5bb38a8616fe9fa5354
 async function addPaidReservation(userMail, placeNumber, trainId) {
     let bookingId;
     if (trainId !== undefined) {

@@ -10,13 +10,13 @@ import {Reservation} from "../../../models/reservation";
 import {ReservationService} from "../../../services/reservation/reservation.service";
 
 @Component({
-  selector: 'app-reservations-page',
-  templateUrl: './reservations-display-page.component.html',
-  styleUrls: ['./reservations-display-page..component.scss']
+  selector: 'app-ticket-page',
+  templateUrl: './reservations-ticket-page.component.html',
+  styleUrls: ['./reservations-ticket-page.component.scss']
 })
 
 
-export class ReservationsDisplayPageComponent implements OnInit {
+export class ReservationsTicketPageComponent implements OnInit {
   // @ViewChild('map')
   // public mapElement: HomeMapComponent;
 
