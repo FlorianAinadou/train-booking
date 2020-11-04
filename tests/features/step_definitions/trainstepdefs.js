@@ -21,7 +21,7 @@ Given('Un customer veut réverser un train', function () {
             assert.strictEqual(res.statusCode,200)
         
             res.on('data', d => {
-                process.stdout.write(d)
+                // process.stdout.write(d)
             })
         })
         
