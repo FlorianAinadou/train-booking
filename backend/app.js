@@ -37,6 +37,4 @@ mongoose.connect(`mongodb+srv://${config.configDB.userName}:${config.configDB.pa
 mongoose.set('debug', true);
 
 
-module.exports = {
-  server
-};
+module.exports = server ;
