@@ -9,10 +9,10 @@ async function getTrainsById(id) {
 }
 
 async function removeSeat(trainId) {
-    const result = await TrainModel.findOne({ '_id': trainId })
-    console.log(result.remainingSeats);
+    const result = await TrainModel.findOne({ '_id': trainId });
+    // console.log(result.remainingSeats);
     const actualRemainingSeats = result.remainingSeats;
-    console.log(actualRemainingSeats)
+    // console.log(actualRemainingSeats)
     const update  =  {
         $set: {
             remainingSeats:
@@ -23,10 +23,10 @@ async function removeSeat(trainId) {
 }
 
 async function relieveSeat(trainId) {
-    const result = await TrainModel.findOne({ '_id': trainId })
-    console.log(result.remainingSeats);
+    const result = await TrainModel.findOne({ '_id': trainId });
+    // console.log(result.remainingSeats);
     const actualRemainingSeats = result.remainingSeats;
-    console.log(actualRemainingSeats)
+    // console.log(actualRemainingSeats)
     const update  =  {
         $set: {
             remainingSeats:

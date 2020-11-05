@@ -9,7 +9,6 @@ router.post('/trainList/removeSeat', async (ctx) => {
 });
 
 router.post('/trainList/relieveSeat', async (ctx) => {
-  console.log("HOOOMMEEE"+ctx.request.body.trainId)
   const aTrain = await sdk.relieveSeat(ctx.request.body.trainId);
   f.success(ctx,  JSON.stringify(aTrain)) ;
 });

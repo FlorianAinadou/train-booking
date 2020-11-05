@@ -1,18 +1,16 @@
 import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {fas} from '@fortawesome/free-solid-svg-icons';
-import {far} from '@fortawesome/free-regular-svg-icons';
-import {faFilm} from '@fortawesome/free-solid-svg-icons';
-import {UserService} from "../../../services/user/user.service";
-import {Alert} from "../../../models/alert";
 import {Reservation} from "../../../models/reservation";
 import {ReservationService} from "../../../services/reservation/reservation.service";
+import {Ticket} from "../../../models/ticket";
+import {UserService} from "../../../services/user/user.service";
+import {CurrencyPipe, DatePipe, DecimalPipe} from "@angular/common";
 
 @Component({
   selector: 'app-ticket-page',
   templateUrl: './reservations-ticket-page.component.html',
-  styleUrls: ['./reservations-ticket-page.component.scss']
+  styleUrls: ['./reservations-ticket-page.component.scss'],
+  providers:[DatePipe]
 })
 
 
@@ -21,10 +19,11 @@ export class ReservationsTicketPageComponent implements OnInit {
   // public mapElement: HomeMapComponent;
 
   emptyList = true;
-  propositions: Reservation[] = [];
+  propositions: Ticket[] = [];
 
 
-  constructor(public reservationService: ReservationService, public router: Router) {
+  constructor(public reservationService: ReservationService, public userService: UserService, public router: Router,
+              private _date: DatePipe) {
     this.loadReservation();
     document.body.style.backgroundColor = '#fff';
   }
@@ -35,28 +34,21 @@ export class ReservationsTicketPageComponent implements OnInit {
   }
 
   async loadReservation() {
-    // this.reservationService.getTrainById("5f9297120d970f0372d2af47").subscribe( re => {
-    //   console.log("train");
-    //   console.log(re);
-    //   // alert(price);
-    // }, error => {
-    //
-    // });
 
-    this.reservationService.getMyReservationList().subscribe(async res => {
+    this.reservationService.getMyReservationPaidList().subscribe(async res => {
       for (let entry of res) {
-        // console.table(entry);
         let routes = [];
         let price = 0;
-
         this.reservationService.getTrainById(entry["trainId"]).subscribe(re => {
           routes = re[0]["routes"];
           price = re[0]["price"];
-          let r: Reservation = {
+          let r: Ticket = {
             price: price.toString(),
             seats: entry["placeNumber"],
             id: entry["bookingId"],
-            routes: routes
+            routes: routes,
+            name: this.userService.getCurrentUserName(),
+            date: this._date.transform(re[0]["date"], 'dd.MM.yyyy HH:mm')
           };
           this.propositions.push(r);
         }, error => {
@@ -70,31 +62,5 @@ export class ReservationsTicketPageComponent implements OnInit {
     }, error => {
 
     });
-  }
-
-  removeReservation(reservation) {
-    this.reservationService.removeReservation(reservation.id).subscribe(re => {
-      this.propositions = this.propositions.filter(({id}) => id !== reservation.id);
-      if (this.propositions.length == 0) {
-        this.emptyList = true;
-      }
-    }, error => {
-
-    });
-  }
-
-  purchaseReservation(reservation) {
-    this.reservationService.purchaseReservation(reservation.price,reservation.id).subscribe(re => {
-      console.log("R "+re);
-      if(re){
-        this.propositions = this.propositions.filter(({id}) => id !== reservation.id);
-        if (this.propositions.length == 0) {
-          this.emptyList = true;
-        }
-      }
-    }, error => {
-
-    });
-
   }
 }

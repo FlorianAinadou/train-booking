@@ -2,10 +2,10 @@ const BookingModel = require('../models/Booking');
 const {strRandom} = require("../utils/idGenerator");
 
 const request = require('request');
-let bookingIdSize = 6
+let bookingIdSize = 6;
 
 
-async function addReservation( userMail, placeNumber, trainId) {
+async function addReservation(userMail, placeNumber, trainId) {
     let bookingId;
     if (trainId !== undefined) {
         bookingId = strRandom({
@@ -26,36 +26,35 @@ async function addReservation( userMail, placeNumber, trainId) {
     }
 
     request.post({
-        url:     'http://127.0.0.1:8000/trainList/removeSeat',
-        form:    {"trainId": trainId}
-      }, function(error, response, body){
+        url: 'http://127.0.0.1:8000/trainList/removeSeat',
+        form: {"trainId": trainId}
+    }, function (error, response, body) {
         console.log(body);
-      });
+    });
     return bookingId;
 }
 
 
-
 async function removeBookingByBookingId(bookingId) {
     const trainIde = await BookingModel.findOne({"bookingId": bookingId});
-    if (trainIde != undefined) {
-        const result=trainIde.trainId;
-        console.log(result)
-        
+    if (trainIde !== undefined) {
+        const result = trainIde.trainId;
+        console.log(result);
+
         request.post({
-            url:     'http://127.0.0.1:8000/trainList/relieveSeat',
-            form:    {"trainId": result}
-          }, function(error, response, body){
+            url: 'http://127.0.0.1:8000/trainList/relieveSeat',
+            form: {"trainId": result}
+        }, function (error, response, body) {
             console.log(body);
-          });
-        // await BookingModel.findOneAndRemove({
-        //     "bookingId": bookingId
-        // }, function (err, booking) {
-        //     if (err)
-        //         return false;
-        // });
-    
-    
+        });
+        await BookingModel.findOneAndRemove({
+            "bookingId": bookingId
+        }, function (err, booking) {
+            if (err)
+                return false;
+        });
+
+
         return true;
     }
 
@@ -64,12 +63,12 @@ async function removeBookingByBookingId(bookingId) {
 }
 
 
-async function setBookingPayStatus(bookingId,userMail) {
+async function setBookingPayStatus(bookingId, userMail) {
     await BookingModel.findOneAndUpdate({
         "bookingId": bookingId,
         'userMail': userMail
-    },{
-        "paid" : true
+    }, {
+        "paid": true
     }, function (err, booking) {
         if (err)
             return false;

@@ -60,6 +60,14 @@ export class ReservationService {
       )
   }
 
+  getMyReservationPaidList(): Observable<any> {
+    return this.http.get<any>(this.reservationUrl + 'getPaidBookingByMail/' + this.getCurrentUserMail())
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+  }
+
   removeReservation(id): Observable<any> {
     return this.http.delete<any>(this.reservationUrl + 'removeBookingByBookingId/'+id)
       .pipe(
