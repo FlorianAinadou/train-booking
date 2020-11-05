@@ -3,6 +3,16 @@ const router = new Router();
 const f = require('../utils/functions');
 const sdk = require('../sdk/trainsList');
 
+router.post('/trainList/removeSeat', async (ctx) => {
+  const aTrain = await sdk.removeSeat(ctx.request.body.trainId);
+  f.success(ctx,  JSON.stringify(aTrain)) ;
+});
+
+router.post('/trainList/relieveSeat', async (ctx) => {
+  console.log("HOOOMMEEE"+ctx.request.body.trainId)
+  const aTrain = await sdk.relieveSeat(ctx.request.body.trainId);
+  f.success(ctx,  JSON.stringify(aTrain)) ;
+});
 
 router.get('/trainList', async (ctx) => {
   try {
@@ -22,5 +32,6 @@ router.get('/trainById/:id', async (ctx) => {
     f.failure(ctx, "failed");
   }
 });
+
 
 module.exports = router;
