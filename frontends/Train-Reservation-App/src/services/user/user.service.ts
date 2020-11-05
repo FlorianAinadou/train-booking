@@ -28,6 +28,7 @@ export class UserService {
     localStorage.removeItem('currentUserName');
     localStorage.removeItem('currentUserToken');
     this.connected = false;
+    this.redirectHomePage();
   }
 
   public addUser(task) {
