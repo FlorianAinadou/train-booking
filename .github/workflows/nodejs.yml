@@ -95,7 +95,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            cd /home/${{secrets.DEPLOY_USER }}/backend/back
+            cd /home/${{secrets.DEPLOY_USER }}/backend/back/backend
             chmod 777 release.sh && ./release.sh
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
