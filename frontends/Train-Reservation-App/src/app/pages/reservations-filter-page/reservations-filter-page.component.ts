@@ -116,6 +116,10 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
 
   selectReservation(reservation) {
     console.table(reservation);
+    this.propositions.find(({id}) => id === reservation.id).seats = (+this.propositions.find(({id}) => id === reservation.id).seats - 1).toString();
+    if ((+this.propositions.find(({id}) => id === reservation.id).seats === 0)) {
+      this.propositions = this.propositions.filter(({id}) => id !== reservation.id);
+    }
     this.reservationService.addReservation(reservation.id).subscribe(res => {
       console.log("Id " + res);
     }, error => {
