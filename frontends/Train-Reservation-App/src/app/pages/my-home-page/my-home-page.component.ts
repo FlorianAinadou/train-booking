@@ -57,7 +57,6 @@ export class MyHomePageComponent implements OnInit {
     this.userConnected = false;
     this.currentUser = null;
     this.userService.deconnected();
-    // console.log("deco");
     this.userService.sendData("deconnected");
   }
 

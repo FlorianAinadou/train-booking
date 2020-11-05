@@ -11,7 +11,7 @@ import {catchError, retry} from "rxjs/operators";
 })
 export class UserService {
 
-  private userUrl = ' http://localhost:9000/api/user/';
+  private userUrl = ' http://paulkoffi.com:9000/api/user/';
   // private user = null;
   private user: User = {};
   public user$: AsyncSubject<User> = new AsyncSubject();
@@ -28,6 +28,7 @@ export class UserService {
     localStorage.removeItem('currentUserName');
     localStorage.removeItem('currentUserToken');
     this.connected = false;
+    this.redirectHomePage();
   }
 
   public addUser(task) {
