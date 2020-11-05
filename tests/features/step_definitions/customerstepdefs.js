@@ -1,6 +1,7 @@
 const assert = require('assert');
 const { Given, When, Then } = require('@cucumber/cucumber');
-var host = process.env.npm_package_config_myHost || "localhost";
+var host = process.env.npm_package_config_myHost;
+// console.log(host);
 
 const http = require('http')
 
