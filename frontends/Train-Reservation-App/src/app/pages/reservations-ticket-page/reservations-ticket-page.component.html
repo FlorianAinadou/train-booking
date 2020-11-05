@@ -10,7 +10,7 @@
     <div class="curved-div">
       <h1 class="policeHobo">Mes Billets</h1>
       <p>
-        Retrouvez ici la liste de tous vos billets de trains  !<br>
+        Retrouvez ici la liste de tous vos billets de trains !<br>
         Bon voyage !
       </p>
       <!--    <p class="depla">-->
@@ -24,16 +24,40 @@
     <!--  <h3 class="title">TESTTTTTTTTTTTTT</h3>-->
   </div>
 
-  <div class="bodyR" style="margin-bottom: 4px;" *ngIf="!emptyList">
+  <div class="bodyR" style="margin-bottom: 4px; margin-top: 40px;" *ngIf="!emptyList">
     <div *ngFor="let p of propositions; let i = index">
-      <app-reservation-result-list [reservation]="p" (OnBuy)="purchaseReservation($event)" (OnRemove)="removeReservation($event)"></app-reservation-result-list>
+      <!--      <app-reservation-result-list [reservation]="p" (OnBuy)="purchaseReservation($event)" (OnRemove)="removeReservation($event)"></app-reservation-result-list>-->
+      <!--    </div>-->
+      <!--    <app-reservation-ticket-result></app-reservation-ticket-result>-->
+      <div class="container">
+        <div>
+
+          <div class="row" *ngIf="i % 3 === 0" style="margin-bottom: 50px">
+
+            <div class="col-lg-4" *ngIf="propositions[i]!=undefined">
+              <app-reservation-ticket-result [reservation]="propositions[i]"></app-reservation-ticket-result>
+            </div>
+
+            <div class="col-lg-4" *ngIf="propositions[i+1]!=undefined">
+              <app-reservation-ticket-result [reservation]="propositions[i+1]"></app-reservation-ticket-result>
+            </div>
+
+            <div class="col-lg-4" *ngIf="propositions[i+2]!=undefined">
+              <app-reservation-ticket-result [reservation]="propositions[i+2]"></app-reservation-ticket-result>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <br>
+  <br>
+  <br>
 
   <div class="container">
     <div class="raw">
-      <div class="borderD"  *ngIf="emptyList">
-        <h2 class="centerD">~  PAS DE RESERVATION DISPONIBLE  ~</h2>
+      <div class="borderD" *ngIf="emptyList">
+        <h2 class="centerD">~ PAS DE BILLET DISPONIBLE ~</h2>
       </div>
     </div>
   </div>
