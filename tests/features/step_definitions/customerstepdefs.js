@@ -1,5 +1,7 @@
 const assert = require('assert');
 const { Given, When, Then } = require('@cucumber/cucumber');
+var host = process.env.npm_package_config_myHost;
+// console.log(host);
 
 const http = require('http')
 
@@ -30,7 +32,7 @@ Given('Un customer veut s\'incrire', function () {
         })
 
         const options = {
-              hostname: 'localhost',
+              hostname: host,
               port: 9000,
               path: '/api/user/signup',
               method: 'POST',

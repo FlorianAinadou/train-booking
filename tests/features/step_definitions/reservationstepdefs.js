@@ -1,5 +1,6 @@
 const assert = require('assert');
 const { Given, When, Then } = require('@cucumber/cucumber');
+var host = process.env.npm_package_config_myHost || "localhost";
 
 const http = require('http')
 
@@ -11,7 +12,7 @@ const http = require('http')
     function (depart,arrivee) {
 
         const options = {
-              hostname: 'localhost',
+              hostname: host,
               port: 9000,
               path: '/trainSelector/'+depart+'/'+arrivee,
               method: 'GET'
@@ -39,7 +40,7 @@ const http = require('http')
     })
 
     const options = {
-          hostname: 'localhost',
+          hostname: host,
           port: 9000,
           path: '/booking/addReservation',
           method: 'POST',
@@ -71,7 +72,7 @@ const http = require('http')
   Then('il regarde ces réservations via son mail {string} et voit {int} réservation', function (email,numberOfReservations) {
     
         const options = {
-            hostname: 'localhost',
+            hostname: host,
             port: 9000,
             path: '/booking/getBookingByMail/'+email,
             method: 'GET'
@@ -100,7 +101,7 @@ const http = require('http')
         })
     
         const options = {
-              hostname: 'localhost',
+              hostname: host,
               port: 9000,
               path: '/payment/payReservation',
               method: 'POST',
