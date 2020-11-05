@@ -1,0 +1,193 @@
+name: Back End projet actions
+
+on:
+  push:
+    branches: [ master,develop,nodeJsBack,angularFront,flutter]
+  pull_request:
+    branches: [ master,develop,nodeJsBack,angularFront,flutter]
+
+jobs:
+
+  unitBackEnd:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./backend
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+  unitExternTrain:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./externes/trains
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+  unitExternBank:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./externes/bank
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+  deployBack:
+
+    runs-on: ubuntu-latest
+    needs : unitBackEnd
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          name: ${{ secrets.SSH_KEY_NAME  }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: ${{ secrets.CONFIG }}
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.0
+        with:
+          switches: -avzr --delete
+          path: ./backend
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+
+      - name: install and refresh server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            cd /home/${{secrets.DEPLOY_USER }}/backend/backend
+            chmod 777 release.sh && ./release.sh
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          privateKey: ${{ secrets.SSH_KEY }}
+
+  deployExternTrain:
+
+    runs-on: ubuntu-latest
+    needs: unitExternTrain
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          name: ${{ secrets.SSH_KEY_NAME  }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: ${{ secrets.CONFIG }}
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.0
+        with:
+          switches: -avzr --delete
+          path: ./externes/trains
+          remote_path: ${{ secrets.DEPLOY_PATH_TRAINS }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+
+      - name: install and refresh server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            cd /home/${{secrets.DEPLOY_USER }}/backend/trains
+            chmod 777 release.sh && ./release.sh
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          privateKey: ${{ secrets.SSH_KEY }}
+
+  deployExternBank:
+
+    runs-on: ubuntu-latest
+    needs: unitExternBank
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          name: ${{ secrets.SSH_KEY_NAME  }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: ${{ secrets.CONFIG }}
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.0
+        with:
+          switches: -avzr --delete
+          path: ./externes/bank
+          remote_path: ${{ secrets.DEPLOY_PATH_BANK }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+
+      - name: install and refresh server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            cd /home/${{secrets.DEPLOY_USER }}/backend/bank
+            chmod 777 release.sh && ./release.sh
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          privateKey: ${{ secrets.SSH_KEY }}
+
+  cucumber:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./tests
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
