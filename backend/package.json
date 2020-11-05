@@ -6,6 +6,10 @@
     "start": "node app.js",
     "test": "mocha test/ -R spec --recursive --exit"
   },
+  "config": {
+    "trainHost": "localhost",
+    "bankHost": "localhost"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
