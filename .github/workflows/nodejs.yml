@@ -120,7 +120,7 @@ jobs:
         uses: burnett01/rsync-deployments@4.0
         with:
           switches: -avzr --delete
-          path: ./externes/trains
+          path: ./backend
           remote_path: ${{ secrets.DEPLOY_PATH_TRAINS }}
           remote_host: ${{ secrets.DEPLOY_HOST }}
           remote_port: ${{ secrets.DEPLOY_PORT }}
