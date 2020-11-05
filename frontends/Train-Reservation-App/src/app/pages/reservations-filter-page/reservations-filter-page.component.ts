@@ -13,7 +13,7 @@ import {ReservationService} from "../../../services/reservation/reservation.serv
 @Component({
   selector: 'app-reservations-filter-page',
   templateUrl: './reservations-filter-page.component.html',
-  styleUrls: ['./reservations-filter-page..component.scss']
+  styleUrls: ['./reservations-filter-page.component.scss']
 })
 
 

@@ -1,7 +1,9 @@
 const BookingModel = require('../models/Booking');
 const {strRandom} = require("../utils/idGenerator");
+
 const request = require('request');
 let bookingIdSize = 6
+
 
 async function addReservation( userMail, placeNumber, trainId) {
     let bookingId;
@@ -11,7 +13,7 @@ async function addReservation( userMail, placeNumber, trainId) {
             includeNumbers: true,
             length: bookingIdSize,
             startsWithLowerCase: false
-        })
+        });
         await BookingModel.create({
             "bookingId": bookingId,
             "userMail": userMail,

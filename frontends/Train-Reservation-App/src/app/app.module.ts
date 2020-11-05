@@ -28,6 +28,7 @@ import {ReservationResultListComponent} from "./reservation-result/reservations/
 import {ReservationsDisplayPageComponent} from "./pages/reservations-display-page";
 import {UserService} from "../services/user/user.service";
 import {ReservationService} from "../services/reservation/reservation.service";
+import {ReservationsTicketPageComponent} from "./pages/reservations-ticket-page";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {ReservationService} from "../services/reservation/reservation.service";
     ReservationsFilterPageComponent,
     ReservationResultComponent,
     ReservationResultListComponent,
-    ReservationsDisplayPageComponent
+    ReservationsDisplayPageComponent,
+    ReservationsTicketPageComponent
   ],
   imports: [
     BrowserModule,
