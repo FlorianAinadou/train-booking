@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:booking_app/common/components/header.dart';
 import 'package:booking_app/common/values/screen_dimensions.dart';
+import 'package:booking_app/screens/booking/components/bookings_page.dart';
 import 'package:booking_app/screens/ticketspage/components/tickets_status_boxes.dart';
 import 'package:flutter/material.dart';
 
@@ -26,28 +29,13 @@ class _BookingPageState extends State<BookingPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/home_page2_1.jpg"),
+            image: AssetImage("images/home_page2_4.jpg"),
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Stack(
-              alignment: AlignmentDirectional.topCenter,
-              children: <Widget>[
-                //Header(),
-                TicketsStatusBoxes(),
-              ],
-            ),
-            Expanded(
-              //height: ScreenDimensions(context).height - (2 * ScreenDimensions(context).appBarHeight) - Header().headerHeight - ScreenDimensions(context).notificationBarHeight,
-              //width: ScreenDimensions(context).width,
-              child: ListView(
-                children: [],
-              ),
-            ),
-          ],
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: BookingsPage(),
         ),
       ),
     );
