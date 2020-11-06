@@ -1,37 +1,40 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:booking_app/common/components/circular_button.dart';
 import 'package:booking_app/common/components/dialogs.dart';
 import 'package:booking_app/common/values/variables.dart';
+import 'package:booking_app/models/ticket_model.dart';
+import 'package:booking_app/models/train_model.dart';
 import 'package:booking_app/services/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:booking_app/models/train_model.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:http/http.dart' as http;
 
-class TrainCard extends StatefulWidget {
-  final BuildContext parent;
+class BookingsCard extends StatefulWidget {
   final Train train;
+  final String bookingId;
+  final BuildContext parent;
 
-  const TrainCard({Key key, @required this.train, this.parent}) : super(key: key);
+  const BookingsCard({Key key, this.train, this.bookingId, this.parent}) : super(key: key);
 
   @override
-  _TrainCardState createState() => _TrainCardState(this.parent, this.train);
+  _BookingsCardState createState() => _BookingsCardState(this.parent, this.train, this.bookingId);
 }
 
-class _TrainCardState extends State<TrainCard> {
+class _BookingsCardState extends State<BookingsCard> {
   final BuildContext parent;
   final Train train;
+  final String bookingId;
 
-  _TrainCardState(this.parent, this.train);
+  _BookingsCardState(this.parent, this.train, this.bookingId);
 
-  Future<String> _payReservation(String bookingId) async {
+
+  Future<String> _payReservation() async {
     String url = host + paymentRoute;
     print(url);
     var data = {
-      'bookingId': bookingId.split('"')[1],
+      'bookingId': this.bookingId,
       'userMail': defaultUser,
       'price' : this.train.price
     };
@@ -47,28 +50,12 @@ class _TrainCardState extends State<TrainCard> {
     return null;
   }
 
-  Future<String> _bookOrPayATrip(bool pay) async {
-    String url;
-    url = host + addBookingRoute;
-    /*if (pay)
-      url = host + addPaidBookingRoute;
-    else
-      url = host + addBookingRoute;*/
+  Future<String> _cancelReservation() async {
+    String url = host + removeBookingRoute + this.bookingId;
     print(url);
-    var data = {
-      'userMail': defaultUser,
-      'placeNumber': (new Random()).nextInt(1000000000),
-      'trainId' : train.id
-    };
-    print(data);
-    var body = json.encode(data);
-    var res = await http.post(
-      url,
-      body: body,
-      headers: {"Content-Type": "application/json"},
-    );
+    var res = await http.delete(url);
     print(res.statusCode);
-    if (res.statusCode == 200) return res.body.toString();
+    if (res.statusCode == 200) return res.body;
     return null;
   }
 
@@ -86,7 +73,7 @@ class _TrainCardState extends State<TrainCard> {
         children: <Widget>[
           RichText(
             text: TextSpan(
-              text: 'TGV ' + this.train.trainId.toString() + ' ~ ' + this.train.price.toString() + '€ ~ ' + this.train.remainingSeats.toString() + ' places restantes',
+              text: this.train.date.split('T')[0].toString() + ' ~ TGV ' + this.train.trainId.toString() + ' ~ ' + this.train.price.toString() + '€',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
@@ -147,7 +134,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: this.train.routes[0].toString() + '\n',
+                            text: this.train.routes[0] + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -195,7 +182,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: this.train.routes[this.train.routes.length-1].toString() + '\n',
+                            text: this.train.routes[this.train.routes.length-1] + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -271,27 +258,27 @@ class _TrainCardState extends State<TrainCard> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               CircularButton(
-              color: Colors.blue,
-              //height: 50,
-              width: 130,
-              //margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-              padding: EdgeInsets.all(10),
-              icon: Icon(
-                FontAwesomeIcons.bookmark,
-                color: Colors.white,
+                color: Colors.red,
+                //height: 50,
+                width: 130,
+                //margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                padding: EdgeInsets.all(10),
+                icon: Icon(
+                  FontAwesomeIcons.trashAlt,
+                  color: Colors.white,
+                ),
+                onClick: () async {
+                  final action = await Dialogs.yesAbortDialog(context, "Annulation de votre réservation", "Voulez-vous effectuer l'annulation de votre réservation?");
+                  if (action == DialogAction.yes) {
+                    await _cancelReservation();
+                    SnackBar snackbar = new SnackBar(
+                        content: Text("Réservation annulée avec succès."));
+                    Scaffold.of(context).showSnackBar(snackbar);
+                  }
+                },
+                text: 'Annuler',
               ),
-              onClick: () async {
-                final action = await Dialogs.yesAbortDialog(context, "Réservation de votre voyage", "Voulez-vous effectuer la réservation de ce voyage?");
-                if (action == DialogAction.yes) {
-                  _bookOrPayATrip(false);
-                  SnackBar snackbar = new SnackBar(
-                      content: Text("Réservation effectuée avec succès."));
-                  Scaffold.of(context).showSnackBar(snackbar);
-                }
-              },
-              text: 'Réserver',
-            ),
-            CircularButton(
+              CircularButton(
                 color: Colors.green,
                 //height: 50,
                 width: 130,
@@ -304,9 +291,7 @@ class _TrainCardState extends State<TrainCard> {
                 onClick: () async {
                   final action = await Dialogs.yesAbortDialog(context, "Paiement de votre voyage", "Voulez-vous effectuer le paiement de votre voyage?");
                   if (action == DialogAction.yes) {
-                    final String res = await _bookOrPayATrip(true);
-                    //print(res);
-                    await _payReservation(res);
+                    await _payReservation();
                     SnackBar snackbar = new SnackBar(
                         content: Text("Paiement effectué avec succès."));
                     Scaffold.of(context).showSnackBar(snackbar);
