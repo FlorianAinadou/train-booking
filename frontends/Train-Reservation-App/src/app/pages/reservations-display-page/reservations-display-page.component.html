@@ -1,0 +1,50 @@
+<ngx-loading-bar
+  [color]="'#0cc5ff'"
+  [height]="'4px'"
+  [includeSpinner]="'false'"
+  [diameter]="'20px'"
+></ngx-loading-bar>
+
+<div class="back">
+  <div class="reservationPosition">
+    <div class="curved-div">
+      <h1 class="policeHobo">Mes Réservations</h1>
+      <p>
+        Finalisez ici vos réservations de billets de trains. Vos réservations resteront valables pendant 30 minutes !<br>
+        Dépêchez vous !
+      </p>
+      <!--    <p class="depla">-->
+      <h3 class="depla">Vos réservations 🎟</h3>
+      <!--    </p>-->
+      <svg viewBox="0 0 1440 319">
+        <path fill="#fff" fill-opacity="1"
+              d="M0,32L48,80C96,128,192,224,288,224C384,224,480,128,576,90.7C672,53,768,75,864,96C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+    <!--  <h3 class="title">TESTTTTTTTTTTTTT</h3>-->
+  </div>
+
+  <div class="bodyR" style="margin-bottom: 4px;" *ngIf="!emptyList">
+    <div *ngFor="let p of propositions; let i = index">
+      <app-reservation-result-list [reservation]="p" (OnBuy)="purchaseReservation($event)" (OnRemove)="removeReservation($event)"></app-reservation-result-list>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="raw">
+      <div class="borderD"  *ngIf="emptyList">
+        <h2 class="centerD">~  PAS DE RESERVATION DISPONIBLE  ~</h2>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+

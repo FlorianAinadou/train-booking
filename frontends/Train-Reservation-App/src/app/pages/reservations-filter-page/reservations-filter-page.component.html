@@ -1,0 +1,100 @@
+<ngx-loading-bar
+  [color]="'#0cc5ff'"
+  [height]="'4px'"
+  [includeSpinner]="'false'"
+  [diameter]="'20px'"
+></ngx-loading-bar>
+
+<div class="container">
+  <div class="raw">
+    <div class="testimonials">
+      <div class="inner">
+        <h1 class="">Trouvez le meilleur trajet !</h1>
+        <div class="border">
+
+
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="testimonial" #l>
+              <img style="height: 8em; border: solid 4px; background-color: black; border-radius: 55%"
+                   src="../../../assets/img/585f90f0cb11b227491c3573.png"
+                   alt="">
+
+<!--              <div class="container">-->
+              <form  [formGroup]="searchForm">
+              <div class="row">
+                  <div class="col-3 input-effect" #imp>
+                    <input class="effect-20 " type="text" placeholder="" [formControlName]="'d'"/>
+                    <label style="color: black;">Station de départ</label>
+                    <span class="barI">
+                         <span
+                           *ngIf="formSubmitted && g.d.errors && g.d.errors.required"
+                           class="myError"> ⛔ Requis</span>
+                    </span>
+                    <span class="focus-border">
+            	      <i></i>
+                   </span>
+                  </div>
+
+                  <div class="col-3 input-effect">
+                    <input class="effect-20 " type="text" placeholder="" [formControlName]="'a'"/>
+                    <label style="color: black;">Station d'arrivée</label>
+                    <span class="barI">
+                         <span
+                           *ngIf="formSubmitted && g.a.errors && g.a.errors.required"
+                           class="myError"> ⛔ Requis</span>
+                    </span>
+                    <span class="focus-border">
+            	      <i></i>
+                   </span>
+                  </div>
+<!--                </div>-->
+              </div>
+              </form>
+
+              <div class="row">
+                <a class="push"  style="position: relative; top: -50px;" href="javascript:" (click)="search()">{{text}}</a>
+                <div class="col-lg-12" style="margin-top: 0px;" *ngIf="display">
+                  <br>
+                  <div class="row" style="padding-bottom: 0">
+<!--                    <div class="col-lg-4" style="text-align: center; font-weight: bold; font-size: 18px; color: #bbbbbb">-->
+<!--                      👨‍🎓<span style="font-style: italic; color: black">Train</span>-->
+<!--                    </div>-->
+                    <div class="col-lg-4" style="text-align: center; font-weight: bold; font-size: 18px; color: #bbbbbb">
+                      🏛<span style="font-style: italic;  color:  black">Prix / Places</span>
+                    </div>
+<!--                    <div class="col-lg-4" style="text-align: center; font-weight: bold; font-size: 18px; color: #bbbbbb">-->
+<!--                      📌<span style="font-style: italic; color:  black">Options</span>-->
+<!--                    </div>-->
+                  </div>
+
+                  <ul class="list">
+                    <cdk-virtual-scroll-viewport id="styleT"
+                                                 style=" height:470px; border-radius:10px; background-color: black;  border: 2px solid black; "
+                                                 itemSize="6">
+                      <ng-container *cdkVirtualFor="let n of propositions">
+                        <li>
+                          <app-reservation-result (OnSelect)="selectReservation($event)"
+                                                  [reservation]="n"></app-reservation-result>
+                        </li>
+                      </ng-container>
+                    </cdk-virtual-scroll-viewport>
+                  </ul>
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
