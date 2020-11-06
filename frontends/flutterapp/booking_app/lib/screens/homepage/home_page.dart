@@ -136,12 +136,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             CircularButton(
                               color: Colors.blue,
                               height: 50,
-                              //width: 50,
+                              width: 140,
                               margin:
                                   EdgeInsets.only(left: 10, top: 10, right: 10),
                               padding: EdgeInsets.all(10),
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                             CircularButton(
                               color: Colors.blue,
                               height: 50,
-                              width: 160,
+                              width: 140,
                               margin:
                                   EdgeInsets.only(left: 10, top: 10, right: 10),
                               padding: EdgeInsets.all(10),

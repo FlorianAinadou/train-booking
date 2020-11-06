@@ -1,6 +1,7 @@
 // API ROUTES
 final String trainSelectorRoute = 'trainSelector/';
 final String addBookingRoute = 'booking/addReservation/';
+final String removeBookingRoute = 'booking/removeBookingByBookingId/';
 final String addPaidBookingRoute = 'booking/addPaidReservation/';
 final String paymentRoute = 'payment/payReservation/';
 final String paidBookingRoute = 'booking/getPaidBookingByMail/';
