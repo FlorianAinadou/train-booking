@@ -7,7 +7,7 @@ import 'package:booking_app/models/train_model.dart';
 import 'train_card.dart';
 import 'package:http/http.dart' as http;
 
-class TrainPage extends StatelessWidget {
+class TrainPage extends StatefulWidget {
   final String departureCity;
   final String arrivalCity;
 
@@ -17,10 +17,15 @@ class TrainPage extends StatelessWidget {
     this.arrivalCity,
   }) : super(key: key);
 
+  @override
+  _TrainPageState createState() => _TrainPageState();
+}
+
+class _TrainPageState extends State<TrainPage> {
   Future<List<Widget>> _getAvailableTrains() async {
     dynamic items = <Widget>[];
     // get from backend
-    String url = host + trainSelectorRoute + departureCity + '/' + arrivalCity;
+    String url = host + trainSelectorRoute + widget.departureCity.trim() + '/' + widget.arrivalCity.trim();
     print(url);
     var data = await http.get(url);
     var jsonData = json.decode(utf8.decode(data.bodyBytes));
@@ -29,6 +34,7 @@ class TrainPage extends StatelessWidget {
     for (var t in jsonData) {
       //print(t["trainId"]);
       Train train = Train(
+          id: t["_id"],
           trainId: t["trainId"],
           date: t["date"],
           routes: t["routes"],
@@ -41,7 +47,7 @@ class TrainPage extends StatelessWidget {
     for (dynamic d in trains) {
       items.add(Column(
         children: <Widget>[
-          TrainCard(train: d),
+          TrainCard(train: d, parent: context,),
         ],
       ));
     }
@@ -50,7 +56,7 @@ class TrainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (departureCity == null && arrivalCity == null)
+    if (widget.departureCity == null && widget.arrivalCity == null)
       return Text(
         "\n\n\nVoyagez en toute sécurité avec Booking train.\nTrouvez votre itinéraire dans la barre de recherche.",
         style: TextStyle(

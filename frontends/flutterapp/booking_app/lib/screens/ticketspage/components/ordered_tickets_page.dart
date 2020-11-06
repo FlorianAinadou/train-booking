@@ -21,7 +21,7 @@ class OrderedTicketsPage extends StatelessWidget {
     dynamic items = <Widget>[];
     // get from backend
     String url = host + paidBookingRoute + defaultUser;
-    print(url);
+    //print(url);
     var data = await http.get(url);
     var jsonData = json.decode(utf8.decode(data.bodyBytes));
     List<Booking> bookingPaids = [];
@@ -35,7 +35,7 @@ class OrderedTicketsPage extends StatelessWidget {
           placeNumber: t["placeNumber"]);
       bookingPaids.add(bookingPaid);
     }
-    print(bookingPaids);
+    //print(bookingPaids);
     // build flutter components
     for (Booking d in bookingPaids) {
       url = host + trainSelectorRoute + d.trainId.toString();
@@ -45,6 +45,7 @@ class OrderedTicketsPage extends StatelessWidget {
       for (var t in jsonData) {
         //print(t["trainId"]);
         Train train = Train(
+            id: t["_id"],
             trainId: t["trainId"],
             date: t["date"],
             routes: t["routes"],
@@ -54,21 +55,22 @@ class OrderedTicketsPage extends StatelessWidget {
         //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
         switch(period){
           case 1:
-            if (DateTime.parse(train.date).difference(DateTime.now()).inDays < 0)
+            if (DateTime.parse(train.date).difference(DateTime.now()).inSeconds < 0)
               trains.add(train);
             break;
           case 2:
-            if (DateTime.parse(train.date).difference(DateTime.now()).inDays == 0)
+            if (DateTime.parse(train.date).difference(DateTime.now()).inSeconds == 0)
               trains.add(train);
             break;
           case 3:
-            if (DateTime.parse(train.date).difference(DateTime.now()).inDays > 0)
+            if (DateTime.parse(train.date).difference(DateTime.now()).inSeconds > 0)
               trains.add(train);
             break;
           default:
             print('unexpected number error');
             break;
         }
+        //trains.sort((a, b) => DateTime.parse(a.date).compareTo(DateTime.parse(b.date)));
       }
       // build flutter components
       for (dynamic d in trains) {

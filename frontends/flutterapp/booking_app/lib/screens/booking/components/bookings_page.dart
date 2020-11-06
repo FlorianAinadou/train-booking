@@ -9,17 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:booking_app/models/train_model.dart';
 import 'package:http/http.dart' as http;
 
-class BookingsPage extends StatelessWidget {
+class BookingsPage extends StatefulWidget {
 
   BookingsPage({
     Key key,
   }) : super(key: key);
 
+  @override
+  _BookingsPageState createState() => _BookingsPageState();
+}
+
+class _BookingsPageState extends State<BookingsPage> {
   Future<List<Widget>> _getBookingTrains() async {
     dynamic items = <Widget>[];
     // get from backend
     String url = host + bookingRoute + defaultUser;
-    print(url);
+    print('1 --> ' + url);
     var data = await http.get(url);
     var jsonData = json.decode(utf8.decode(data.bodyBytes));
     List<Booking> bookingPaids = [];
@@ -33,16 +38,18 @@ class BookingsPage extends StatelessWidget {
           placeNumber: t["placeNumber"]);
       bookingPaids.add(bookingPaid);
     }
-    print(bookingPaids);
+    //print(bookingPaids);
     // build flutter components
     for (Booking d in bookingPaids) {
       url = host + trainSelectorRoute + d.trainId.toString();
+      print('2 --> ' + url);
       data = await http.get(url);
       jsonData = json.decode(utf8.decode(data.bodyBytes));
-      List<Train> trains = [];
+      //print(jsonData);
+      //List<Train> trains = [];
       for (var t in jsonData) {
-        //print(t["trainId"]);
         Train train = Train(
+            id: t["_id"],
             trainId: t["trainId"],
             date: t["date"],
             routes: t["routes"],
@@ -50,17 +57,23 @@ class BookingsPage extends StatelessWidget {
             price: t["price"],
             remainingSeats: t["remainingSeats"]);
         //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
-        trains.add(train);
+        //print(train);
+        items.add(Column(
+          children: <Widget>[
+            BookingsCard(train: train, bookingId: d.bookingId, parent: context,),
+          ],
+        ));
+        //trains.add(train);
         //trains.sort();
       }
       // build flutter components
-      for (dynamic d in trains) {
+      /*for (dynamic d in trains) {
         items.add(Column(
           children: <Widget>[
             BookingsCard(train: d),
           ],
         ));
-      }
+      }*/
     }
     return items;
   }
@@ -83,7 +96,7 @@ class BookingsPage extends StatelessWidget {
             return Loader();
           }
           return Text(
-            "\n\n\nAucune réservation en cours.",
+            "\n\n\n\n\n\n\n\nAucune réservation en cours.",
             style: TextStyle(
               fontFamily: 'Pacifico',
               color: Colors.black,

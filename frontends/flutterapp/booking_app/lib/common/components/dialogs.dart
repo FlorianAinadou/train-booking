@@ -26,12 +26,12 @@ class Dialogs {
           actions: <Widget>[
             FlatButton(
               onPressed: () => Navigator.of(context).pop(DialogAction.abort),
-              child: const Text('No'),
+              child: const Text('Non'),
             ),
             RaisedButton(
               onPressed: () => Navigator.of(context).pop(DialogAction.yes),
               child: const Text(
-                'Yes',
+                'Oui',
                 style: TextStyle(
                   color: Colors.white,
                 ),

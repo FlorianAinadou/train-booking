@@ -1,9 +1,7 @@
 import 'dart:ui';
 
-import 'package:booking_app/common/components/header.dart';
 import 'package:booking_app/common/values/screen_dimensions.dart';
 import 'package:booking_app/screens/booking/components/bookings_page.dart';
-import 'package:booking_app/screens/ticketspage/components/tickets_status_boxes.dart';
 import 'package:flutter/material.dart';
 
 class BookingPage extends StatefulWidget {
@@ -27,6 +25,8 @@ class _BookingPageState extends State<BookingPage> {
         ),
       ),
       body: Container(
+        height: ScreenDimensions(context).height - (2 * ScreenDimensions(context).appBarHeight + ScreenDimensions(context).notificationBarHeight),
+        width: ScreenDimensions(context).width,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("images/home_page2_4.jpg"),
