@@ -50,6 +50,15 @@ class _BookingsCardState extends State<BookingsCard> {
     return null;
   }
 
+  Future<String> _cancelReservation() async {
+    String url = host + removeBookingRoute + this.bookingId;
+    print(url);
+    var res = await http.delete(url);
+    print(res.statusCode);
+    if (res.statusCode == 200) return res.body;
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,13 +73,21 @@ class _BookingsCardState extends State<BookingsCard> {
         children: <Widget>[
           RichText(
             text: TextSpan(
-              text: this.train.date.split('T')[0].toString() + '   ' + this.train.date.split('T')[1].toString().split('.')[0].toString(),
+              text: this.train.date.split('T')[0].toString() + ' ~ TGV ' + this.train.trainId.toString() + ' ~ ' + this.train.price.toString() + '€',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 //height: 1.5,
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 8.0),
+            child: Divider(
+              color: Colors.grey,
+              height: 3,
+              thickness: 1,
             ),
           ),
           Row(
@@ -125,9 +142,7 @@ class _BookingsCardState extends State<BookingsCard> {
                             ),
                           ),
                           TextSpan(
-                            text: '~'/*ticket.departureDateTime
-                                .split(' ')[1]
-                                .toString()*/,
+                            text: this.train.date.split('T')[1].toString().split('.')[0].toString(),
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -175,8 +190,7 @@ class _BookingsCardState extends State<BookingsCard> {
                             ),
                           ),
                           TextSpan(
-                            text: '~'
-                                /*ticket.arrivalDateTime.split(' ')[1].toString()*/,
+                            text: this.train.date.split('T')[1].toString().split('.')[0].toString(),
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -240,27 +254,52 @@ class _BookingsCardState extends State<BookingsCard> {
               thickness: 1,
             ),
           ),
-          CircularButton(
-            color: Colors.green,
-            //height: 50,
-            width: 160,
-            //margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-            padding: EdgeInsets.all(10),
-            icon: Icon(
-              FontAwesomeIcons.moneyCheckAlt,
-              color: Colors.white,
-            ),
-            onClick: () async {
-              final action = await Dialogs.yesAbortDialog(context, "Paiement de votre réservation", "Voulez-vous valider le paiement de votre réservation?");
-              if (action == DialogAction.yes) {
-                _payReservation();
-                (parent as Element).reassemble();
-                SnackBar snackbar = new SnackBar(
-                    content: Text("Paiement effectué avec succès."));
-                Scaffold.of(context).showSnackBar(snackbar);
-              }
-            },
-            text: 'Payer',
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              CircularButton(
+                color: Colors.red,
+                //height: 50,
+                width: 120,
+                //margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                padding: EdgeInsets.all(10),
+                icon: Icon(
+                  FontAwesomeIcons.trashAlt,
+                  color: Colors.white,
+                ),
+                onClick: () async {
+                  final action = await Dialogs.yesAbortDialog(context, "Annulation de votre réservation", "Voulez-vous effectuer l'annulation de votre réservation?");
+                  if (action == DialogAction.yes) {
+                    await _cancelReservation();
+                    SnackBar snackbar = new SnackBar(
+                        content: Text("Réservation annulée avec succès."));
+                    Scaffold.of(context).showSnackBar(snackbar);
+                  }
+                },
+                text: 'Annuler',
+              ),
+              CircularButton(
+                color: Colors.green,
+                //height: 50,
+                width: 120,
+                //margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                padding: EdgeInsets.all(10),
+                icon: Icon(
+                  FontAwesomeIcons.moneyCheckAlt,
+                  color: Colors.white,
+                ),
+                onClick: () async {
+                  final action = await Dialogs.yesAbortDialog(context, "Paiement de votre voyage", "Voulez-vous effectuer le paiement de votre voyage?");
+                  if (action == DialogAction.yes) {
+                    await _payReservation();
+                    SnackBar snackbar = new SnackBar(
+                        content: Text("Paiement effectué avec succès."));
+                    Scaffold.of(context).showSnackBar(snackbar);
+                  }
+                },
+                text: 'Payer',
+              ),
+            ],
           ),
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:booking_app/common/components/loader.dart';
 import 'package:booking_app/services/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/models/train_model.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'train_card.dart';
 import 'package:http/http.dart' as http;
 
@@ -57,14 +58,25 @@ class _TrainPageState extends State<TrainPage> {
   @override
   Widget build(BuildContext context) {
     if (widget.departureCity == null && widget.arrivalCity == null)
-      return Text(
-        "\n\n\nVoyagez en toute sécurité avec Booking train.\nTrouvez votre itinéraire dans la barre de recherche.",
-        style: TextStyle(
-          fontFamily: 'Pacifico',
-          color: Colors.black,
-          fontSize: 24,
+      return LiquidPullToRefresh(
+        //key: _refreshIndicatorKey,	// key if you want to add
+        animSpeedFactor: 10.0,
+        onRefresh: () async {
+          setState(() {});
+        },
+        child: ListView(
+          children: [
+            Text(
+              "\n\n\nVoyagez en toute sécurité avec Booking train.\nTrouvez votre itinéraire dans la barre de recherche.",
+              style: TextStyle(
+                fontFamily: 'Pacifico',
+                color: Colors.black,
+                fontSize: 24,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ]
         ),
-        textAlign: TextAlign.center,
       );
     else
       return FutureBuilder(
@@ -75,21 +87,39 @@ class _TrainPageState extends State<TrainPage> {
             if (availableTrains != null) {
               int taille = availableTrains.length;
               if (taille != 0)
-                return ListView(
-                  children: availableTrains,
+                return LiquidPullToRefresh(
+                  //key: _refreshIndicatorKey,	// key if you want to add
+                  animSpeedFactor: 10.0,
+                  onRefresh: () async {
+                    setState(() {});
+                  },
+                  child: ListView(
+                    children: availableTrains,
+                  ),
                 );
             }
           } else {
             return Loader();
           }
-          return Text(
-            "\n\n\nAucun train disponible pour cet itinéraire, veuillez réessayer plus tard...",
-            style: TextStyle(
-              fontFamily: 'Pacifico',
-              color: Colors.black,
-              fontSize: 24,
+          return LiquidPullToRefresh(
+            //key: _refreshIndicatorKey,	// key if you want to add
+            animSpeedFactor: 10.0,
+            onRefresh: () async {
+              setState(() {});
+            },
+            child: ListView(
+              children: [
+                Text(
+                  "\n\n\nAucun train disponible pour cet itinéraire, veuillez réessayer plus tard...",
+                  style: TextStyle(
+                    fontFamily: 'Pacifico',
+                    color: Colors.black,
+                    fontSize: 24,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            textAlign: TextAlign.center,
           );
         },
       );

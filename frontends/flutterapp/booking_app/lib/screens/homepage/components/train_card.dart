@@ -86,13 +86,21 @@ class _TrainCardState extends State<TrainCard> {
         children: <Widget>[
           RichText(
             text: TextSpan(
-              text: 'ID : ' + widget.train.trainId.toString() + ' - TGV ?',
+              text: 'TGV ' + this.train.trainId.toString() + ' ~ ' + this.train.price.toString() + '€ ~ ' + this.train.remainingSeats.toString() + ' places restantes',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 //height: 1.5,
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 8.0),
+            child: Divider(
+              color: Colors.grey,
+              height: 3,
+              thickness: 1,
             ),
           ),
           Row(
@@ -139,7 +147,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: widget.train.routes[0].toString() + '\n',
+                            text: this.train.routes[0].toString() + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -147,7 +155,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),
                           TextSpan(
-                            text: 'Heure ?',
+                            text: this.train.date.split('T')[1].toString().split('.')[0].toString(),
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -187,7 +195,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: widget.train.routes[widget.train.routes.length-1].toString() + '\n',
+                            text: this.train.routes[this.train.routes.length-1].toString() + '\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -195,7 +203,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),
                           TextSpan(
-                            text: 'Heure ?',
+                            text: this.train.date.split('T')[1].toString().split('.')[0].toString(),
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -276,7 +284,6 @@ class _TrainCardState extends State<TrainCard> {
                 final action = await Dialogs.yesAbortDialog(context, "Réservation de votre voyage", "Voulez-vous effectuer la réservation de ce voyage?");
                 if (action == DialogAction.yes) {
                   _bookOrPayATrip(false);
-                  (parent as Element).reassemble();
                   SnackBar snackbar = new SnackBar(
                       content: Text("Réservation effectuée avec succès."));
                   Scaffold.of(context).showSnackBar(snackbar);
@@ -300,7 +307,6 @@ class _TrainCardState extends State<TrainCard> {
                     final String res = await _bookOrPayATrip(true);
                     //print(res);
                     await _payReservation(res);
-                    (parent as Element).reassemble();
                     SnackBar snackbar = new SnackBar(
                         content: Text("Paiement effectué avec succès."));
                     Scaffold.of(context).showSnackBar(snackbar);

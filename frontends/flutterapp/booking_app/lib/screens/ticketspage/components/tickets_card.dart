@@ -23,13 +23,21 @@ class TicketsCard extends StatelessWidget {
         children: <Widget>[
           RichText(
             text: TextSpan(
-              text: train.date.split('T')[0].toString() + '   ' + train.date.split('T')[1].toString().split('.')[0].toString(),
+              text: this.train.date.split('T')[0].toString() + ' ~ TGV ' + this.train.trainId.toString() + ' ~ ' + this.train.price.toString() + '€',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 //height: 1.5,
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 8.0),
+            child: Divider(
+              color: Colors.grey,
+              height: 3,
+              thickness: 1,
             ),
           ),
           Row(
@@ -84,9 +92,7 @@ class TicketsCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: '~'/*ticket.departureDateTime
-                                .split(' ')[1]
-                                .toString()*/,
+                            text: this.train.date.split('T')[1].toString().split('.')[0].toString(),
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -134,8 +140,7 @@ class TicketsCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: '~'
-                                /*ticket.arrivalDateTime.split(' ')[1].toString()*/,
+                            text: this.train.date.split('T')[1].toString().split('.')[0].toString(),
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,

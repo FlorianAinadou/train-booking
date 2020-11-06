@@ -8,9 +8,9 @@ import 'package:booking_app/services/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/models/train_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class BookingsPage extends StatefulWidget {
-
   BookingsPage({
     Key key,
   }) : super(key: key);
@@ -38,73 +38,88 @@ class _BookingsPageState extends State<BookingsPage> {
           placeNumber: t["placeNumber"]);
       bookingPaids.add(bookingPaid);
     }
-    //print(bookingPaids);
+    print(bookingPaids);
     // build flutter components
     for (Booking d in bookingPaids) {
       url = host + trainSelectorRoute + d.trainId.toString();
       print('2 --> ' + url);
       data = await http.get(url);
-      jsonData = json.decode(utf8.decode(data.bodyBytes));
-      //print(jsonData);
-      //List<Train> trains = [];
-      for (var t in jsonData) {
-        Train train = Train(
-            id: t["_id"],
-            trainId: t["trainId"],
-            date: t["date"],
-            routes: t["routes"],
-            full: t["full"],
-            price: t["price"],
-            remainingSeats: t["remainingSeats"]);
-        //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
-        //print(train);
-        items.add(Column(
-          children: <Widget>[
-            BookingsCard(train: train, bookingId: d.bookingId, parent: context,),
-          ],
-        ));
-        //trains.add(train);
-        //trains.sort();
+      //print(data.statusCode);
+      if (data.statusCode == 200) {
+        jsonData = json.decode(utf8.decode(data.bodyBytes));
+        //List<Train> trains = [];
+        for (var t in jsonData) {
+          Train train = Train(
+              id: t["_id"],
+              trainId: t["trainId"],
+              date: t["date"],
+              routes: t["routes"],
+              full: t["full"],
+              price: t["price"],
+              remainingSeats: t["remainingSeats"]);
+          //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
+          items.add(Column(
+            children: <Widget>[
+              BookingsCard(
+                train: train,
+                bookingId: d.bookingId,
+                parent: context,
+              ),
+            ],
+          ));
+          //trains.add(train);
+          //trains.sort();
+        }
       }
-      // build flutter components
-      /*for (dynamic d in trains) {
-        items.add(Column(
-          children: <Widget>[
-            BookingsCard(train: d),
-          ],
-        ));
-      }*/
     }
     return items;
   }
 
   @override
   Widget build(BuildContext context) {
-      return FutureBuilder(
-        future: _getBookingTrains(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            List<Widget> availableTrains = snapshot.data;
-            if (availableTrains != null) {
-              int taille = availableTrains.length;
-              if (taille != 0)
-                return ListView(
+    return FutureBuilder(
+      future: _getBookingTrains(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<Widget> availableTrains = snapshot.data;
+          if (availableTrains != null) {
+            int taille = availableTrains.length;
+            if (taille != 0)
+              return LiquidPullToRefresh(
+                //key: _refreshIndicatorKey,	// key if you want to add
+                animSpeedFactor: 10.0,
+                onRefresh: () async {
+                  setState(() {});
+                },
+                child: ListView(
                   children: availableTrains,
-                );
-            }
-          } else {
-            return Loader();
+                ),
+              );
           }
-          return Text(
-            "\n\n\n\n\n\n\n\nAucune réservation en cours.",
-            style: TextStyle(
-              fontFamily: 'Pacifico',
-              color: Colors.black,
-              fontSize: 24,
-            ),
-            textAlign: TextAlign.center,
-          );
-        },
-      );
+        } else {
+          return Loader();
+        }
+        return LiquidPullToRefresh(
+          //key: _refreshIndicatorKey,	// key if you want to add
+          animSpeedFactor: 10.0,
+          onRefresh: () async {
+            setState(() {});
+          },
+          child: ListView(
+            children: [
+              Text(
+                "\n\n\n\n\n\n\n\nAucune réservation en cours.",
+                style: TextStyle(
+                  fontFamily: 'Pacifico',
+                  color: Colors.black,
+                  fontSize: 24,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
