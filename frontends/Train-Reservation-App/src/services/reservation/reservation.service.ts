@@ -11,7 +11,7 @@ import {catchError, retry} from "rxjs/operators";
 })
 export class ReservationService {
 
-  private userUrl = ' http://paulkoffi.com:9000/trainSelector/';
+  private userUrl = ' http://localhost:paulkoffi.com:9000/trainSelector/';
   private reservationUrl = ' http://paulkoffi.com:9000/booking/';
   private paymentUrl = ' http://paulkoffi.com:9000/payment/';
 

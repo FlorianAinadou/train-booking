@@ -49,8 +49,8 @@ router.post('/api/user/signup', async (ctx) => {
     // console.log("wtf");
     var password = crypto.createHash('sha256').update(ctx.request.body.password).digest('hex');
     const user = await customerFinderSdk.getUserByEmail(ctx.request.body.mail);
-    // console.log()
-    if (user === undefined) {
+    console.table(user);
+    if (user !== null) {
         console.error("can't create user " + ctx.request.body.mail);
         f.failure409(ctx, "An user with that email already exists");
     } else {
