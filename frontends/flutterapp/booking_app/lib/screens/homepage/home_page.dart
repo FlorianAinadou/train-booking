@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                             CircularButton(
                               color: Colors.blue,
                               height: 50,
-                              width: 140,
+                              width: 150,
                               margin:
                                   EdgeInsets.only(left: 10, top: 10, right: 10),
                               padding: EdgeInsets.all(10),
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                             CircularButton(
                               color: Colors.blue,
                               height: 50,
-                              width: 140,
+                              width: 150,
                               margin:
                                   EdgeInsets.only(left: 10, top: 10, right: 10),
                               padding: EdgeInsets.all(10),
