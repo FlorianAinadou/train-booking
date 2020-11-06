@@ -8,14 +8,25 @@ import 'package:booking_app/services/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/models/train_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-class OrderedTicketsPage extends StatelessWidget {
+class OrderedTicketsPage extends StatefulWidget {
   final int period;
 
   OrderedTicketsPage({
     Key key,
     this.period,
   }) : super(key: key);
+
+  @override
+  _OrderedTicketsPageState createState() =>
+      _OrderedTicketsPageState(this.period);
+}
+
+class _OrderedTicketsPageState extends State<OrderedTicketsPage> {
+  final int period;
+
+  _OrderedTicketsPageState(this.period);
 
   Future<List<Widget>> _getPaidAvailableTickets() async {
     dynamic items = <Widget>[];
@@ -53,18 +64,24 @@ class OrderedTicketsPage extends StatelessWidget {
             price: t["price"],
             remainingSeats: t["remainingSeats"]);
         //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
-        switch(period){
+        switch (this.period) {
           case 1:
-            if (DateTime.parse(train.date).difference(DateTime.now()).inSeconds < 0)
-              trains.add(train);
+            if (DateTime.parse(train.date)
+                    .difference(DateTime.now())
+                    .inSeconds <
+                0) trains.add(train);
             break;
           case 2:
-            if (DateTime.parse(train.date).difference(DateTime.now()).inSeconds == 0)
-              trains.add(train);
+            if (DateTime.parse(train.date)
+                    .difference(DateTime.now())
+                    .inSeconds ==
+                0) trains.add(train);
             break;
           case 3:
-            if (DateTime.parse(train.date).difference(DateTime.now()).inSeconds > 0)
-              trains.add(train);
+            if (DateTime.parse(train.date)
+                    .difference(DateTime.now())
+                    .inSeconds >
+                0) trains.add(train);
             break;
           default:
             print('unexpected number error');
@@ -94,45 +111,85 @@ class OrderedTicketsPage extends StatelessWidget {
           if (availableTrains != null) {
             int taille = availableTrains.length;
             if (taille != 0)
-              return ListView(
-                children: availableTrains,
+              return LiquidPullToRefresh(
+                //key: _refreshIndicatorKey,	// key if you want to add
+                animSpeedFactor: 10.0,
+                onRefresh: () async {
+                  setState(() {});
+                },
+                child: ListView(
+                  children: availableTrains,
+                ),
               );
           }
         } else {
           return Loader();
         }
-        switch(period){
+        switch (this.period) {
           case 1:
-            return Text(
-              "\n\n\n\n\n\n\n\nAucun voyage effectué récemment.",
-              style: TextStyle(
-                fontFamily: 'Pacifico',
-                color: Colors.white,
-                fontSize: 24,
+            return LiquidPullToRefresh(
+              //key: _refreshIndicatorKey,	// key if you want to add
+              animSpeedFactor: 10.0,
+              onRefresh: () async {
+                setState(() {});
+              },
+              child: ListView(
+                children: [
+                  Text(
+                    "\n\n\n\n\n\n\n\nAucun voyage effectué récemment.",
+                    style: TextStyle(
+                      fontFamily: 'Pacifico',
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
             );
             break;
           case 2:
-            return Text(
-              "\n\n\n\n\n\n\n\nAucun voyage prévu aujourd'hui.",
-              style: TextStyle(
-                fontFamily: 'Pacifico',
-                color: Colors.white,
-                fontSize: 24,
+            return LiquidPullToRefresh(
+              //key: _refreshIndicatorKey,	// key if you want to add
+              animSpeedFactor: 10.0,
+              onRefresh: () async {
+                setState(() {});
+              },
+              child: ListView(
+                children: [
+                  Text(
+                    "\n\n\n\n\n\n\n\nAucun voyage prévu aujourd'hui.",
+                    style: TextStyle(
+                      fontFamily: 'Pacifico',
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
             );
             break;
           case 3:
-            return Text(
-              "\n\n\n\n\n\n\n\nAucun voyage prévu prochainement.",
-              style: TextStyle(
-                fontFamily: 'Pacifico',
-                color: Colors.white,
-                fontSize: 24,
+            return LiquidPullToRefresh(
+              //key: _refreshIndicatorKey,	// key if you want to add
+              animSpeedFactor: 10.0,
+              onRefresh: () async {
+                setState(() {});
+              },
+              child: ListView(
+                children: [
+                  Text(
+                    "\n\n\n\n\n\n\n\nAucun voyage prévu prochainement.",
+                    style: TextStyle(
+                      fontFamily: 'Pacifico',
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
             );
             break;
           default:

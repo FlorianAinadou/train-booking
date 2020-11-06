@@ -254,7 +254,10 @@ class _BookingsCardState extends State<BookingsCard> {
               final action = await Dialogs.yesAbortDialog(context, "Paiement de votre réservation", "Voulez-vous valider le paiement de votre réservation?");
               if (action == DialogAction.yes) {
                 _payReservation();
-                (parent as Element).reassemble();
+                //(parent as Element).reassemble();
+                /*super.setState(() {
+
+                });*/
                 SnackBar snackbar = new SnackBar(
                     content: Text("Paiement effectué avec succès."));
                 Scaffold.of(context).showSnackBar(snackbar);

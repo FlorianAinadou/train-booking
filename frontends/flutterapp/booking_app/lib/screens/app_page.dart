@@ -15,7 +15,7 @@ class AppPage extends StatefulWidget {
 
 class _AppPageState extends State<AppPage> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
+  List<Widget> _children = [
     HomePage(),
     TicketsPage(todayTickets),
     BookingPage(),
@@ -26,6 +26,11 @@ class _AppPageState extends State<AppPage> {
       if (index == 1) todayTickets = true;
       //print(todayTickets);
       _currentIndex = index;
+      _children = [
+        HomePage(),
+        TicketsPage(todayTickets),
+        BookingPage(),
+      ];
     });
   }
 
