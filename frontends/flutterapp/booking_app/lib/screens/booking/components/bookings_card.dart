@@ -260,7 +260,7 @@ class _BookingsCardState extends State<BookingsCard> {
               CircularButton(
                 color: Colors.red,
                 //height: 50,
-                width: 120,
+                width: 130,
                 //margin: EdgeInsets.only(left: 10, top: 10, right: 10),
                 padding: EdgeInsets.all(10),
                 icon: Icon(
@@ -281,7 +281,7 @@ class _BookingsCardState extends State<BookingsCard> {
               CircularButton(
                 color: Colors.green,
                 //height: 50,
-                width: 120,
+                width: 130,
                 //margin: EdgeInsets.only(left: 10, top: 10, right: 10),
                 padding: EdgeInsets.all(10),
                 icon: Icon(
