@@ -11,8 +11,6 @@
 - define fine-grained user stories
 
 ### Risks
-- Frontend tests
-- bad cutting of user stories
 
 ### Flag
 ```diff
