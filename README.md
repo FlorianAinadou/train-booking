@@ -27,7 +27,9 @@
   Du point de vu architecture, technique, analyse, organisation et maintenabilité du système à implémenter, ce projet a pour objectif de mettre en application les bonnes pratiques architecturaux vus en cours en parallèle d'un bon niveau de complexité.
   
   La présentation (soutenance) du POC se trouve 👉 [ici](./deliverables/soutenance_1.pdf).
-  Le document d'architecture du projet se trouve 👉 [ici](./deliverables/architecture.pdf).  
+  
+  Le document d'architecture du projet se trouve 👉 [ici](./deliverables/architecture.pdf).
+    
   L'architecture logicielle à développer dans ce projet s'appuiera sur la pile suivante :
   <p align="center">
       <img src="./deliverables/train-booking-components-diagram.jpg"/>
@@ -61,7 +63,7 @@
   ## Plateforme Web (Angular)
   * Ouvrir le projet [Train-Reservation-App](./frontends/Train-Reservation-App) avec votre IDE
   * Lancer la commande `npm install` à la racine du projet pour compiler le projet web.
-  * Lancer ensuite la commande `npm start` à la racine du projet pour démarrer le projet web. 
+  * Lancer ensuite la commande `ng serve` à la racine du projet pour démarrer le projet web. 
   
   ## Plateforme Mobile (Flutter)
   * Ouvrir le projet [flutterapp](./frontends/flutterapp) avec votre IDE
@@ -69,7 +71,6 @@
   * Lancer l'application sur votre périphérique de destination
   
   ## Pile technologique
-  À venir...
   <p align="center">
     <img src="./docs/stack.png"/>
   </p>
