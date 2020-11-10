@@ -1,3 +1,49 @@
+# Week 46:
+
+### Achieved
+- POC Deliverable
+- new user stories written
+- architecture document updated
+
+### For the following week
+- continuing to perform user stories
+- write tests for frontends
+- define fine-grained user stories
+
+### Risks
+- Frontend tests
+- bad cutting of user stories
+
+### Flag
+```diff
++ (Green)
+```
+
+# Week 45:
+
+### Achieved
+- problems encountered on the mobile interfacing while deploying on mobile device
+- Backend updated on functions related to book a ticket 
+- Web app booking interface updated on tickets prices
+- Backend routes updated
+- mobile app connected to the backend
+- backend hosted on remote ssh server
+- CI implemented for tests
+- payment interfaces implemented on web and mobile platforms
+- Démo preparation
+
+### For the following week
+- Deliverable preparation
+- prepare next user stories
+
+### Risks
+- POC Deliverable
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 44:
 
 ### Achieved
