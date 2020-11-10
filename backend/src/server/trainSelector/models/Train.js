@@ -1,10 +1,13 @@
 const rpa = require('request-promise');
 
 // let TrainsList= null;
-
+// var host = process.env.npm_package_config_trainHost;
+// console.log("ici");
+// console.table(process.env);
+// console.log("Host "+host);
 //The url we want is: 'www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
-const url = "http://127.0.0.1:8000/trainList";
-const url2 = "http://127.0.0.1:8000/trainById/";
+const url = "http://localhost:8000/trainList";
+const url2 = "http://localhost:8000/trainById/";
 
 
 async function getTrainList() {
