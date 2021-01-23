@@ -32,5 +32,21 @@ router.get('/trainById/:id', async (ctx) => {
   }
 });
 
+router.post('/trainsList',async(ctx) => {
+  const newSeats = [
+    {seatId: 1,
+      seatClasse: 'First',
+      price: 50,
+      taken: false
+    },
+    {seatId: 51,
+      seatClasse: 'Second',
+      price: 25,
+      taken: false
+    }
+]
+  const aTrain = await sdk.addATrain(ctx.request.body.trainId, newSeats);
+  f.success(ctx,  JSON.stringify(aTrain)) ;
+});
 
 module.exports = router;

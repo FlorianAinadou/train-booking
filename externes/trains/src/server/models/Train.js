@@ -20,14 +20,18 @@ TrainSchema = new Schema({
         type : Boolean,
         require: true
     },
-    price : {
+    seats : {
+        type : Array,
+        require: true
+    },
+    firstRemainingSeats : {
         type : Number,
         require: true
     },
-    remainingSeats : {
+    secondRemainingSeats : {
         type : Number,
         require: true
-    },
+    }
 });
 
 
