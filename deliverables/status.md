@@ -1,3 +1,27 @@
+# ----------------- 2021 -----------------
+
+# Week 4 :
+
+### Achieved
+- The functionalities to be implemented as a priority have been defined
+- Choosing to use Firebase for the notification system
+- Nothing to change on the architecture for now
+
+### For the following week
+- scaling tests on our ssh server with tools like Apache Benchmark
+- modify system architecture depending on scaling test results
+- Begin the notification functionality for the two frontends (web & mobile synchronised)
+
+### Risks
+- Modifying our architecture without taking into account scaling tests
+
+### Flag
+```diff
++ (Green)
+```
+
+# ----------------- 2020 -----------------
+
 # Week 46:
 
 ### Achieved
