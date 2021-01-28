@@ -21,7 +21,9 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/firebase-messaging-sw.js", // add this one
+              "src/manifest.json" // this one also
             ],
             "styles": [
               "src/styles.css",
@@ -87,7 +89,9 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/firebase-messaging-sw.js", // add this one
+              "src/manifest.json" // this one also
             ],
             "styles": [
               "src/styles.css"
