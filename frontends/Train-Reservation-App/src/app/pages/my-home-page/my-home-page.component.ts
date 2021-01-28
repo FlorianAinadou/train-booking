@@ -6,6 +6,7 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 import {faFilm} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
+import {MessagingService} from "../../../services/messaging/messaging.service";
 
 @Component({
   selector: 'app-my-home-page',
@@ -22,12 +23,12 @@ export class MyHomePageComponent implements OnInit {
   public userConnected;
   public authentificationFailed;
   alert: Alert[] = [];
-
+  message;
   isShow: boolean;
   topPosToStartShowing = 100;
 
 
-  constructor(public userService: UserService, public router: Router) {
+  constructor(public userService: UserService, public router: Router, public messagingService: MessagingService) {
     // library.add(fas, far);
     // library.add(faFilm);
     // document.body.style.backgroundColor = '#fff';
@@ -61,7 +62,9 @@ export class MyHomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.messagingService.requestPermission();
+    this.messagingService.receiveMessage();
+    this.message = this.messagingService.currentMessage;
   }
 
   onActivate(componentReference) {

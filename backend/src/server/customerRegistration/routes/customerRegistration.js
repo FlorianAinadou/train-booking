@@ -60,6 +60,12 @@ router.post('/api/user/signup', async (ctx) => {
     }
 });
 
+router.post('/api/user/:id', async (ctx) => {
+    const user = await customerFinderSdk.getUserById(ctx.params.id);
+    f.success(ctx, user);
+});
+
+
 /**
  * Login
  * @author Paul Marie
@@ -70,6 +76,7 @@ router.post('/api/user/login', async (ctx) => {
     var password = crypto.createHash('sha256').update(ctx.request.body.password).digest('hex');
     const user = await customerFinderSdk.getUserByEmailAndPassword(ctx.request.body.mail, password);
     if (user !== null) {
+        // await customerFinderSdk.updateFirebaseTokenWeb(ctx.request.body.token, ctx.request.body.mail);
         // console.table(user);
         var payload = {
                 email: ctx.request.body.mail,
@@ -91,6 +98,25 @@ router.post('/api/user/login', async (ctx) => {
     }
 });
 
+router.post('/api/user/updatefirebasetokenmobile', async (ctx) => {
+    const rep = await customerFinderSdk.updateFirebaseTokenMobile(ctx.request.body.token, ctx.request.body.mail);
+    if (rep) {
+        f.success(ctx, JSON.stringify(rep));
+    } else {
+        console.error("Login Failure");
+        f.failure(ctx, JSON.stringify("There's no user matching that"));
+    }
+});
+
+router.post('/api/user/updatefirebasetokenweb', async (ctx) => {
+    const rep = await customerFinderSdk.updateFirebaseTokenWeb(ctx.request.body.token, ctx.request.body.mail);
+    if (rep) {
+        f.success(ctx, JSON.stringify(rep));
+    } else {
+        console.error("Login Failure");
+        f.failure(ctx, JSON.stringify("There's no user matching that"));
+    }
+});
 
 // Test
 router.post('/api/data', async (ctx) => {

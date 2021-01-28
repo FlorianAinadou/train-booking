@@ -65,7 +65,19 @@ async function getUserByEmailAndPassword(mail, password) {
     return  UserModel.findOne({'email': mail, 'password': password});
 }
 
+async function updateFirebaseTokenMobile(token, email) {
+    await UserModel.updateOne({"email": email}, {"fireBaseIdMobile": token}, function (err, p) {
+        if (err) console.log(err);
+    });
+    return true;
+}
 
+async function updateFirebaseTokenWeb(token, email) {
+    await UserModel.updateOne({"email": email}, {"fireBaseIdWeb": token}, function (err, p) {
+        if (err) console.log(err);
+    });
+    return true;
+}
 
 
 module.exports = {
@@ -73,5 +85,7 @@ module.exports = {
     getUserByName,
     getUserByEmail,
     getUserById,
-    getUserByEmailAndPassword
+    getUserByEmailAndPassword,
+    updateFirebaseTokenMobile,
+    updateFirebaseTokenWeb
 };
