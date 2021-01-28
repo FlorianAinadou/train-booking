@@ -4,6 +4,8 @@ const f = require('../../utils/functions');
 const sdk = require('../sdk/paymentsdk');
 const customerFinderSdk = require('../../customerRegistration/sdk/customerFinder');
 
+
+
 router.get('/pay/:idCard/:price', async (ctx) => {
     try {
         const bankResponse = await sdk.pay(ctx.params.idCard, ctx.params.price);

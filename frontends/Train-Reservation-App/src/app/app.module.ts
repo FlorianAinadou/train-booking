@@ -30,13 +30,15 @@ import {UserService} from '../services/user/user.service';
 import {ReservationService} from '../services/reservation/reservation.service';
 import {ReservationsTicketPageComponent} from './pages/reservations-ticket-page';
 import {ReservationTicketResultComponent} from './reservation-result/reservations/reservation-ticket-result';
-import {AngularFireDatabaseModule} from "@angular/fire/database";
-import {AngularFireAuthModule} from "@angular/fire/auth";
-import {AngularFireMessagingModule} from "@angular/fire/messaging";
-import {AngularFireModule} from "@angular/fire";
-import {environment} from "../environments/environment";
-import {MessagingService} from "../services/messaging/messaging.service";
-import {AsyncPipe} from "@angular/common";
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {MessagingService} from '../services/messaging/messaging.service';
+import {AsyncPipe} from '@angular/common';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {PushNotificationService} from "../services/notifications/pushNotification.service";
 
 
 @NgModule({
@@ -74,8 +76,9 @@ import {AsyncPipe} from "@angular/common";
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [NgbTabsetConfig, UserService, ReservationService, MessagingService, AsyncPipe],
+  providers: [NgbTabsetConfig, UserService, ReservationService, MessagingService, AsyncPipe, PushNotificationService],
   entryComponents: [InscriptionModalComponent, ConnexionModalComponent],
   bootstrap: [AppComponent]
 })
