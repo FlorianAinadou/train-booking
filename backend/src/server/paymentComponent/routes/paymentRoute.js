@@ -26,7 +26,7 @@ router.post('/payment/payReservationWeb', async (ctx) => {
     const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId, ctx.request.body.userMail, ctx.request.body.price);
     const users = await customerFinderSdk.getUserByEmail(ctx.params.mail);
     if (bookings) {
-        const fireBaseConfig = require('./firebase-config');
+        const fireBaseConfig = require('../../../../firebase-config');
         const notification_options = {
             priority: "high",
             timeToLive: 60 * 60 * 24
