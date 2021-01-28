@@ -72,12 +72,12 @@ async function updateFirebaseTokenMobile(token, email) {
     return true;
 }
 
-// async function updateWepPushToken(token, email) {
-//     await UserModel.updateOne({"email": email}, {"webPushId": token}, function (err, p) {
-//         if (err) console.log(err);
-//     });
-//     return true;
-// }
+async function updateWepPushToken(endpoint, p256dh, auth, email) {
+    await UserModel.updateOne({"email": email}, {"endpoint": endpoint , "p256dh" : p256dh, "auth" : auth}, function (err, p) {
+        if (err) console.log(err);
+    });
+    return true;
+}
 
 
 
@@ -87,6 +87,6 @@ module.exports = {
     getUserByEmail,
     getUserById,
     getUserByEmailAndPassword,
-    updateFirebaseTokenMobile
-    // updateWepPushToken
+    updateFirebaseTokenMobile,
+    updateWepPushToken
 };
