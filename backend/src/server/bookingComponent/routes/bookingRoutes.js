@@ -25,7 +25,12 @@ router.post('/booking/addPaidReservation', async (ctx) => {
     f.success(ctx, bookings);
 });
 
-router.post('/booking/addReservation', async (ctx) => {
+router.post('/booking/addReservationWeb', async (ctx) => {
+    const bookings = await reservation.addReservation(ctx.request.body.userMail, ctx.request.body.placeNumber, ctx.request.body.trainId);
+    f.success(ctx,  JSON.stringify(bookings));
+});
+
+router.post('/booking/addReservationMobile', async (ctx) => {
     const bookings = await reservation.addReservation(ctx.request.body.userMail, ctx.request.body.placeNumber, ctx.request.body.trainId);
     f.success(ctx,  JSON.stringify(bookings));
 });
