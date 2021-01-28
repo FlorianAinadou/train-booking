@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.white,
                               ),
                               onClick: () async {
-                                await Dialogs.validationDialog(context);
+                                await Dialogs.dateDialog(context);
                                 setState(() {
                                   departureDate = DateFormat.MMMEd("fr").format(
                                       DateFormat("dd-MM-yyyy")
