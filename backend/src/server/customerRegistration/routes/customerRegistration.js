@@ -108,15 +108,15 @@ router.post('/api/user/updatefirebasetokenmobile', async (ctx) => {
     }
 });
 
-router.post('/api/user/updatefirebasetokenweb', async (ctx) => {
-    const rep = await customerFinderSdk.updateFirebaseTokenWeb(ctx.request.body.token, ctx.request.body.mail);
-    if (rep) {
-        f.success(ctx, JSON.stringify(rep));
-    } else {
-        console.error("Login Failure");
-        f.failure(ctx, JSON.stringify("There's no user matching that"));
-    }
-});
+// router.post('/api/user/updatewebpushToken', async (ctx) => {
+//     const rep = await customerFinderSdk.updateWepPushToken(ctx.request.body.token, ctx.request.body.mail);
+//     if (rep) {
+//         f.success(ctx, JSON.stringify(rep));
+//     } else {
+//         console.error("Login Failure");
+//         f.failure(ctx, JSON.stringify("There's no user matching that"));
+//     }
+// });
 
 // Test
 router.post('/api/data', async (ctx) => {

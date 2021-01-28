@@ -72,12 +72,13 @@ async function updateFirebaseTokenMobile(token, email) {
     return true;
 }
 
-async function updateFirebaseTokenWeb(token, email) {
-    await UserModel.updateOne({"email": email}, {"fireBaseIdWeb": token}, function (err, p) {
-        if (err) console.log(err);
-    });
-    return true;
-}
+// async function updateWepPushToken(token, email) {
+//     await UserModel.updateOne({"email": email}, {"webPushId": token}, function (err, p) {
+//         if (err) console.log(err);
+//     });
+//     return true;
+// }
+
 
 
 module.exports = {
@@ -86,6 +87,6 @@ module.exports = {
     getUserByEmail,
     getUserById,
     getUserByEmailAndPassword,
-    updateFirebaseTokenMobile,
-    updateFirebaseTokenWeb
+    updateFirebaseTokenMobile
+    // updateWepPushToken
 };

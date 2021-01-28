@@ -37,9 +37,15 @@ CustomerSchema = new Schema({
     fireBaseIdMobile: {
         type: String,
     },
-    WebPushId: {
+    endpoint: {
         type: String,
     },
+    p256dh : {
+        type: String,
+    },
+    auth: {
+        type: String,
+    }
 });
 
 
