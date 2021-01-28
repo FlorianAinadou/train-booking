@@ -6,4 +6,4 @@ pm2 stop externtrainsservice
 
 pm2 delete externtrainsservice
 
-pm2 start app.js --name "externtrainsservice" --instances 5 --max-restarts 5
+pm2 start app.js --name "externtrainsservice" --instances 1 --max-restarts 5

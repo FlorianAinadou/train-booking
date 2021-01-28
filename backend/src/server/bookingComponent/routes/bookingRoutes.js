@@ -30,6 +30,11 @@ router.post('/booking/addReservation', async (ctx) => {
     f.success(ctx,  JSON.stringify(bookings));
 });
 
+// router.post('/booking/addReservationMobile', async (ctx) => {
+//     const bookings = await reservation.addReservation(ctx.request.body.userMail, ctx.request.body.placeNumber, ctx.request.body.trainId);
+//     f.success(ctx,  JSON.stringify(bookings));
+// });
+
 router.del('/booking/removeBookingByBookingId/:bookingId', async (ctx) => {
     const bookings = await reservation.removeBookingByBookingId(ctx.params.bookingId);
     f.success(ctx, bookings);

@@ -83,7 +83,7 @@ export class ReservationService {
       'price' : price
     };
     console.table(myReservation);
-    return this.http.post<any>(this.paymentUrl + 'payReservation', myReservation)
+    return this.http.post<any>(this.paymentUrl + 'payReservationWeb', myReservation)
       .pipe(
         retry(1),
         catchError(this.errorHandl)

@@ -103,7 +103,7 @@ const http = require('http')
         const options = {
               hostname: host,
               port: 9000,
-              path: '/payment/payReservation',
+              path: '/payment/payReservationWeb',
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
