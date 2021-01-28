@@ -33,7 +33,13 @@ CustomerSchema = new Schema({
     cardId: {
         type: String,
         require: true
-    }
+    },
+    fireBaseIdMobile: {
+        type: String,
+    },
+    fireBaseIdWeb: {
+        type: String,
+    },
 });
 
 
