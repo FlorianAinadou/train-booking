@@ -24,7 +24,7 @@ router.post('/payment/payReservationMobile', async (ctx) => {
 
 router.post('/payment/payReservationWeb', async (ctx) => {
     const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId, ctx.request.body.userMail, ctx.request.body.price);
-    const users = await customerFinderSdk.getUserByEmail(ctx.params.mail);
+    const users = await customerFinderSdk.getUserByEmail(ctx.request.body.userMail);
     if (bookings && users !== null && users !== undefined) {
         const fireBaseConfig = require('../../../../firebase-config');
         const notification_options = {
