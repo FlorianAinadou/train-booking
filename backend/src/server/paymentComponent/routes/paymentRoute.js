@@ -4,7 +4,10 @@ const f = require('../../utils/functions');
 const sdk = require('../sdk/paymentsdk');
 const customerFinderSdk = require('../../customerRegistration/sdk/customerFinder');
 
-
+const PUBLIC_VAPID = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
+const PRIVATE_VAPID = '_kRzHiscHBIGftfA7IehH9EA3RvBl8SBYhXBAMz6GrI';
+const webpush = require('web-push');
+webpush.setVapidDetails('mailto:you@domain.com', PUBLIC_VAPID, PRIVATE_VAPID);
 
 router.get('/pay/:idCard/:price', async (ctx) => {
     try {
@@ -19,6 +22,26 @@ router.get('/pay/:idCard/:price', async (ctx) => {
 
 router.post('/payment/payReservationMobile', async (ctx) => {
     const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId, ctx.request.body.userMail, ctx.request.body.price);
+    const users = await customerFinderSdk.getUserByEmail(ctx.request.body.userMail);
+    if (bookings && users !== null && users !== undefined) {
+        const sub = {
+            endpoint: users.endpoint,
+            expirationTime: null,
+            keys: {
+                p256dh: users.p256dh,
+                auth: users.auth
+            }
+        };
+        const notificationPayload = {
+            notification: {
+                title: 'Nouvelle réservation effectuée avec succès',
+                body: '😎 GO GO GO !!!!',
+                icon: 'assets/icons/icon-512x512.png'
+            }
+        };
+        webpush.sendNotification(sub, JSON.stringify(notificationPayload));
+    }
+    // f.success(ctx, "OK");
     f.success(ctx, JSON.stringify(bookings));
 });
 
