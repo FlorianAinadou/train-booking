@@ -3,7 +3,7 @@
  * @version 0.1
  */
 
-const UserModel = require('../models/Customer');
+const UserAModel = require('../models/CustomerAccount');
 
 
 /*************************************************************************************************
@@ -16,7 +16,7 @@ const UserModel = require('../models/Customer');
  * @returns {Promise<any[]>}
  */
 async function getUsers() {
-    const users = await UserModel.find({});
+    const users = await UserAModel.find({});
     return users;
 }
 
@@ -29,7 +29,7 @@ async function getUsers() {
  * @returns {Promise<any>}
  */
 async function getUserByName(name, fname) {
-    return await UserModel.find({'firstName': fname, 'lastName': name});
+    return await UserAModel.find({'firstName': fname, 'lastName': name});
 }
 
 /**
@@ -39,7 +39,7 @@ async function getUserByName(name, fname) {
  * @returns {Promise<any>}
  */
 async function getUserByEmail(mail) {
-    return UserModel.findOne({'email': mail});
+    return UserAModel.findOne({'email': mail});
 }
 
 
@@ -50,7 +50,7 @@ async function getUserByEmail(mail) {
  * @returns {Promise<any>}
  */
 async function getUserById(id) {
-    return await UserModel.findById(id);
+    return await UserAModel.findById(id);
 }
 
 
@@ -62,18 +62,19 @@ async function getUserById(id) {
  * @returns {Promise<any>}
  */
 async function getUserByEmailAndPassword(mail, password) {
-    return  UserModel.findOne({'email': mail, 'password': password});
+    console.log("ici");
+    return  UserAModel.findOne({'email': mail, 'password': password});
 }
 
 async function updateFirebaseTokenMobile(token, email) {
-    await UserModel.updateOne({"email": email}, {"fireBaseIdMobile": token}, function (err, p) {
+    await UserAModel.updateOne({"email": email}, {"fireBaseIdMobile": token}, function (err, p) {
         if (err) console.log(err);
     });
     return true;
 }
 
 async function updateWepPushToken(endpoint, p256dh, auth, email) {
-    await UserModel.updateOne({"email": email}, {"endpoint": endpoint , "p256dh" : p256dh, "auth" : auth}, function (err, p) {
+    await UserAModel.updateOne({"email": email}, {"endpoint": endpoint , "p256dh" : p256dh, "auth" : auth}, function (err, p) {
         if (err) console.log(err);
     });
     return true;

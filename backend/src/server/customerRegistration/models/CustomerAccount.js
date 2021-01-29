@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-CustomerSchema = new Schema({
+CustomerAccountSchema = new Schema({
     firstName: {
         type: String,
         required: [true, 'first name is required']
@@ -36,20 +36,24 @@ CustomerSchema = new Schema({
     },
     fireBaseIdMobile: {
         type: String,
+        require: true
     },
     endpoint: {
         type: String,
+        require: true
     },
     p256dh : {
         type: String,
+        require: true
     },
     auth: {
         type: String,
+        require: true
     }
 });
 
 
-mongoose.model('customer', CustomerSchema);
-const Customer = mongoose.model('customer');
+mongoose.model('customeraccount', CustomerAccountSchema);
+const CustomerAccount = mongoose.model('customeraccount');
 
-module.exports = Customer;
+module.exports = CustomerAccount;

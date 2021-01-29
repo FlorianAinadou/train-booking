@@ -60,8 +60,13 @@ router.post('/api/user/signup', async (ctx) => {
     }
 });
 
-router.post('/api/user/:id', async (ctx) => {
-    const user = await customerFinderSdk.getUserById(ctx.params.id);
+router.post('/api/user', async (ctx) => {
+    // const user = await customerFinderSdk.getUserById(ctx.params.id);
+    var password = crypto.createHash('sha256').update(ctx.request.body.password).digest('hex');
+    console.log('ici');
+    // const user = await customerFinderSdk.getUserByEmail(ctx.request.body.mail);
+
+    const user = await customerFinderSdk.getUserByEmailAndPassword(ctx.request.body.mail, password);
     f.success(ctx, user);
 });
 
@@ -73,8 +78,13 @@ router.post('/api/user/:id', async (ctx) => {
  * @route {POST} paulkoffi.com:3000/api/login
  */
 router.post('/api/user/login', async (ctx) => {
+    console.log('ici');
     var password = crypto.createHash('sha256').update(ctx.request.body.password).digest('hex');
+    console.log('ici');
+
     const user = await customerFinderSdk.getUserByEmailAndPassword(ctx.request.body.mail, password);
+    console.log('ici');
+
     if (user !== null) {
         // await customerFinderSdk.updateFirebaseTokenWeb(ctx.request.body.token, ctx.request.body.mail);
         // console.table(user);
@@ -98,6 +108,11 @@ router.post('/api/user/login', async (ctx) => {
     }
 });
 
+
+router.post('/api/user/log', async (ctx) => {
+    console.log('ici');
+});
+
 router.post('/api/user/updatefirebasetokenmobile', async (ctx) => {
     const rep = await customerFinderSdk.updateFirebaseTokenMobile(ctx.request.body.token, ctx.request.body.mail);
     if (rep) {
@@ -108,15 +123,15 @@ router.post('/api/user/updatefirebasetokenmobile', async (ctx) => {
     }
 });
 
-// router.post('/api/user/updatewebpushToken', async (ctx) => {
-//     const rep = await customerFinderSdk.updateWepPushToken(ctx.request.body.token, ctx.request.body.mail);
-//     if (rep) {
-//         f.success(ctx, JSON.stringify(rep));
-//     } else {
-//         console.error("Login Failure");
-//         f.failure(ctx, JSON.stringify("There's no user matching that"));
-//     }
-// });
+router.post('/api/user/updatewebpushinformations', async (ctx) => {
+    const rep = await customerFinderSdk.updateWepPushToken(ctx.request.body.endpoint, ctx.request.body.p256dh, ctx.request.body.auth,  ctx.request.body.mail);
+    if (rep) {
+        f.success(ctx, JSON.stringify(rep));
+    } else {
+        console.error("Login Failure");
+        f.failure(ctx, JSON.stringify("There's no user matching that"));
+    }
+});
 
 // Test
 router.post('/api/data', async (ctx) => {
@@ -130,6 +145,10 @@ router.post('/api/data', async (ctx) => {
     } catch {
         f.failure(ctx, "Bad Token");
     }
+});
+
+router.post('/api/user/sign', async (ctx) => {
+
 });
 
 

@@ -6,7 +6,6 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 import {faFilm} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
-import {MessagingService} from "../../../services/messaging/messaging.service";
 import { SwPush } from '@angular/service-worker';
 import {PushNotificationService} from "../../../services/notifications/pushNotification.service";
 
@@ -28,12 +27,11 @@ export class MyHomePageComponent implements OnInit {
   public userConnected;
   public authentificationFailed;
   alert: Alert[] = [];
-  message;
   isShow: boolean;
   topPosToStartShowing = 100;
 
 
-  constructor(public userService: UserService, public router: Router, public messagingService: MessagingService, swPush: SwPush, pushService: PushNotificationService) {
+  constructor(public userService: UserService, public router: Router, swPush: SwPush, pushService: PushNotificationService) {
     // library.add(fas, far);
     // library.add(faFilm);
     // document.body.style.backgroundColor = '#fff';
@@ -42,24 +40,24 @@ export class MyHomePageComponent implements OnInit {
     this.alert.push({'type': 'danger', 'message': null});
     this.userConnected = this.userService.getAuth();
     // alert("REP "+this.userConnected);
-    if (swPush.isEnabled) {
-      swPush
-        .requestSubscription({
-          serverPublicKey: VAPID_PUBLIC
-        })
-        .then(subscription => {
-          pushService.sendSubscriptionToTheServer(subscription).subscribe();
-        })
-        .catch(console.error);
-    }
-    swPush.messages.subscribe((message) => {
-      console.log(message);
-      alert("ok");
-    });
+    // if (swPush.isEnabled) {
+    //   swPush
+    //     .requestSubscription({
+    //       serverPublicKey: VAPID_PUBLIC
+    //     })
+    //     .then(subscription => {
+    //       pushService.sendSubscriptionToTheServer(subscription).subscribe();
+    //     })
+    //     .catch(console.error);
+    // }
+    // swPush.messages.subscribe((message) => {
+    //   console.log(message);
+    //   alert("ok");
+    // });
 
-    swPush.notificationClicks.subscribe(({ action, notification }) => {
-      window.open(notification.data.url);
-    });
+    // swPush.notificationClicks.subscribe(({ action, notification }) => {
+    //   window.open(notification.data.url);
+    // });
   }
 
   async connectMe(details: string[],componentReference): Promise<void> {
@@ -85,9 +83,7 @@ export class MyHomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messagingService.requestPermission();
-    this.messagingService.receiveMessage();
-    this.message = this.messagingService.currentMessage;
+
   }
 
   onActivate(componentReference) {

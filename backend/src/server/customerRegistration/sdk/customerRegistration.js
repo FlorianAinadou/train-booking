@@ -3,7 +3,7 @@
  * @version 0.1
  */
 
-const UserModel = require('../models/Customer');
+const UserAModel = require('../models/CustomerAccount');
 
 
 /*************************************************************************************************
@@ -22,7 +22,7 @@ const UserModel = require('../models/Customer');
 
 async function addUser(fname, lname, email, password, tel, address, gender) {
     if (lname !== undefined && fname !== undefined) {
-        await UserModel.create({
+        await UserAModel.create({
             "firstName": fname,
             "lastName": lname,
             "email": email,
@@ -30,7 +30,11 @@ async function addUser(fname, lname, email, password, tel, address, gender) {
             "address": address,
             "phone_number": tel,
             "gender": gender,
-            "cardId" : "1R5321T4T64163134"
+            "cardId" : "1R5321T4T64163134",
+            "endpoint": "" ,
+            "p256dh" : "",
+            "auth" : "",
+            "fireBaseIdMobile" : ""
         }, function (err, user) {
             if (err) console.log(err);
         });
@@ -48,7 +52,7 @@ async function addUser(fname, lname, email, password, tel, address, gender) {
  * @param password - mot de passe de l'utilisateur
  */
 async function updateMailAndPassword(newEmail, password, email) {
-    await UserModel.updateOne({"email": email}, {"email": newEmail, "password": password}, function (err, p) {
+    await UserAModel.updateOne({"email": email}, {"email": newEmail, "password": password}, function (err, p) {
         if (err) console.log(err);
     });
     return true;
@@ -61,7 +65,7 @@ async function updateMailAndPassword(newEmail, password, email) {
  * @param email - adresse email de l'utilisateur
  */
 async function removeUserByEmail(email) {
-    await UserModel.findOneAndRemove({
+    await UserAModel.findOneAndRemove({
         "email": email
     }, function (err, user) {
         if (err)
