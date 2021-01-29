@@ -8,7 +8,7 @@ const SERVER_URL = 'http://localhost:3000/subscription';
 @Injectable()
 export class PushNotificationService {
 
-  private userSubUrl = ' http://localhost:9000/api/user/subs';
+  private userSubUrl = ' http://paulkoffi.com:9000/api/user/subs';
 
   constructor(private http: HttpClient) {
   }
