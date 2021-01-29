@@ -6,7 +6,7 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 import {faFilm} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
-import { SwPush } from '@angular/service-worker';
+import {SwPush} from '@angular/service-worker';
 import {PushNotificationService} from "../../../services/notifications/pushNotification.service";
 
 const VAPID_PUBLIC = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
@@ -31,7 +31,7 @@ export class MyHomePageComponent implements OnInit {
   topPosToStartShowing = 100;
 
 
-  constructor(public userService: UserService, public router: Router, swPush: SwPush, pushService: PushNotificationService) {
+  constructor(public userService: UserService, public router: Router, public swPush: SwPush, public pushService: PushNotificationService) {
     // library.add(fas, far);
     // library.add(faFilm);
     // document.body.style.backgroundColor = '#fff';
@@ -50,28 +50,41 @@ export class MyHomePageComponent implements OnInit {
     //     })
     //     .catch(console.error);
     // }
-    // swPush.messages.subscribe((message) => {
-    //   console.log(message);
-    //   alert("ok");
-    // });
+    swPush.messages.subscribe((message) => {
+      console.log(message);
+      // alert("ok");
+    });
 
-    // swPush.notificationClicks.subscribe(({ action, notification }) => {
-    //   window.open(notification.data.url);
-    // });
+    swPush.notificationClicks.subscribe(({ action, notification }) => {
+      window.open(notification.data.url);
+    });
   }
 
-  async connectMe(details: string[],componentReference): Promise<void> {
+  async connectMe(details: string[], componentReference): Promise<void> {
     this.userService.getUserConnect(details[0], details[1]).subscribe(res => {
-          this.userConnected = true;
-          this.currentUser = res["firstName"].concat(" ",res["lastName"].toString());
-          console.table(res);
-          this.userService.decodeToken(res["token"],details[0],this.currentUser);
-          componentReference.connected(this.currentUser);
+      this.userConnected = true;
+      this.currentUser = res["firstName"].concat(" ", res["lastName"].toString());
+      console.table(res);
+      this.userService.decodeToken(res["token"], details[0], this.currentUser);
+      // alert('ici');
+      // if (this.swPush.isEnabled) {
+      this.swPush
+        .requestSubscription({
+          serverPublicKey: VAPID_PUBLIC
+        })
+        .then(subscription => {
+          this.pushService.sendSubscriptionToTheServer2(subscription).subscribe();
+        })
+        .catch(console.error);
+      // }
+
+
+      componentReference.connected(this.currentUser);
     }, error => {
-          this.alert[0].message = "L'authentification a échoué, veuillez réessayer !!";
-          setTimeout(() => {
-            this.alert[0].message = null;
-          }, 2000);
+      this.alert[0].message = "L'authentification a échoué, veuillez réessayer !!";
+      setTimeout(() => {
+        this.alert[0].message = null;
+      }, 2000);
     });
   }
 
@@ -91,8 +104,8 @@ export class MyHomePageComponent implements OnInit {
     // componentReference.anyFunction();
     componentReference.OnConnect.subscribe(async (data) => {
       // Will receive the data from child here
-       console.log("SUB");
-       await this.connectMe(data,componentReference);
+      console.log("SUB");
+      await this.connectMe(data, componentReference);
     })
   }
 
