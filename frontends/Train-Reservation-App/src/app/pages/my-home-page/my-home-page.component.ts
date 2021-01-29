@@ -8,6 +8,7 @@ import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
 import {SwPush} from '@angular/service-worker';
 import {PushNotificationService} from "../../../services/notifications/pushNotification.service";
+import {ReservationService} from "../../../services/reservation/reservation.service";
 
 const VAPID_PUBLIC = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
 
@@ -31,7 +32,7 @@ export class MyHomePageComponent implements OnInit {
   topPosToStartShowing = 100;
 
 
-  constructor(public userService: UserService, public router: Router, public swPush: SwPush, public pushService: PushNotificationService) {
+  constructor(public userService: UserService, public router: Router, public swPush: SwPush, public pushService: PushNotificationService, public reservationService: ReservationService) {
     // library.add(fas, far);
     // library.add(faFilm);
     // document.body.style.backgroundColor = '#fff';
@@ -52,6 +53,7 @@ export class MyHomePageComponent implements OnInit {
     // }
     swPush.messages.subscribe((message) => {
       console.log(message);
+      this.reservationService.getMyReservationPaidList2();
       // alert("ok");
     });
 

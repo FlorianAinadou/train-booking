@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {User} from '../../models/user';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {catchError, retry} from "rxjs/operators";
+import {Ticket} from "../../models/ticket";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class ReservationService {
   private userUrl = ' http://paulkoffi.com:9000/trainSelector/';
   private reservationUrl = ' http://paulkoffi.com:9000/booking/';
   private paymentUrl = ' http://paulkoffi.com:9000/payment/';
+
+  private reservationsList: Ticket[] = [];
+  public reservation$: BehaviorSubject<Ticket[]> = new BehaviorSubject(this.reservationsList);
 
 
   constructor(private http: HttpClient, private router: Router) {
@@ -65,7 +69,16 @@ export class ReservationService {
       .pipe(
         retry(1),
         catchError(this.errorHandl)
-      )
+      );
+  }
+
+  public getMyReservationPaidList2() {
+    this.http.get<Ticket[]>(this.reservationUrl + 'getPaidBookingByMail/' + this.getCurrentUserMail()).subscribe(s => {
+      // alert(s);
+      this.reservationsList = s;
+      this.reservation$.next(s);
+      // console.log('rep =  ', s);
+    });
   }
 
   removeReservation(id): Observable<any> {
