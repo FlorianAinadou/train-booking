@@ -14,6 +14,17 @@ const paymentComponent = require('./src/server/paymentComponent/routes/paymentRo
 
 const app = new Koa();
 const PORT = 9000;
+const webpush = require('web-push');
+
+const publicKey = 'BBRb25x9AhSH8JRJ0Jykc-kbR4M-D0lQuhPScEx69k2fi2qKqt2IUiuWE-k3jdod6rbXgcssZeVHZS03KO5tO6E';
+const privateKey = 'c5eoxjQkimTRUfIBsfbCDbgCtiAZnZOv29B_A0TGo0U';
+// {
+//   publicKey: 'BBRb25x9AhSH8JRJ0Jykc-kbR4M-D0lQuhPScEx69k2fi2qKqt2IUiuWE-k3jdod6rbXgcssZeVHZS03KO5tO6E',
+//       privateKey: 'c5eoxjQkimTRUfIBsfbCDbgCtiAZnZOv29B_A0TGo0U'
+// }
+
+console.log(webpush.generateVAPIDKeys());
+
 
 app.use(bodyParser());
 app.use(logger());

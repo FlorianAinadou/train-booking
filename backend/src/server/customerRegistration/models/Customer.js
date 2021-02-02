@@ -37,7 +37,7 @@ CustomerSchema = new Schema({
     fireBaseIdMobile: {
         type: String,
     },
-    fireBaseIdWeb: {
+    WebPushId: {
         type: String,
     },
 });

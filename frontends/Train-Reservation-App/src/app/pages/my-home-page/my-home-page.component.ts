@@ -7,6 +7,11 @@ import {faFilm} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
 import {MessagingService} from "../../../services/messaging/messaging.service";
+import { SwPush } from '@angular/service-worker';
+import {PushNotificationService} from "../../../services/notifications/pushNotification.service";
+
+const VAPID_PUBLIC = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
+
 
 @Component({
   selector: 'app-my-home-page',
@@ -28,7 +33,7 @@ export class MyHomePageComponent implements OnInit {
   topPosToStartShowing = 100;
 
 
-  constructor(public userService: UserService, public router: Router, public messagingService: MessagingService) {
+  constructor(public userService: UserService, public router: Router, public messagingService: MessagingService, swPush: SwPush, pushService: PushNotificationService) {
     // library.add(fas, far);
     // library.add(faFilm);
     // document.body.style.backgroundColor = '#fff';
@@ -37,6 +42,24 @@ export class MyHomePageComponent implements OnInit {
     this.alert.push({'type': 'danger', 'message': null});
     this.userConnected = this.userService.getAuth();
     // alert("REP "+this.userConnected);
+    if (swPush.isEnabled) {
+      swPush
+        .requestSubscription({
+          serverPublicKey: VAPID_PUBLIC
+        })
+        .then(subscription => {
+          pushService.sendSubscriptionToTheServer(subscription).subscribe();
+        })
+        .catch(console.error);
+    }
+    swPush.messages.subscribe((message) => {
+      console.log(message);
+      alert("ok");
+    });
+
+    swPush.notificationClicks.subscribe(({ action, notification }) => {
+      window.open(notification.data.url);
+    });
   }
 
   async connectMe(details: string[],componentReference): Promise<void> {
