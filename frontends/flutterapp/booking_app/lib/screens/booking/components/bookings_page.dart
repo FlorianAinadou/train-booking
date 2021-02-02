@@ -63,7 +63,7 @@ class _BookingsPageState extends State<BookingsPage> {
               BookingsCard(
                 train: train,
                 bookingId: d.bookingId,
-                parent: context,
+                parentState: this,
               ),
             ],
           ));
@@ -87,7 +87,7 @@ class _BookingsPageState extends State<BookingsPage> {
             if (taille != 0)
               return LiquidPullToRefresh(
                 //key: _refreshIndicatorKey,	// key if you want to add
-                animSpeedFactor: 10.0,
+                animSpeedFactor: 20.0,
                 onRefresh: () async {
                   setState(() {});
                 },
@@ -101,7 +101,7 @@ class _BookingsPageState extends State<BookingsPage> {
         }
         return LiquidPullToRefresh(
           //key: _refreshIndicatorKey,	// key if you want to add
-          animSpeedFactor: 10.0,
+          animSpeedFactor: 20.0,
           onRefresh: () async {
             setState(() {});
           },
