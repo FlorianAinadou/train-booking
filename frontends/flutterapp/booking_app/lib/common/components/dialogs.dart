@@ -7,6 +7,32 @@ enum DialogAction { yes, abort, submit }
 //--------------------------------------------------> VARIABLES
 
 class Dialogs {
+  static Future<DialogAction> validationDialog(
+    BuildContext context,
+    String title,
+    String body,
+  ) async {
+    final action = await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: Text(title),
+          content: Text(body),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.of(context).pop(DialogAction.submit),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    return (action != null) ? action : DialogAction.abort;
+  }
 
   static Future<DialogAction> yesAbortDialog(
     BuildContext context,
@@ -44,7 +70,7 @@ class Dialogs {
     return (action != null) ? action : DialogAction.abort;
   }
 
-  static Future<DialogAction> validationDialog(BuildContext context) async {
+  static Future<DialogAction> dateDialog(BuildContext context) async {
     TextEditingController textEditingController = TextEditingController();
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -61,8 +87,7 @@ class Dialogs {
             key: _formKey,
             child: TextFormField(
               controller: textEditingController,
-              decoration:
-                  InputDecoration(labelText: "JJ-MM-YYYY"),
+              decoration: InputDecoration(labelText: "JJ-MM-YYYY"),
               validator: (String value) {
                 if (value.isEmpty) {
                   return "Champ vide";

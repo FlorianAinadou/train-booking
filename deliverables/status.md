@@ -1,5 +1,24 @@
 # ----------------- 2021 -----------------
 
+# Week 5 :
+
+### Achieved
+- system architecture diagram updated and available [here](./train-booking-components-diagram.png)
+- Notification functionality implemented for both web and mobile
+- scaling tests in process
+
+### For the following week
+- continuing scaling tests on our ssh server with tools like Apache Benchmark
+- implement group payment functionality
+
+### Risks
+- Modifying our architecture without taking into account scaling tests
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 4 :
 
 ### Achieved
