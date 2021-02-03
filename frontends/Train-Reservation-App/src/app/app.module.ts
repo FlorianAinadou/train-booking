@@ -38,6 +38,7 @@ import {environment} from '../environments/environment';
 import {AsyncPipe} from '@angular/common';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {PushNotificationService} from "../services/notifications/pushNotification.service";
+import {GroupDisplayPageComponent} from "./pages/group-display-page";
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {PushNotificationService} from "../services/notifications/pushNotificatio
     ReservationResultListComponent,
     ReservationsDisplayPageComponent,
     ReservationsTicketPageComponent,
-    ReservationTicketResultComponent
+    ReservationTicketResultComponent,
+    GroupDisplayPageComponent
   ],
   imports: [
     BrowserModule,
