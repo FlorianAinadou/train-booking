@@ -36,7 +36,7 @@
     
   L'architecture logicielle à développer dans ce projet s'appuiera sur la pile suivante :
   <p align="center">
-      <img src="./deliverables/train-booking-components-diagram.jpg"/>
+      <img src="./deliverables/train-booking-components-diagram.png"/>
   </p>
   
   ## Fonctionnement de la CI

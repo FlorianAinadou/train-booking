@@ -3,7 +3,7 @@
 # Week 5 :
 
 ### Achieved
-- system architecture diagram updated and available [here](./deliverables/train-booking-components-diagram.png)
+- system architecture diagram updated and available [here](./train-booking-components-diagram.png)
 - Notification functionality implemented for both web and mobile
 - scaling tests in process
 
