@@ -17,4 +17,14 @@ router.get('/groups', async (ctx) => {
     }
 });
 
+router.get('/groups/:email', async (ctx) => {
+    try {
+        const groupResponse = ctx.params.email;
+        f.success(ctx,groupResponse);
+        console.log(groupResponse.toString())   
+    } catch {
+        f.failure(ctx, "failed");
+    }
+});
+
 module.exports = router;
