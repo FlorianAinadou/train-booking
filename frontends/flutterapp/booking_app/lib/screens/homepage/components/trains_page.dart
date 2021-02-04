@@ -48,7 +48,7 @@ class _TrainPageState extends State<TrainPage> {
     for (dynamic d in trains) {
       items.add(Column(
         children: <Widget>[
-          TrainCard(train: d, parent: context,),
+          TrainCard(train: d, parentState: this,),
         ],
       ));
     }

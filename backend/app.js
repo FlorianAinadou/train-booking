@@ -10,10 +10,16 @@ const bookingComponent = require('./src/server/bookingComponent/routes/bookingRo
 const config = require("./config");
 const mongoose = require('mongoose');
 
-const paymentComponent = require('./src/server/paymentComponent/routes/paymentRoute')
+const paymentComponent = require('./src/server/paymentComponent/routes/paymentRoute');
 
 const app = new Koa();
 const PORT = 9000;
+
+// {
+//   publicKey: 'BBRb25x9AhSH8JRJ0Jykc-kbR4M-D0lQuhPScEx69k2fi2qKqt2IUiuWE-k3jdod6rbXgcssZeVHZS03KO5tO6E',
+//       privateKey: 'c5eoxjQkimTRUfIBsfbCDbgCtiAZnZOv29B_A0TGo0U'
+// }
+
 
 app.use(bodyParser());
 app.use(logger());
@@ -31,7 +37,8 @@ const server = app.listen(PORT, () => {
 
 mongoose.connect(`mongodb+srv://${config.configDB.userName}:${config.configDB.password}@${config.configDB.host}/${config.configDB.name}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 
 mongoose.set('debug', true);

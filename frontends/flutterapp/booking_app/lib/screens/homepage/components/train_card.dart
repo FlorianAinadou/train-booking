@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:booking_app/common/components/circular_button.dart';
 import 'package:booking_app/common/components/dialogs.dart';
 import 'package:booking_app/common/values/variables.dart';
+import 'package:booking_app/screens/homepage/components/trains_page.dart';
 import 'package:booking_app/services/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/models/train_model.dart';
@@ -12,20 +13,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class TrainCard extends StatefulWidget {
-  final BuildContext parent;
+  final State<TrainPage> parentState;
   final Train train;
 
-  const TrainCard({Key key, @required this.train, this.parent}) : super(key: key);
+  const TrainCard({Key key, @required this.train, this.parentState}) : super(key: key);
 
   @override
-  _TrainCardState createState() => _TrainCardState(this.parent, this.train);
+  _TrainCardState createState() => _TrainCardState(this.parentState, this.train);
 }
 
 class _TrainCardState extends State<TrainCard> {
-  final BuildContext parent;
+  final State<TrainPage> parentState;
   final Train train;
 
-  _TrainCardState(this.parent, this.train);
+  _TrainCardState(this.parentState, this.train);
 
   Future<String> _payReservation(String bookingId) async {
     String url = host + paymentRoute;
@@ -47,7 +48,7 @@ class _TrainCardState extends State<TrainCard> {
     return null;
   }
 
-  Future<String> _bookOrPayATrip(bool pay) async {
+  Future<String> _bookATrip() async {
     String url;
     url = host + addBookingRoute;
     /*if (pay)
@@ -283,7 +284,8 @@ class _TrainCardState extends State<TrainCard> {
               onClick: () async {
                 final action = await Dialogs.yesAbortDialog(context, "Réservation de votre voyage", "Voulez-vous effectuer la réservation de ce voyage?");
                 if (action == DialogAction.yes) {
-                  _bookOrPayATrip(false);
+                  await _bookATrip();
+                  parentState.setState(() {});
                   SnackBar snackbar = new SnackBar(
                       content: Text("Réservation effectuée avec succès."));
                   Scaffold.of(context).showSnackBar(snackbar);
@@ -304,9 +306,10 @@ class _TrainCardState extends State<TrainCard> {
                 onClick: () async {
                   final action = await Dialogs.yesAbortDialog(context, "Paiement de votre voyage", "Voulez-vous effectuer le paiement de votre voyage?");
                   if (action == DialogAction.yes) {
-                    final String res = await _bookOrPayATrip(true);
+                    final String res = await _bookATrip();
                     //print(res);
                     await _payReservation(res);
+                    parentState.setState(() {});
                     SnackBar snackbar = new SnackBar(
                         content: Text("Paiement effectué avec succès."));
                     Scaffold.of(context).showSnackBar(snackbar);

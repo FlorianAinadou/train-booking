@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.white,
                               ),
                               onClick: () async {
-                                await Dialogs.validationDialog(context);
+                                await Dialogs.dateDialog(context);
                                 setState(() {
                                   departureDate = DateFormat.MMMEd("fr").format(
                                       DateFormat("dd-MM-yyyy")
@@ -176,7 +176,10 @@ class _HomePageState extends State<HomePage> {
                                 }
                                 _formKey.currentState.save();
                                 setState(() {
-                                  trains = TrainPage(departureCity: departureCity, arrivalCity: arrivalCity,);
+                                  trains = TrainPage(
+                                    departureCity: departureCity,
+                                    arrivalCity: arrivalCity,
+                                  );
                                 });
                               },
                               text: 'Rechercher',
