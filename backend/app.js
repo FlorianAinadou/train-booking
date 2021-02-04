@@ -12,6 +12,8 @@ const mongoose = require('mongoose');
 
 const paymentComponent = require('./src/server/paymentComponent/routes/paymentRoute');
 
+const groupComponent = require('./src/server/groupComponent/routes/groupRoute')
+
 const app = new Koa();
 const PORT = 9000;
 
@@ -28,8 +30,7 @@ app.use(trainSelector.routes());
 app.use(bookingComponent.routes());
 app.use(customerRegistration.routes());
 app.use(paymentComponent.routes());
-
-
+app.use(groupComponent.routes());
 
 const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
