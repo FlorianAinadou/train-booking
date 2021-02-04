@@ -30,7 +30,12 @@ router.get('/groups/:email', async (ctx) => {
 });
 
 router.post('/groups/addNewMember', async (ctx) => {
-    const groups = await groupsdk.addNewMember(ctx.request.body.groupName, ctx.request.body.userName, ctx.params.userMail);
+    const groups = await groupsdk.addNewMember(ctx.request.body.groupName, ctx.request.body.userName, ctx.request.body.userMail);
+    f.success(ctx, groups);
+});
+
+router.post('/groups/quitAGroup', async (ctx) => {
+    const groups = await groupsdk.quitAGroup(ctx.request.body.groupName, ctx.request.body.userName, ctx.request.body.userMail);
     f.success(ctx, groups);
 });
 

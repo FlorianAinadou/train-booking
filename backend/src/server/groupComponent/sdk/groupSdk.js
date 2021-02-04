@@ -6,7 +6,6 @@ async function getAllGroupsByEmail(userMail) {
 
 async function addNewMember(groupName, username, userMail){
     const result = await GroupModel.findOne({ 'groupName': groupName });
-    console.log(`the result is ${result}`)
     const currentUsers = result.users;
     const currentUserNames = result.usersnames
     const update  =  {
@@ -19,7 +18,33 @@ async function addNewMember(groupName, username, userMail){
     return await GroupModel.updateOne({ 'groupName': groupName }, update);
 }
 
+async function quitAGroup(groupName, username, userMail){
+    const result = await GroupModel.findOne({ 'groupName': groupName });
+
+    const currentUsers = result.users;
+    const currentUsersNames = result.usersnames
+
+    const indexToRemoveUsersNames = currentUsersNames.indexOf(username);
+    const indexToRemoveUsers = currentUsers.indexOf(userMail);
+
+    if(indexToRemoveUsers > -1){
+        currentUsers.splice(indexToRemoveUsers,1);
+    }
+    if(indexToRemoveUsersNames > -1){
+        currentUsersNames.splice(indexToRemoveUsersNames,1);
+    }
+    const update  =  {
+        $set: {
+            users:
+            currentUsers,
+            usersnames: currentUsersNames
+        },
+      };
+    return await GroupModel.updateOne({ 'groupName': groupName }, update);
+}
+
 module.exports = {
     getAllGroupsByEmail,
-    addNewMember
+    addNewMember,
+    quitAGroup
 };
