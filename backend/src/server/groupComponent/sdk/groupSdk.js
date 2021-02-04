@@ -8,14 +8,21 @@ async function addNewMember(groupName, username, userMail){
     const result = await GroupModel.findOne({ 'groupName': groupName });
     const currentUsers = result.users;
     const currentUserNames = result.usersnames
+
+    currentUsers.push(userMail);
+    currentUserNames.push(username);
+
+    console.log(`nouveau tableau ${currentUsers}`)
+
     const update  =  {
         $set: {
             users:
-            currentUsers.push(userMail),
-            usersnames: currentUserNames.push(username)
+            currentUsers,
+            usersnames: currentUserNames
         },
       };
     return await GroupModel.updateOne({ 'groupName': groupName }, update);
+    // return 'yes'
 }
 
 async function quitAGroup(groupName, username, userMail){
