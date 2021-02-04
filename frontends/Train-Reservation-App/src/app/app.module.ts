@@ -30,15 +30,12 @@ import {UserService} from '../services/user/user.service';
 import {ReservationService} from '../services/reservation/reservation.service';
 import {ReservationsTicketPageComponent} from './pages/reservations-ticket-page';
 import {ReservationTicketResultComponent} from './reservation-result/reservations/reservation-ticket-result';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {AngularFireAuthModule} from '@angular/fire/auth';
-import {AngularFireMessagingModule} from '@angular/fire/messaging';
-import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AsyncPipe} from '@angular/common';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {PushNotificationService} from "../services/notifications/pushNotification.service";
 import {GroupDisplayPageComponent} from "./pages/group-display-page";
+import {GroupCardPageComponent} from "./pages/group-card";
 
 
 @NgModule({
@@ -57,7 +54,8 @@ import {GroupDisplayPageComponent} from "./pages/group-display-page";
     ReservationsDisplayPageComponent,
     ReservationsTicketPageComponent,
     ReservationTicketResultComponent,
-    GroupDisplayPageComponent
+    GroupDisplayPageComponent,
+    GroupCardPageComponent
   ],
   imports: [
     BrowserModule,

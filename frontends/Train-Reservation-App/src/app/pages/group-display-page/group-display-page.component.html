@@ -10,11 +10,11 @@
     <div class="curved-div">
       <h1 class="policeHobo">Mes Groupes</h1>
       <p>
-        Voyagez seul , c'est fun 😎. Voyagez à plusieurs , c'est  G E N I A L 🔥  !!!<br>
+        Voyagez seul , c'est fun 😎. Voyagez à plusieurs , c'est G E N I A L 🔥 !!!<br>
         🤝 Créez ou rejoignez ici des groupes de voyage et Let's Gooo !
       </p>
       <!--    <p class="depla">-->
-      <h3 class="depla">🔥 Groupes || Invitations 🔥</h3>
+      <h3 class="depla"> Groupes 🔥 Invitations </h3>
       <!--    </p>-->
       <svg viewBox="0 0 1440 319">
         <path fill="#fff" fill-opacity="1"
@@ -22,23 +22,93 @@
       </svg>
     </div>
     <!--  <h3 class="title">TESTTTTTTTTTTTTT</h3>-->
+
   </div>
 
-<!--  <div class="bodyR" style="margin-bottom: 4px;" *ngIf="!emptyList">-->
-<!--    <div *ngFor="let p of propositions; let i = index">-->
-<!--      <app-reservation-result-list [reservation]="p" (OnBuy)="purchaseReservation($event)" (OnRemove)="removeReservation($event)"></app-reservation-result-list>-->
+  <div class="bodyR" style="margin-bottom: 4px;">
+    <!--    <cdk-virtual-scroll-viewport id="styleT"-->
+    <!--                                 style=" height:470px; border-radius:10px; background-color: black;  border: 2px solid black; "-->
+    <!--                                 itemSize="6">-->
+    <!--      <ng-container *cdkVirtualFor="let n of teams">-->
+    <!--        <li>-->
+    <!--          <div class="row">-->
+    <!--            <div class="col-lg-4">-->
+    <!--              <img class="reduce" src="../../../assets/img/Train_RIB_ADC_2.png">-->
+    <!--              &lt;!&ndash;{{contrat.etudiant.nom}}&ndash;&gt;-->
+    <!--              &lt;!&ndash;<p class="policeHobo" style="font-size: 15px; padding-bottom: 0px" >&ndash;&gt;-->
+    <!--              &lt;!&ndash;{{contrat.etudiant.nom}}&ndash;&gt;-->
+    <!--              &lt;!&ndash;</p>&ndash;&gt;-->
+    <!--              &lt;!&ndash;<span style="font-size: 15px;">{{contrat.etudiant.nom}}</span>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="col-lg-4"  style="font-size: 15px; text-align: center; ">-->
+    <!--              💸test €<br> 💺 test places restantes <br> 🗺 test-->
+    <!--            </div>-->
+    <!--            <div class="col-lg-4"  style="font-size: 15px; text-align: center; margin-top: 20px">-->
+
+    <!--              &lt;!&ndash;### Contrat en cours&ndash;&gt;-->
+    <!--              &lt;!&ndash;    <i class="fas fa-vote-yea fa-2x  myButton zoom"  (click)="successOrFailure(1)"  *ngIf="contrat.validation===2" style="color: #398058" [ngbTooltip]="tipContentV" placement="left"></i>&ndash;&gt;-->
+    <!--              &lt;!&ndash;    <i class="fas fa-times-circle fa-2x myButton zoom"  (click)="successOrFailure(0)" *ngIf="contrat.validation===2" style="padding-left: 10px; color: #f23d32;" [ngbTooltip]="tipContentR" placement="left"></i>&ndash;&gt;-->
+
+    <!--              &lt;!&ndash;### Valider / Echec&ndash;&gt;-->
+    <!--              <i class="fas fa-plus-circle fa-2x  myButton zoom"   style="color: black" ></i>-->
+    <!--              &lt;!&ndash;    <i class="fas fa-file-signature fa-2x  myButton"  *ngIf="contrat.validation===0" style="color: darkred" [ngbTooltip]="tipContentFailed" placement="left"></i>&ndash;&gt;-->
+    <!--              &lt;!&ndash;    <i class="fas fa-2x fa-eye myButton zoom"   *ngIf="contrat.validation===0" style="padding-left: 10px" [ngbTooltip]="tipContentRE  " placement="left"></i>&ndash;&gt;-->
+
+    <!--              &lt;!&ndash;### Archivage / Pas&ndash;&gt;-->
+    <!--              &lt;!&ndash;<i class="fa fa-2x fa-file-archive myButton zoom"  (click)="archived()" *ngIf="contrat.archived===false" style="padding-left: 10px" [ngbTooltip]="tipContentA  " placement="left"></i>&ndash;&gt;-->
+    <!--              &lt;!&ndash;    <i class="far fa-folder-open fa-2x myButton zoom" (click)="archived()"  *ngIf="contrat.archived===true" style="padding-left: 10px;" [ngbTooltip]="tipContentD" placement="left"></i>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--          &lt;!&ndash;                  <app-reservation-result (OnSelect)="selectReservation($event)"&ndash;&gt;-->
+    <!--          &lt;!&ndash;                                          [reservation]="n"></app-reservation-result>&ndash;&gt;-->
+    <!--        </li>-->
+    <!--      </ng-container>-->
+    <!--    </cdk-virtual-scroll-viewport>-->
+    <!--    <ngb-tabset>-->
+    <!--      <ngb-tab title="One">-->
+    <!--        <ng-template ngbTabContent>-->
+    <!--          <p style="color: black;">These tabs are displayed as pills...</p>-->
+    <!--        </ng-template>-->
+    <!--      </ngb-tab>-->
+    <!--      <ngb-tab title="Two">-->
+    <!--        <ng-template ngbTabContent>-->
+    <!--          <p style="color: black;">Because default values have been customized.</p>-->
+    <!--        </ng-template>-->
+    <!--      </ngb-tab>-->
+    <!--    </ngb-tabset>-->
+    <!--    <div *ngFor="let p of propositions; let i = index">-->
+    <!--      <app-reservation-result-list [reservation]="p" (OnBuy)="purchaseReservation($event)" (OnRemove)="removeReservation($event)"></app-reservation-result-list>-->
+    <!--    </div>-->
+    <!--  </div>-->
+
+    <!--  <div class="container">-->
+    <!--    <div class="raw">-->
+    <!--      <div class="borderD"  *ngIf="emptyList">-->
+    <!--        <h2 class="centerD">~  PAS DE RESERVATION DISPONIBLE  ~</h2>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+<!--    <div class="heading">-->
+<!--      <h1>Ordered List UI</h1>-->
 <!--    </div>-->
-<!--  </div>-->
+    <div class="container2 ribbon">
+      <div class="nav  left-top right-bottom">
+<!--        <a href="#"><i class="fal fa-home"></i></a>-->
+        <span class="activeB"> Mes groupes 💯 </span>
+        <span> Invitations en attente 👏 </span>
+<!--        <a><i class="fab fa-codepen"></i></a>-->
+      </div>
+      <div class="listA">
+        <div class="num">
+          <app-group-card></app-group-card>
+          <app-group-card></app-group-card>
+          <app-group-card></app-group-card>
+      </div>
+    </div>
 
-<!--  <div class="container">-->
-<!--    <div class="raw">-->
-<!--      <div class="borderD"  *ngIf="emptyList">-->
-<!--        <h2 class="centerD">~  PAS DE RESERVATION DISPONIBLE  ~</h2>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  </div>
 
-
+  </div>
 </div>
 
 
