@@ -6,7 +6,7 @@ GroupSchema = new Schema({
         type: String,
         required: true
     },
-    usernames: {
+    usersnames: {
         type: Array,
         required: true
     },

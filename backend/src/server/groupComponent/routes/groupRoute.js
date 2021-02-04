@@ -29,4 +29,9 @@ router.get('/groups/:email', async (ctx) => {
     }
 });
 
+router.post('/groups/addNewMember', async (ctx) => {
+    const groups = await groupsdk.addNewMember(ctx.request.body.groupName, ctx.request.body.userName, ctx.params.userMail);
+    f.success(ctx, groups);
+});
+
 module.exports = router;
