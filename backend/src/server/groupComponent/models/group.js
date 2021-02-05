@@ -20,7 +20,6 @@ GroupSchema = new Schema({
     }
 });
 
-
 mongoose.model('group', GroupSchema);
 const Group = mongoose.model('group');
 

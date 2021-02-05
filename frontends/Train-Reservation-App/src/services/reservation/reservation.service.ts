@@ -103,6 +103,22 @@ export class ReservationService {
       )
   }
 
+  purchaseGroupReservation(trainId, price, placesNumber, groupId): Observable<any> {
+    const myReservation = {
+      'trainId': trainId,
+      'customer': this.getCurrentUserMail(),
+      'price' : price,
+      'placesNumber' : placesNumber,
+      'groupId' : groupId
+    };
+    console.table(myReservation);
+    return this.http.post<any>(this.paymentUrl + 'payReservationGroupWeb', myReservation)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+  }
+
   // Error handling
   errorHandl(error) {
     let errorMessage = '';

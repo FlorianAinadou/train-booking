@@ -4,11 +4,13 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
 import {faFilm} from '@fortawesome/free-solid-svg-icons';
-import {UserService} from "../../../services/user/user.service";
-import {Alert} from "../../../models/alert";
-import {ReservationService} from "../../../services/reservation/reservation.service";
-import {NgbTabsetConfig} from "@ng-bootstrap/ng-bootstrap";
-import {TeamsService} from "../../teams.service";
+import {UserService} from '../../../services/user/user.service';
+import {Alert} from '../../../models/alert';
+import {ReservationService} from '../../../services/reservation/reservation.service';
+import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+import {Reservation} from '../../../models/reservation';
+import {Groups} from '../../../models/groups';
+import {GroupsService} from '../../../services/groups/groups.service';
 
 @Component({
   selector: 'app-group-page',
@@ -22,24 +24,37 @@ export class GroupDisplayPageComponent implements OnInit {
   // public mapElement: HomeMapComponent;
 
   emptyList = true;
-  // propositions: Reservation[] = [];
-  teams = [];
+  groupList: Groups[] = [];
 
 
-  constructor(private teamsService: TeamsService ,public reservationService: ReservationService, public router: Router, config: NgbTabsetConfig) {
+  constructor(public groupService: GroupsService, public router: Router) {
     document.body.style.backgroundColor = '#fff';
+    this.groupService.getMyGroups().subscribe(res => {
+      let compt = 1;
+      for (const entry of res) {
+        const r: Groups = {
+          groupName: entry.groupName,
+          id: entry._id,
+          usersnames: entry.usersnames,
+          travelsNumber: entry.travelsNumber,
+          pictures: [],
+          title: "Group " + compt.toString()
+        };
+        // tslint:disable-next-line:only-arrow-functions
+        r.usersnames.forEach(function (value) {
+          const a = Math.floor((Math.random() * 100) + 1);
+          //   alert(a);
+          r.pictures.push('https://randomuser.me/api/portraits/men/' + a.toString() + '.jpg');
+        });
+        this.groupList.push(r);
+        compt = compt + 1;
+      }
+    }, error => {
 
-    // customize default values of tabsets used by this component tree
-    config.justify = 'center';
-    config.type = 'pills';
+    });
   }
 
 
   ngOnInit() {
-    this.getTeams();
-  }
-
-  getTeams() {
-    this.teams = this.teamsService.getTeams();
   }
 }

@@ -6,9 +6,9 @@
   <div class="courses-container">
     <div class="course">
       <div class="course-preview" style="">
-        <h2>Group 1</h2>
+        <h2>{{group.title}}</h2>
 <!--        <h2>JavaScript Fundamentals</h2>-->
-        <a href="#">Nombre de voyages [9]</a>
+        <a href="#">Nombre de voyages [{{group.travelsNumber}}]</a>
 <!--        <a href="#">Nombre de voyages [9]<i class="fas fa-chevron-right"></i></a>-->
 
       </div>
@@ -16,14 +16,14 @@
         <div class="progress-container">
           <div class="progress" #prog></div>
           <span class="progress-text">
-					6/10 amis
+					{{group.usersnames.length}}/10 amis
 				</span>
         </div>
-        <h6>WAKANDA ⚡</h6>
+        <h6>{{group.groupName}}</h6>
         <h2>Membres</h2>
-        <span *ngFor="let p of tab; let i = index" class="tooltipA">
-         <span><img class="reduce" src= "{{tof[0]}}"></span>
-          <span class="tooltiptext">Tooltip text</span>
+        <span *ngFor="let p of group.usersnames; let i = index" class="tooltipA">
+         <span><img class="reduce" src= "{{group.pictures[i]}}"></span>
+          <span class="tooltiptext">{{group.usersnames[i]}}</span>
         </span>
 <!--        <span><img class="reduce" src="https://randomuser.me/api/portraits/women/9.jpg"></span>-->
 <!--        <span><img class="reduce" src="https://randomuser.me/api/portraits/men/5.jpg"></span>-->

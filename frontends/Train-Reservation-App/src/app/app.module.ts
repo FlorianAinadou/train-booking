@@ -36,6 +36,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {PushNotificationService} from "../services/notifications/pushNotification.service";
 import {GroupDisplayPageComponent} from "./pages/group-display-page";
 import {GroupCardPageComponent} from "./pages/group-card";
+import {GroupsService} from "../services/groups/groups.service";
 
 
 @NgModule({
@@ -73,7 +74,7 @@ import {GroupCardPageComponent} from "./pages/group-card";
     ReactiveFormsModule, // Import all dependencies
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [NgbTabsetConfig, UserService, ReservationService, AsyncPipe, PushNotificationService],
+  providers: [NgbTabsetConfig, UserService, ReservationService, AsyncPipe, PushNotificationService, GroupsService],
   entryComponents: [InscriptionModalComponent, ConnexionModalComponent],
   bootstrap: [AppComponent]
 })

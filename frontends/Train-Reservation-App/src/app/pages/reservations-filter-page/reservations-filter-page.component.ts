@@ -9,6 +9,8 @@ import {Alert} from "../../../models/alert";
 import {Reservation} from "../../../models/reservation";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReservationService} from "../../../services/reservation/reservation.service";
+import {Groups} from "../../../models/groups";
+import {GroupsService} from "../../../services/groups/groups.service";
 
 @Component({
   selector: 'app-reservations-filter-page',
@@ -27,13 +29,37 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
   formSubmitted = false;
 
   propositions: Reservation[] = [];
+  groupList: Groups[] = [];
   display = false;
   text = "Search";
 
-  constructor(public userService: UserService, public router: Router, private renderer: Renderer2, public formBuilder: FormBuilder, public reservationService: ReservationService) {
+  constructor(public userService: UserService, public groupService: GroupsService, public router: Router, private renderer: Renderer2, public formBuilder: FormBuilder, public reservationService: ReservationService) {
     this.searchForm = this.formBuilder.group({
       d: ['', Validators.required],
       a: ['', Validators.required]
+    });
+    this.groupService.getMyGroups().subscribe(res => {
+      let compt = 1;
+      for (const entry of res) {
+        const r: Groups = {
+          groupName: entry.groupName,
+          id: entry._id,
+          usersnames: entry.usersnames,
+          travelsNumber: entry.travelsNumber,
+          pictures: [],
+          title: "Group " + compt.toString()
+        };
+        // tslint:disable-next-line:only-arrow-functions
+        r.usersnames.forEach(function (value) {
+          const a = Math.floor((Math.random() * 100) + 1);
+          //   alert(a);
+          r.pictures.push('https://randomuser.me/api/portraits/men/' + a.toString() + '.jpg');
+        });
+        this.groupList.push(r);
+        compt = compt + 1;
+      }
+    }, error => {
+
     });
   }
 
@@ -125,5 +151,33 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
     }, error => {
 
     });
+  }
+
+  selectReservationGroup(data) {
+    let nb = data.nb;
+    let groupId = data.groupId;
+    let reservationId = data.reservationId;
+    let price = +this.propositions.find(({id}) => id === reservationId).price * this.groupList.find(({id}) => id === groupId).usersnames.length;
+    let placesNumber = [];
+
+    this.groupList.find(({id}) => id === groupId).forEach(function (value) {
+      placesNumber.push(Date.now().toString());
+    });
+
+    this.reservationService.purchaseGroupReservation(reservationId, price, placesNumber, groupId).subscribe(res => {
+      console.log("RES " + res);
+      if(res){
+        // update seats available number
+        this.propositions.find(({id}) => id === reservationId).seats = (+this.propositions.find(({id}) => id === reservationId).seats - nb()).toString();
+        if ((+this.propositions.find(({id}) => id === reservationId).seats === 0)) {
+          this.propositions = this.propositions.filter(({id}) => id !== reservationId);
+        }
+      }
+    }, error => {
+
+    });
+    // console.log("ici");
+    // this.propositions.find(({id}) => id === reservation.id).seats = (+this.propositions.find(({id}) => id === reservation.id).seats - 1).toString();
+    alert(data.reservationId);
   }
 }
