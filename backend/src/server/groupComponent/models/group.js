@@ -6,6 +6,10 @@ GroupSchema = new Schema({
         type: String,
         required: true
     },
+    groupId: {
+        type: String,
+        require: true
+    },
     usersnames: {
         type: Array,
         required: true

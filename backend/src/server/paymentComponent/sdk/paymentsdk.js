@@ -1,6 +1,7 @@
 const rp = require('request-promise');
 const customerRegistration = require('../../customerRegistration/sdk/customerFinder');
 const bookingReservation = require('../../bookingComponent/sdk/reservation');
+const PaymentGroupModel = require('../models/paymentGroup');
 
 // var host = process.env.npm_package_config_bankHost;
 
@@ -22,7 +23,30 @@ async function payReservationByIdAndEmail(bookingId, userMail,price) {
     return false;
 }
 
+async function payGroup(trainId, customerMail, price, placesNumber, groupId){
+    let bookingId;
+    bookingId = strRandom({
+        includeUpperCase: true,
+        includeNumbers: true,
+        length: bookingIdSize,
+        startsWithLowerCase: false
+    });
+    
+    await PaymentGroupModel.create({
+        "bookingId": bookingId,
+        "customerMail": customerMail,
+        "placesNumber": placesNumber,
+        "trainId": trainId,
+        "price": price,
+        "groupId": groupId
+    }, function (err, paymentGroup) {
+        if (err) console.log(err);
+    });
+    return bookingId;
+}
+
 module.exports = {
     pay,
-    payReservationByIdAndEmail
+    payReservationByIdAndEmail,
+    payGroup
 };

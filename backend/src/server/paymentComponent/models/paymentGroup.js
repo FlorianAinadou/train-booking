@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 PaymentGroupSchema = new Schema({
-    groupName: {
+    bookingId: {
         type: String,
         required: true
     },
-    idCard: {
+    groupId: {
         type: String,
         required: true
     },
@@ -14,12 +14,16 @@ PaymentGroupSchema = new Schema({
         type: Number,
         require: true
     },
-    users: {
-        type: Array,
-        require: true
-    },
-    owner: {
+    customerMail: {
         type: String,
+        required: true
+    },
+    trainId : {
+        type: String,
+        required: true
+    }, 
+    placesNumber : {
+        type: Array,
         required: true
     }
 });
