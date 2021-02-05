@@ -24,24 +24,29 @@ async function payReservationByIdAndEmail(bookingId, userMail,price) {
 }
 
 async function payGroup(trainId, customerMail, price, placesNumber, groupId){
+    const customer = await customerRegistration.getUserByEmail(customerMail);
+    const rep  = await pay(customer.cardId,price);
     let bookingId;
-    bookingId = strRandom({
-        includeUpperCase: true,
-        includeNumbers: true,
-        length: bookingIdSize,
-        startsWithLowerCase: false
-    });
+    if (rep){
+        bookingId = strRandom({
+            includeUpperCase: true,
+            includeNumbers: true,
+            length: bookingIdSize,
+            startsWithLowerCase: false
+        });
     
-    await PaymentGroupModel.create({
-        "bookingId": bookingId,
-        "customerMail": customerMail,
-        "placesNumber": placesNumber,
-        "trainId": trainId,
-        "price": price,
-        "groupId": groupId
-    }, function (err, paymentGroup) {
-        if (err) console.log(err);
-    });
+        await PaymentGroupModel.create({
+            "bookingId": bookingId,
+            "customerMail": customerMail,
+            "placesNumber": placesNumber,
+            "trainId": trainId,
+            "price": price,
+            "groupId": groupId
+        }, function (err, paymentGroup) {
+            if (err) console.log(err);
+        });
+
+    }
     return bookingId;
 }
 
