@@ -8,12 +8,26 @@ async function sendAnInvitation(userMail, groupName){
     /** */
 }
 
-async function createAGroup(userMail,userName,groupName){
+async function createAGroup(groupName, username, userMail){
     /** */
+    const alreadyexist = await GroupModel.find({'groupName': groupName});
+    console.log(`the rsult is ${alreadyexist}`)
+    if (alreadyexist === null){
+        await GroupModel.create({
+            "groupName": groupName,
+            "owner": userMail,
+            "users": [userMail],
+            "usersnames": [username],
+            "travelsNumber": 0
+        }, function (err, group) {
+            if (err) console.log(err);
+        });
+        return 'Successful'
+    }
 }
 
-async function supprimAGroup(userMail,userName,groupName){
-    /** */
+async function deleteAGroup(groupName,userMail){
+    return await GroupModel.deleteOne({'owner': userMail, 'groupName': groupName});
 }
 
 async function addNewMember(groupName, username, userMail){
@@ -24,8 +38,6 @@ async function addNewMember(groupName, username, userMail){
     currentUsers.push(userMail);
     currentUserNames.push(username);
 
-    console.log(`nouveau tableau ${currentUsers}`)
-
     const update  =  {
         $set: {
             users:
@@ -34,7 +46,6 @@ async function addNewMember(groupName, username, userMail){
         },
       };
     return await GroupModel.updateOne({ 'groupName': groupName }, update);
-    // return 'yes'
 }
 
 async function quitAGroup(groupName, username, userMail){
@@ -65,5 +76,7 @@ async function quitAGroup(groupName, username, userMail){
 module.exports = {
     getAllGroupsByEmail,
     addNewMember,
-    quitAGroup
+    quitAGroup,
+    createAGroup,
+    deleteAGroup
 };

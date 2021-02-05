@@ -39,4 +39,19 @@ router.post('/groups/quitAGroup', async (ctx) => {
     f.success(ctx, groups);
 });
 
+router.post('/groups/createAGroup', async (ctx) => {
+    const groups = await groupsdk.createAGroup(ctx.request.body.groupName, ctx.request.body.userName, ctx.request.body.userMail);
+    f.success(ctx, groups);
+});
+
+router.del('/groups/:email/:groupName', async (ctx) => {
+    try {
+        const groupResponse = await groupsdk.deleteAGroup(ctx.params.groupName,ctx.params.email);
+        f.success(ctx,groupResponse);
+        console.log(groupResponse.toString())   
+    } catch {
+        f.failure(ctx, "failed");
+    }
+});
+
 module.exports = router;

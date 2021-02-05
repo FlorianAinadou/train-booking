@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-GroupSchema = new Schema({
+PaymentGroupSchema = new Schema({
     groupName: {
         type: String,
         required: true
     },
-    usersnames: {
-        type: Array,
+    idCard: {
+        type: String,
         required: true
     },
-    travelsNumber: {
+    price : {
         type: Number,
-        required: true
+        require: true
     },
     users: {
         type: Array,
@@ -25,7 +25,7 @@ GroupSchema = new Schema({
 });
 
 
-mongoose.model('group', GroupSchema);
-const Group = mongoose.model('group');
+mongoose.model('paymentGroup', PaymentGroupSchema);
+const PaymentGroup = mongoose.model('paymentGroup');
 
-module.exports = Group;
+module.exports = PaymentGroup;
