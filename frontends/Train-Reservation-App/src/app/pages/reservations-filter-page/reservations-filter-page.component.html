@@ -92,10 +92,17 @@
             </div>
           </div>
         </div>
-
-
       </div>
 
     </div>
   </div>
+
 </div>
+<div>
+  <p class="modal-title policeHobo" *ngIf="alert[0].message"  style=" position: absolute; margin-top: 2% !important; margin-left: 42% !important;  font-size: 19px; text-align: center !important;">
+<!--  <p class="modal-title policeHobo" *ngIf="alert[0].message"  style=" position: absolute; margin-top: 2% !important;   font-size: 19px; text-align: center !important;">-->
+    <ngb-alert style=" position: relative; margin-top: 90px !important; font-size: 19px; text-align: center !important;" [dismissible]="false" *ngIf="alert[0].message" [type]="alert[0].type"
+               (close)="alert[0].message = null">{{ alert[0].message }}</ngb-alert>
+  </p>
+</div>
+
