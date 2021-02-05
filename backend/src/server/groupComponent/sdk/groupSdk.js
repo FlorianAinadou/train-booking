@@ -4,6 +4,18 @@ async function getAllGroupsByEmail(userMail) {
     return await GroupModel.find({users: userMail});
 }
 
+async function sendAnInvitation(userMail, groupName){
+    /** */
+}
+
+async function createAGroup(userMail,userName,groupName){
+    /** */
+}
+
+async function supprimAGroup(userMail,userName,groupName){
+    /** */
+}
+
 async function addNewMember(groupName, username, userMail){
     const result = await GroupModel.findOne({ 'groupName': groupName });
     const currentUsers = result.users;
