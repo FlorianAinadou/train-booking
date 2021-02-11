@@ -55,8 +55,13 @@ async function payGroup(trainId, customerMail, price, placesNumber, groupId){
     return false;
 }
 
+async function getAllPaymentsGroupByEmail(userMail){
+    return await PaymentGroupModel.find({customerMail: userMail})
+}
+
 module.exports = {
     pay,
     payReservationByIdAndEmail,
-    payGroup
+    payGroup,
+    getAllPaymentsGroupByEmail
 };

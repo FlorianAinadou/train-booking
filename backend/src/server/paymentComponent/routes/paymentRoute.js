@@ -107,5 +107,14 @@ router.post('/payment/paygroup', async (ctx) => {
     }
 })
 
+router.get('/payment/:userMail', async (ctx) => {
+    try{
+        const paymentGroup = await sdk.getAllPaymentsGroupByEmail(ctx.params.userMail);
+        f.success(ctx, paymentGroup)
+    }catch{
+        f.failure(ctx,'failed')
+    }
+})
+
 
 module.exports = router;
