@@ -112,7 +112,7 @@ export class ReservationService {
       'groupId' : groupId
     };
     console.table(myReservation);
-    return this.http.post<any>(this.paymentUrl + 'payReservationGroupWeb', myReservation)
+    return this.http.post<any>(this.paymentUrl + 'paygroup', myReservation)
       .pipe(
         retry(1),
         catchError(this.errorHandl)
