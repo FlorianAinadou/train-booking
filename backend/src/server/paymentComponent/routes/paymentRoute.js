@@ -75,7 +75,8 @@ router.post('/payment/payReservationWeb', async (ctx) => {
                     title: "Nouvelle Reservation !!!",
                     body: "😎 GO GO GO !!!!!",
                     icon: "https://subtlepatterns.com/patterns/geometry2.png",
-                    click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                    click_action: 'FLUTTER_NOTIFICATION_CLICK',
+
                 }
                 // },
                 // data: {
@@ -96,7 +97,7 @@ router.post('/payment/payReservationWeb', async (ctx) => {
     f.success(ctx, JSON.stringify(bookings));
 });
 
-router.post('payment/paygroup', (ctx) => {
+router.post('payment/paygroup', async (ctx) => {
     try {
         const paymentGroup = await sdk.payGroup(ctx.request.body.trainId, ctx.request.body.customer, ctx.request.body.price,
             ctx.request.body.placesNumber, ctx.request.body.groupId);
