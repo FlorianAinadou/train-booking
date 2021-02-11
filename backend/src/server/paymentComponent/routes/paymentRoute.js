@@ -97,11 +97,11 @@ router.post('/payment/payReservationWeb', async (ctx) => {
     f.success(ctx, JSON.stringify(bookings));
 });
 
-router.post('payment/paygroup', async (ctx) => {
+router.post('/payment/paygroup', async (ctx) => {
     try {
         const paymentGroup = await sdk.payGroup(ctx.request.body.trainId, ctx.request.body.customer, ctx.request.body.price,
             ctx.request.body.placesNumber, ctx.request.body.groupId);
-        f.success(ctx, paymentGroup.toString())
+        f.success(ctx, paymentGroup)
     } catch {
         f.failure(ctx, 'failed')
     }
