@@ -15,3 +15,6 @@ BoxShadow disabledBox = BoxShadow(
 BoxShadow todayTicketsBox = enabledBox;
 BoxShadow passedTicketsBox = disabledBox;
 BoxShadow futureTicketsBox = disabledBox;
+
+BoxShadow personalBookingBox = enabledBox;
+BoxShadow groupBookingBox = disabledBox;
