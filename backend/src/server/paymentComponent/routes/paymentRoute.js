@@ -20,17 +20,17 @@ router.get('/pay/:idCard/:price', async (ctx) => {
 });
 
 router.post('pay'), async (ctx) => {
-    try{
+    try {
         const isGroup = ctx.request.body.isGroup;
-        const bankResponse;
-        if(isGroup){
-            bankResponse = await sdk.groupPay(ctx.request.body.groupId, ctx.request.body.price, ctx.request.body.userMail);
-        }else{
+        let bankResponse;
+        if (isGroup) {
+            bankResponse = await sdk.payGroup(ctx.request.body.groupId, ctx.request.body.price, ctx.request.body.userMail);
+        } else {
             bankResponse = await sdk.pay(ctx.request.body.idCard, ctx)
         }
 
-    }catch {
-        f.failure(ctx,"failed");
+    } catch {
+        f.failure(ctx, "failed");
     }
 }
 
@@ -69,28 +69,28 @@ router.post('/payment/payReservationWeb', async (ctx) => {
             priority: "high",
             timeToLive: 60 * 60 * 24
         };
-        if(users.fireBaseIdMobile !== null){
-          const message_notification = {
-            notification: {
-              title: "Nouvelle Reservation !!!",
-              body: "😎 GO GO GO !!!!!",
-              icon: "https://subtlepatterns.com/patterns/geometry2.png",
-              click_action: 'FLUTTER_NOTIFICATION_CLICK'
-            }
-            // },
-            // data: {
-            //     groupId: result.groupId,
-            //     act: act,
-            //     time: result.delay + " min"
-            // }
-          };
-          await fireBaseConfig.admin.messaging().sendToDevice(users.fireBaseIdMobile, message_notification, notification_options)
-              .then(response => {
-                  console.log("NOTIF SEND OK");
-              })
-              .catch(error => {
-                console.log(error);
-              });
+        if (users.fireBaseIdMobile !== null) {
+            const message_notification = {
+                notification: {
+                    title: "Nouvelle Reservation !!!",
+                    body: "😎 GO GO GO !!!!!",
+                    icon: "https://subtlepatterns.com/patterns/geometry2.png",
+                    click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                }
+                // },
+                // data: {
+                //     groupId: result.groupId,
+                //     act: act,
+                //     time: result.delay + " min"
+                // }
+            };
+            await fireBaseConfig.admin.messaging().sendToDevice(users.fireBaseIdMobile, message_notification, notification_options)
+                .then(response => {
+                    console.log("NOTIF SEND OK");
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     }
     f.success(ctx, JSON.stringify(bookings));
@@ -99,7 +99,7 @@ router.post('/payment/payReservationWeb', async (ctx) => {
 router.post('payment/paygroup', (ctx) => {
     try {
         const paymentGroup = await sdk.payGroup(ctx.request.body.trainId, ctx.request.body.customer, ctx.request.body.price,
-                                                ctx.request.body.placesNumber, ctx.request.body.groupId);
+            ctx.request.body.placesNumber, ctx.request.body.groupId);
         f.success(ctx, paymentGroup.toString())
     } catch {
         f.failure(ctx, 'failed')
