@@ -6,7 +6,11 @@ GroupSchema = new Schema({
         type: String,
         required: true
     },
-    usernames: {
+    groupId: {
+        type: String,
+        require: true
+    },
+    usersnames: {
         type: Array,
         required: true
     },
@@ -17,6 +21,10 @@ GroupSchema = new Schema({
     users: {
         type: Array,
         require: true
+    },
+    owner: {
+        type: String,
+        required: true
     }
 });
 

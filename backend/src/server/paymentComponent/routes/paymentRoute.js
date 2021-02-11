@@ -19,6 +19,21 @@ router.get('/pay/:idCard/:price', async (ctx) => {
     }
 });
 
+router.post('pay'), async (ctx) => {
+    try{
+        const isGroup = ctx.request.body.isGroup;
+        const bankResponse;
+        if(isGroup){
+            bankResponse = await sdk.groupPay(ctx.request.body.groupId, ctx.request.body.price, ctx.request.body.userMail);
+        }else{
+            bankResponse = await sdk.pay(ctx.request.body.idCard, ctx)
+        }
+
+    }catch {
+        f.failure(ctx,"failed");
+    }
+}
+
 
 router.post('/payment/payReservationMobile', async (ctx) => {
     const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId, ctx.request.body.userMail, ctx.request.body.price);
@@ -80,6 +95,16 @@ router.post('/payment/payReservationWeb', async (ctx) => {
     }
     f.success(ctx, JSON.stringify(bookings));
 });
+
+router.post('payment/paygroup', (ctx) => {
+    try {
+        const paymentGroup = await sdk.payGroup(ctx.request.body.trainId, ctx.request.body.customer, ctx.request.body.price,
+                                                ctx.request.body.placesNumber, ctx.request.body.groupId);
+        f.success(ctx, paymentGroup.toString())
+    } catch {
+        f.failure(ctx, 'failed')
+    }
+})
 
 
 module.exports = router;
