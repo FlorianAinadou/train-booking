@@ -5,6 +5,7 @@ const customerRegistration = require('../../customerRegistration/sdk/customerFin
 const bookingReservation = require('../../bookingComponent/sdk/reservation');
 const PaymentGroupModel = require('../models/paymentGroup');
 let bookingIdSize = 6;
+const request = require('request');
 
 // var host = process.env.npm_package_config_bankHost;
 
@@ -49,6 +50,13 @@ async function payGroup(trainId, customerMail, price, placesNumber, groupId){
         }, function (err, paymentGroup) {
             if (err) console.log(err);
             return false;
+        });
+
+        request.post({
+            url: 'http://127.0.0.1:8000/trainList/removeSeats',
+            form: {"trainId": trainId,"seats" : placesNumber.length}
+        }, function (error, response, body) {
+            console.log(body);
         });
         return true;
     }
