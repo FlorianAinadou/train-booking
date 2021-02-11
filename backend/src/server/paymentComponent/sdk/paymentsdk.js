@@ -1,7 +1,10 @@
+const {strRandom} = require("../../bookingComponent/utils/idGenerator");
+
 const rp = require('request-promise');
 const customerRegistration = require('../../customerRegistration/sdk/customerFinder');
 const bookingReservation = require('../../bookingComponent/sdk/reservation');
 const PaymentGroupModel = require('../models/paymentGroup');
+let bookingIdSize = 6;
 
 // var host = process.env.npm_package_config_bankHost;
 
@@ -27,14 +30,15 @@ async function payGroup(trainId, customerMail, price, placesNumber, groupId){
     const customer = await customerRegistration.getUserByEmail(customerMail);
     const rep  = await pay(customer.cardId,price);
     let bookingId;
-    if (rep){
+
+    if (rep && customer){
         bookingId = strRandom({
             includeUpperCase: true,
             includeNumbers: true,
             length: bookingIdSize,
             startsWithLowerCase: false
         });
-    
+
         await PaymentGroupModel.create({
             "bookingId": bookingId,
             "customerMail": customerMail,
@@ -44,10 +48,11 @@ async function payGroup(trainId, customerMail, price, placesNumber, groupId){
             "groupId": groupId
         }, function (err, paymentGroup) {
             if (err) console.log(err);
+            return false;
         });
-
+        return true;
     }
-    return bookingId;
+    return false;
 }
 
 module.exports = {
