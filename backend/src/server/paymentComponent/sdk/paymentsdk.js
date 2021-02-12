@@ -68,38 +68,100 @@ async function getAllPaymentsGroupByEmail(userMail){
 
     const paymentsGroupsResponse = []
     const paymentsGroups = await PaymentGroupModel.find()
-    paymentsGroups.forEach(async paymentGroup => {
+    // paymentsGroups.forEach(async paymentGroup => {
         
-        const group = await getGroupsByGroupId(paymentGroup.groupId,userMail);
-        console.log(group)
-        // console.log(groupsNames);
-        if( group != null){
-            const paymentGroupResponse = {
-                'placesNumber' : paymentGroup.placesNumber,
-                '_id': paymentGroup._id,
-                'bookingId': paymentGroup.bookingId,
-                'customerMail': paymentGroup.customerMail,
-                'trainId': paymentGroup.trainId,
-                'price': paymentGroup.price,
-                'groupId': paymentGroup.groupId,
-                'groupName' : group.groupName
+    //     const group = await getGroupsByGroupId(paymentGroup.groupId,userMail);
+    //     // console.log(group)
+    //     // console.log(groupsNames);
+    //     if( group != null){
+    //         const paymentGroupResponse = {
+    //             'placesNumber' : paymentGroup.placesNumber,
+    //             '_id': paymentGroup._id,
+    //             'bookingId': paymentGroup.bookingId,
+    //             'customerMail': paymentGroup.customerMail,
+    //             'trainId': paymentGroup.trainId,
+    //             'price': paymentGroup.price,
+    //             'groupId': paymentGroup.groupId,
+    //             'groupName' : group.groupName
     
-            }
-            console.log(paymentGroupResponse)
-        }
-        
-    //     paymentsGroupsResponse.push(paymentGroupResponse)
-    });
+    //         }
+    //         // console.log(paymentGroupResponse)
+    //         paymentsGroupsResponse.push(paymentGroupResponse)
+    //     }
+    // //     paymentsGroupsResponse.push(paymentGroupResponse)
+    // });
     // return paymentsGroupsResponse;
+    // paymentsGroups.forEach(function(paymentGroup){
+    //     GroupModel.findOne({_id:paymentGroup.groupId, users: userMail}),function(err, foundGroup){
+    //         if(err){
 
+    //         }else{
+    //             const paymentGroupResponse = {
+    //                             'placesNumber' : paymentGroup.placesNumber,
+    //                             '_id': paymentGroup._id,
+    //                             'bookingId': paymentGroup.bookingId,
+    //                             'customerMail': paymentGroup.customerMail,
+    //                             'trainId': paymentGroup.trainId,
+    //                             'price': paymentGroup.price,
+    //                             'groupId': paymentGroup.groupId,
+    //                             'groupName' : foundGroup.groupName
+                    
+    //                         }
+    //             paymentsGroupsResponse.push(paymentGroupResponse)
+    //         }
+    //     }
+    // });
+
+    const response = lookForGroups(paymentsGroups,userMail).then(foundGroups => {
+        // process results here
+        // console.log(foundGroups)
+        let paymentGroupsIndex = 0;
+        for (let foundGroup of foundGroups){
+            console.log(foundGroup)
+            if( foundGroup != null){
+                // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+                const paymentGroupResponse = {
+                    'placesNumber' : paymentsGroups[paymentGroupsIndex].placesNumber,
+                    '_id': paymentsGroups[paymentGroupsIndex]._id,
+                    'bookingId': paymentsGroups[paymentGroupsIndex].bookingId,
+                    'customerMail': paymentsGroups[paymentGroupsIndex].customerMail,
+                    'trainId': paymentsGroups[paymentGroupsIndex].trainId,
+                    'price': paymentsGroups[paymentGroupsIndex].price,
+                    'groupId': paymentsGroups[paymentGroupsIndex].groupId,
+                    'groupName' : foundGroup.groupName
+        
+                }
+                console.log(paymentGroupResponse)
+                paymentsGroupsResponse.push(paymentGroupResponse);
+            }
+            paymentGroupsIndex ++ ;
+        }
+        return paymentsGroupsResponse;
+    }).catch(err => {
+        // process error here
+    });
+    // console.log(paymentsGroupsResponse)
+    return response;
 }
 
-async function getGroupsByGroupId(groupId, customerMail){
-    const group = await GroupModel.findOne({_id:groupId, users: customerMail});
-    if (group === null ){
-        return null;
+async function lookForGroups(paymentsGroups,userMail) {
+    let foundGroups = [];
+    for (let paymentGroup of paymentsGroups) {
+        try {
+            let found = await GroupModel.findOne({_id: paymentGroup.groupId, users: userMail}).exec();
+            foundGroups.push(found);
+        } catch(e) {
+            console.log(`did not find rider ${paymentGroup} in database`);
+        }
     }
-    return group;
+    // console.log(foundGroups);
+    return foundGroups;
+}
+
+
+
+async function getGroupsByGroupId(groupId, customerMail){
+    return await GroupModel.findOne({_id:groupId, users: customerMail});
 }
 
 module.exports = {
