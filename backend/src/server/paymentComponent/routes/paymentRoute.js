@@ -19,7 +19,7 @@ router.get('/pay/:idCard/:price', async (ctx) => {
     }
 });
 
-router.post('pay' , async (ctx) => {
+router.post('pay', async (ctx) => {
     try {
         const isGroup = ctx.request.body.isGroup;
         let bankResponse;
@@ -101,6 +101,35 @@ router.post('/payment/paygroup', async (ctx) => {
     try {
         const paymentGroup = await sdk.payGroup(ctx.request.body.trainId, ctx.request.body.customer, ctx.request.body.price,
             ctx.request.body.placesNumber, ctx.request.body.groupId);
+        const group = await sdk.getGroupById(ctx.request.body.groupId);
+        const mails = group.users;
+        const customer = await customerFinderSdk.getUserByEmail(ctx.request.body.customer);
+        const name = customer["firstName"].concat(" ", customer["lastName"].toString());
+        for (const mail of mails) {
+            const users = await customerFinderSdk.getUserByEmail(mail);
+            const fireBaseConfig = require('../../../../firebase-config');
+            const notification_options = {
+                priority: "high",
+                timeToLive: 60 * 60 * 24
+            };
+            if (users.fireBaseIdMobile !== null && users.fireBaseIdMobile !== undefined && users.fireBaseIdMobile.length!==0) {
+                const message_notification = {
+                    notification: {
+                        title: "Nouvelle réservation de Groupe !!!",
+                        body: "😎 ".concat(group["groupName"], " : payé par : ",name.toString()),
+                        icon: "https://subtlepatterns.com/patterns/geometry2.png",
+                        click_action: 'FLUTTER_NOTIFICATION_CLICK',
+                    }
+                };
+                await fireBaseConfig.admin.messaging().sendToDevice(users.fireBaseIdMobile, message_notification, notification_options)
+                    .then(response => {
+                        console.log("NOTIF SEND OK");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        }
         f.success(ctx, paymentGroup)
     } catch {
         f.failure(ctx, 'failed')
@@ -108,11 +137,11 @@ router.post('/payment/paygroup', async (ctx) => {
 })
 
 router.get('/payment/:userMail', async (ctx) => {
-    try{
+    try {
         const paymentGroup = await sdk.getAllPaymentsGroupByEmail(ctx.params.userMail);
         f.success(ctx, paymentGroup)
-    }catch{
-        f.failure(ctx,'failed')
+    } catch {
+        f.failure(ctx, 'failed')
     }
 })
 

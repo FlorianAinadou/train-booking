@@ -42,7 +42,7 @@ export class GroupDisplayPageComponent implements OnInit {
         };
         // tslint:disable-next-line:only-arrow-functions
         r.usersnames.forEach(function (value) {
-          const a = Math.floor((Math.random() * 100) + 1);
+          const a = Math.floor((Math.random() * 95) + 1);
           //   alert(a);
           r.pictures.push('https://randomuser.me/api/portraits/men/' + a.toString() + '.jpg');
         });

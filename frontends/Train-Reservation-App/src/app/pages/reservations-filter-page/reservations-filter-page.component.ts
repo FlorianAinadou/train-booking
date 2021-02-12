@@ -52,7 +52,7 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
           title: "Group " + compt.toString()
         };
         r.usersnames.forEach(function (value) {
-          const a = Math.floor((Math.random() * 100) + 1);
+          const a = Math.floor((Math.random() * 95) + 1);
           //   alert(a);
           r.pictures.push('https://randomuser.me/api/portraits/men/' + a.toString() + '.jpg');
         });

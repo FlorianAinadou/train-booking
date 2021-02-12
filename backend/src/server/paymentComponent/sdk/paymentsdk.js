@@ -88,6 +88,15 @@ async function getAllPaymentsGroupByEmail(userMail){
     return paymentsGroupsResponse;
 }
 
+async function getUsersMailByGroupId(groupId){
+    const group = await GroupModel.findOne({_id:groupId});
+    return group.users;
+}
+
+async function getGroupById(groupId){
+    return GroupModel.findOne({_id: groupId});
+}
+
 async function getGroupsByGroupId(groupId, customerMail){
     const group = await GroupModel.findOne({_id:groupId, users: customerMail});
     if (group === null ){
@@ -100,5 +109,7 @@ module.exports = {
     pay,
     payReservationByIdAndEmail,
     payGroup,
-    getAllPaymentsGroupByEmail
+    getAllPaymentsGroupByEmail,
+    getUsersMailByGroupId,
+    getGroupById
 };
