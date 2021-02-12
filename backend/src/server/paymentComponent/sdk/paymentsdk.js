@@ -71,9 +71,9 @@ async function getAllPaymentsGroupByEmail(userMail){
     paymentsGroups.forEach(async paymentGroup => {
         
         const group = await getGroupsByGroupId(paymentGroup.groupId,userMail);
-        console.log(typeof group)
+        console.log(group)
         // console.log(groupsNames);
-        if(group !== undefined || group !== null){
+        if( group != null){
             const paymentGroupResponse = {
                 'placesNumber' : paymentGroup.placesNumber,
                 '_id': paymentGroup._id,
@@ -95,7 +95,11 @@ async function getAllPaymentsGroupByEmail(userMail){
 }
 
 async function getGroupsByGroupId(groupId, customerMail){
-    return await GroupModel.findOne({_id:groupId, users: customerMail});
+    const group = await GroupModel.findOne({_id:groupId, users: customerMail});
+    if (group === null ){
+        return null;
+    }
+    return group;
 }
 
 module.exports = {
