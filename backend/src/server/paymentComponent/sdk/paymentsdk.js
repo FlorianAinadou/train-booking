@@ -68,58 +68,13 @@ async function getAllPaymentsGroupByEmail(userMail){
 
     const paymentsGroupsResponse = []
     const paymentsGroups = await PaymentGroupModel.find()
-    // paymentsGroups.forEach(async paymentGroup => {
-        
-    //     const group = await getGroupsByGroupId(paymentGroup.groupId,userMail);
-    //     // console.log(group)
-    //     // console.log(groupsNames);
-    //     if( group != null){
-    //         const paymentGroupResponse = {
-    //             'placesNumber' : paymentGroup.placesNumber,
-    //             '_id': paymentGroup._id,
-    //             'bookingId': paymentGroup.bookingId,
-    //             'customerMail': paymentGroup.customerMail,
-    //             'trainId': paymentGroup.trainId,
-    //             'price': paymentGroup.price,
-    //             'groupId': paymentGroup.groupId,
-    //             'groupName' : group.groupName
     
-    //         }
-    //         // console.log(paymentGroupResponse)
-    //         paymentsGroupsResponse.push(paymentGroupResponse)
-    //     }
-    // //     paymentsGroupsResponse.push(paymentGroupResponse)
-    // });
-    // return paymentsGroupsResponse;
-    // paymentsGroups.forEach(function(paymentGroup){
-    //     GroupModel.findOne({_id:paymentGroup.groupId, users: userMail}),function(err, foundGroup){
-    //         if(err){
-
-    //         }else{
-    //             const paymentGroupResponse = {
-    //                             'placesNumber' : paymentGroup.placesNumber,
-    //                             '_id': paymentGroup._id,
-    //                             'bookingId': paymentGroup.bookingId,
-    //                             'customerMail': paymentGroup.customerMail,
-    //                             'trainId': paymentGroup.trainId,
-    //                             'price': paymentGroup.price,
-    //                             'groupId': paymentGroup.groupId,
-    //                             'groupName' : foundGroup.groupName
-                    
-    //                         }
-    //             paymentsGroupsResponse.push(paymentGroupResponse)
-    //         }
-    //     }
-    // });
-
     const response = lookForGroups(paymentsGroups,userMail).then(foundGroups => {
         // process results here
-        // console.log(foundGroups)
         let paymentGroupsIndex = 0;
         for (let foundGroup of foundGroups){
             console.log(foundGroup)
             if( foundGroup != null){
-                // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
                 const paymentGroupResponse = {
                     'placesNumber' : paymentsGroups[paymentGroupsIndex].placesNumber,
                     '_id': paymentsGroups[paymentGroupsIndex]._id,
@@ -140,7 +95,6 @@ async function getAllPaymentsGroupByEmail(userMail){
     }).catch(err => {
         // process error here
     });
-    // console.log(paymentsGroupsResponse)
     return response;
 }
 
@@ -154,7 +108,6 @@ async function lookForGroups(paymentsGroups,userMail) {
             console.log(`did not find rider ${paymentGroup} in database`);
         }
     }
-    // console.log(foundGroups);
     return foundGroups;
 }
 
