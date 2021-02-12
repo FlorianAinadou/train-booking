@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 
 class TicketsPage extends StatefulWidget {
   bool todayTickets;
+
   TicketsPage(this.todayTickets);
 
   @override
@@ -20,6 +21,7 @@ class _TicketsPageState extends State<TicketsPage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   bool todayTickets;
+
   _TicketsPageState(this.todayTickets);
 
   //bool get todayTickets => null;
@@ -67,130 +69,137 @@ class _TicketsPageState extends State<TicketsPage>
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              "Mes billets",
-              style: TextStyle(
-                fontFamily: 'Pacifico',
-                color: Colors.white,
-                fontSize: 30,
-              ),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Mes billets",
+            style: TextStyle(
+              fontFamily: 'Pacifico',
+              color: Colors.white,
+              fontSize: 30,
             ),
-            bottom: TabBar(
+          ),
+          bottom: TabBar(
+            controller: _tabController,
+            isScrollable: false,
+            indicatorColor: Colors.white,
+            indicatorWeight: 2.0,
+            tabs: <Widget>[
+              Tab(
+                child: Container(
+                  height: _tabController.index == 0 ? 35.0 : 30.0,
+                  //width: 140,
+                  //padding: EdgeInsets.all(10),
+                  //margin: EdgeInsets.only(left: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(28),
+                        bottomLeft: Radius.circular(28),
+                      ),
+                      boxShadow: [
+                        _tabController.index == 0 ? enabledBox : disabledBox,
+                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Passés",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Tab(
+                child: Container(
+                  height: _tabController.index == 1 ? 35.0 : 30.0,
+                  //width: 120,
+                  //padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.only(left: 2),
+                  decoration: BoxDecoration(color: Colors.white,
+                      //borderRadius: BorderRadius.all(Radius.circular(28)),
+                      boxShadow: [
+                        _tabController.index == 1 ? enabledBox : disabledBox,
+                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Aujourd'hui",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Tab(
+                child: Container(
+                  height: _tabController.index == 2 ? 35.0 : 30.0,
+                  //width: 120,
+                  //padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.only(left: 2),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(28),
+                        bottomRight: Radius.circular(28),
+                      ),
+                      boxShadow: [
+                        _tabController.index == 2 ? enabledBox : disabledBox,
+                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "À venir",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/home_page2_1.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: TabBarView(
               controller: _tabController,
-              isScrollable: false,
-              indicatorColor: Colors.white,
-              indicatorWeight: 2.0,
-              tabs: <Widget>[
-                Tab(
-                  child: Container(
-                    height: _tabController.index == 0 ? 35.0 : 30.0,
-                    //width: 140,
-                    //padding: EdgeInsets.all(10),
-                    //margin: EdgeInsets.only(left: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(28),
-                          bottomLeft: Radius.circular(28),
-                        ),
-                        boxShadow: [
-                          _tabController.index == 0 ? enabledBox : disabledBox,
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Passés",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+              children: <Widget>[
+                OrderedTicketsPage(
+                  period: 1,
                 ),
-                Tab(
-                  child: Container(
-                    height: _tabController.index == 1 ? 35.0 : 30.0,
-                    //width: 120,
-                    //padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(left: 2),
-                    decoration: BoxDecoration(color: Colors.white,
-                        //borderRadius: BorderRadius.all(Radius.circular(28)),
-                        boxShadow: [
-                          _tabController.index == 1 ? enabledBox : disabledBox,
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Aujourd'hui",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                OrderedTicketsPage(
+                  period: 2,
                 ),
-                Tab(
-                  child: Container(
-                    height: _tabController.index == 2 ? 35.0 : 30.0,
-                    //width: 120,
-                    //padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(left: 2),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(28),
-                          bottomRight: Radius.circular(28),
-                        ),
-                        boxShadow: [
-                          _tabController.index == 2 ? enabledBox : disabledBox,
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "À venir",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                OrderedTicketsPage(
+                  period: 3,
                 ),
               ],
             ),
           ),
-          body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("images/home_page2_1.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: TabBarView(
-                controller: _tabController,
-                children: <Widget>[
-                  OrderedTicketsPage(period: 1,),
-                  OrderedTicketsPage(period: 2,),
-                  OrderedTicketsPage(period: 3,),
-                ],
-              ),
-            ),
-          )),
+        ),
+      ),
     );
   }
 }
