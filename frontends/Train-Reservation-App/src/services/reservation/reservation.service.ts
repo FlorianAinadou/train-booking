@@ -12,13 +12,13 @@ import {Ticket} from "../../models/ticket";
 })
 export class ReservationService {
 
-  private userUrl = 'http://localhost:9000/trainSelector/';
-  private reservationUrl = 'http://localhost:9000/booking/';
-  private paymentUrl = 'http://localhost:9000/payment/';
+  // private userUrl = 'http://localhost:9000/trainSelector/';
+  // private reservationUrl = 'http://localhost:9000/booking/';
+  // private paymentUrl = 'http://localhost:9000/payment/';
 
-  // private userUrl = ' http://paulkoffi.com:9000/trainSelector/';
-  // private reservationUrl = ' http://paulkoffi.com:9000/booking/';
-  // private paymentUrl = ' http://paulkoffi.com:9000/payment/';
+  private userUrl = ' http://paulkoffi.com:9000/trainSelector/';
+  private reservationUrl = ' http://paulkoffi.com:9000/booking/';
+  private paymentUrl = ' http://paulkoffi.com:9000/payment/';
 
   private reservationsList: Ticket[] = [];
   public reservation$: BehaviorSubject<Ticket[]> = new BehaviorSubject(this.reservationsList);
@@ -75,6 +75,7 @@ export class ReservationService {
         catchError(this.errorHandl)
       );
   }
+
 
   public getMyReservationPaidList2() {
     this.http.get<Ticket[]>(this.reservationUrl + 'getPaidBookingByMail/' + this.getCurrentUserMail()).subscribe(s => {

@@ -178,7 +178,6 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
           this.alertSuccess[0].message = null;
         }, 2000);
-        alert("true");
       }else{
         this.alert[0].message = "Votre payement a été refusé !!";
         setTimeout(() => {

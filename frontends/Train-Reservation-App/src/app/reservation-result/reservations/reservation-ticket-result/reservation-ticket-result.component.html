@@ -1,4 +1,4 @@
-<div class="card item-card card-block">
+<div class="card item-card card-block" *ngIf="!reservation.group">
   <div id="textbox">
     <p class="alignleft">💸{{reservation.price}}€</p>
     <p class="aligncenter">{{reservation.date}}</p>
@@ -17,3 +17,21 @@
   </div>
 </div>
 <!--👤📌📌-->
+<div class="card item-card card-block2" *ngIf="reservation.group">
+  <div id="textbox2">
+    <p class="alignleft">💸{{reservation.price}}€</p>
+    <p class="aligncenter">{{reservation.date}}</p>
+    <p class="alignright"><i class="fas fa-train" style="color: black !important;"></i></p>
+  </div>
+  <div style="clear: both;"></div>
+  <!--  <h4 class="card-title text-right"><i class="fas fa-train" style="color: black !important;"></i></h4>-->
+  <!--  <h4 class="card-title text-left">💸{{reservation.price}}€</h4>-->
+
+  <img src="../../../../assets/img/{{this.img[this.i-1]}}" height="547"
+       width="900" alt="ok"/>
+  <h5 class="item-card-title mt-3 mb-3"> #️⃣ {{reservation.id}} • 🛂 {{reservation.name}}</h5>
+  <div class="myText">
+    <p class="card-text">🗺 {{reservation.routes}} </p>
+    <p style="margin-top: 0px !important;">▶ {{reservation.groupName}} </p>
+  </div>
+</div>
