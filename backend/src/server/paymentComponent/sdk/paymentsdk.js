@@ -6,6 +6,7 @@ const bookingReservation = require('../../bookingComponent/sdk/reservation');
 const PaymentGroupModel = require('../models/paymentGroup');
 let bookingIdSize = 6;
 const request = require('request');
+const GroupModel = require('../../groupComponent/models/group') 
 
 // var host = process.env.npm_package_config_bankHost;
 
@@ -63,8 +64,58 @@ async function payGroup(trainId, customerMail, price, placesNumber, groupId){
     return false;
 }
 
+async function getAllPaymentsGroupByEmail(userMail){
+
+    const paymentsGroupsResponse = []
+    const paymentsGroups = await PaymentGroupModel.find()
+    paymentsGroups.forEach(async paymentGroup => {
+        
+        const group = await getGroupsByGroupId(paymentGroup.groupId,userMail);
+        console.log(group)
+        // console.log(groupsNames);
+        if( group != null){
+            const paymentGroupResponse = {
+                'placesNumber' : paymentGroup.placesNumber,
+                '_id': paymentGroup._id,
+                'bookingId': paymentGroup.bookingId,
+                'customerMail': paymentGroup.customerMail,
+                'trainId': paymentGroup.trainId,
+                'price': paymentGroup.price,
+                'groupId': paymentGroup.groupId,
+                'groupName' : group.groupName
+    
+            }
+            console.log(paymentGroupResponse)
+        }
+        
+    //     paymentsGroupsResponse.push(paymentGroupResponse)
+    });
+    // return paymentsGroupsResponse;
+
+}
+
+async function getGroupsByGroupId(groupId, customerMail){
+    const group = await GroupModel.findOne({_id:groupId, users: customerMail});
+    if (group === null ){
+        return null;
+    }
+    return group;
+}
+
 module.exports = {
     pay,
     payReservationByIdAndEmail,
-    payGroup
+    payGroup,
+    getAllPaymentsGroupByEmail
 };
+
+
+// console.log(`the result ${paymentGroup.groupId}`)
+        // GroupModel.findOne({_id:paymentGroup.groupId}, (err,group) => {
+        //     if (err) {return 'Error not found group'}
+        //     // console.log(`the result ${group.groupName}`);
+        //     paymentGroup.groupName = group.groupName;
+        //     console.log(`the result ${paymentGroup.groupName}`)
+        //     // console.log(`the result ${paymentGroup}`)
+        // });
+        // console.log(`the result ${typeof paymentGroup.groupName}`)
