@@ -8,13 +8,17 @@
 * Livrables:
     * [POC](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_46)
 * Tags: 
-    * [Week 46](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_46)
-    * Week 45 : [No tag] Semaine de démo
-    * [Week 44](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_44)
-    * [Week 43](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_43)
-    * [Week 42](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_42)
-    * [Week 41](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_41)
-    * [Week 40](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_40)
+    * **Year 2021**
+      * [Week 5](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_5)
+      * [Week 4](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_4)
+    * **Year 2020**
+      * [Week 46 (POC)](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_46)
+      * Week 45 : [No tag] Semaine de démo
+      * [Week 44](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_44)
+      * [Week 43](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_43)
+      * [Week 42](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_42)
+      * [Week 41](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_41)
+      * [Week 40](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_40)
 * Statuts d'Intégration continue sur Master: 
     * [backend](./backend) : ![Back End projet actions](https://github.com/wak-nda/train-booking-al-20-21-team-c/workflows/Back%20End%20projet%20actions/badge.svg?branch=master)
   
@@ -32,7 +36,7 @@
     
   L'architecture logicielle à développer dans ce projet s'appuiera sur la pile suivante :
   <p align="center">
-      <img src="./deliverables/train-booking-components-diagram.jpg"/>
+      <img src="./deliverables/train-booking-components-diagram.png"/>
   </p>
   
   ## Fonctionnement de la CI

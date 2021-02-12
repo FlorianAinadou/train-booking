@@ -8,6 +8,11 @@ router.post('/trainList/removeSeat', async (ctx) => {
   f.success(ctx,  JSON.stringify(aTrain)) ;
 });
 
+router.post('/trainList/removeSeats', async (ctx) => {
+  const aTrain = await sdk.removeSeats(ctx.request.body.trainId,ctx.request.body.seats);
+  f.success(ctx,  JSON.stringify(aTrain)) ;
+});
+
 router.post('/trainList/relieveSeat', async (ctx) => {
   const aTrain = await sdk.relieveSeat(ctx.request.body.trainId);
   f.success(ctx,  JSON.stringify(aTrain)) ;

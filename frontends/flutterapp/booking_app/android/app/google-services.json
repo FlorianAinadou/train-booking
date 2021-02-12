@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "110686295619",
+    "project_id": "bookingtrain-a8f8c",
+    "storage_bucket": "bookingtrain-a8f8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110686295619:android:e88650ec3d86abb7c1a6f6",
+        "android_client_info": {
+          "package_name": "com.example.booking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110686295619-mg0tt4qndissou8976i9enm12eiu2qvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTpdZ55SU_of0rw_fXdy2IN6fOrpto6o8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110686295619-mg0tt4qndissou8976i9enm12eiu2qvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -43,6 +43,20 @@ async function removeSeat(trainId, seatClasse) {
     }
 }
 
+async function removeSeats(trainId,seats) {
+    const result = await TrainModel.findOne({ '_id': trainId });
+    // console.log(result.remainingSeats);
+    const actualRemainingSeats = result.remainingSeats;
+    // console.log(actualRemainingSeats)
+    const update  =  {
+        $set: {
+            remainingSeats:
+                actualRemainingSeats-seats
+        },
+    };
+    return await TrainModel.updateOne({ '_id': trainId }, update);
+}
+
 async function relieveSeat(trainId) {
     const result = await TrainModel.findOne({ '_id': trainId });
     if (determineClasse(seatClasse)){
@@ -77,5 +91,9 @@ module.exports = {
     getTrainsById,
     removeSeat,
     relieveSeat,
+<<<<<<< HEAD
     addATrain
+=======
+    removeSeats
+>>>>>>> ce206a076a1f12fccf8237c7a11cf403a82fd59c
 };
