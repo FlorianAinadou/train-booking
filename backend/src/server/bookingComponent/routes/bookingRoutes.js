@@ -3,6 +3,8 @@ const router = new Router();
 const f = require('../../utils/functions');
 const reservation = require('../sdk/reservation');
 const booking = require('../sdk/booking');
+const paymentsSdk = require('../../paymentComponent/sdk/paymentsdk');
+
 
 router.get('/booking/getBooking/:bookingId/:userMail', async (ctx) => {
     const bookings = await booking.getBookingByIdAndEmail(ctx.params.bookingId, ctx.params.userMail);
@@ -28,6 +30,11 @@ router.get('/booking/getPaidBookingByMail/:userMail', async (ctx) => {
             "trainId": entry.trainId,
             "isGroup": false
         });
+    });
+    const groupPayments = await paymentsSdk.getAllPaymentsGroupByEmail(ctx.params.userMail);
+    groupPayments.forEach(function (entry) {
+        // console.log(entry);
+        result.push(entry);
     });
     f.success(ctx, result);
 });

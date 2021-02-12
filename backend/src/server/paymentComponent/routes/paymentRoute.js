@@ -19,7 +19,7 @@ router.get('/pay/:idCard/:price', async (ctx) => {
     }
 });
 
-router.post('pay'), async (ctx) => {
+router.post('pay' , async (ctx) => {
     try {
         const isGroup = ctx.request.body.isGroup;
         let bankResponse;
@@ -32,7 +32,7 @@ router.post('pay'), async (ctx) => {
     } catch {
         f.failure(ctx, "failed");
     }
-}
+});
 
 
 router.post('/payment/payReservationMobile', async (ctx) => {

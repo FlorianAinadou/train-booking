@@ -65,33 +65,27 @@ async function payGroup(trainId, customerMail, price, placesNumber, groupId){
 }
 
 async function getAllPaymentsGroupByEmail(userMail){
+    const paymentsGroupsResponse = [];
+    const paymentsGroups = await PaymentGroupModel.find();
+    for (const paymentGroup of paymentsGroups) {
+        const group = await GroupModel.findOne({_id:paymentGroup.groupId});
+        const customer = await customerRegistration.getUserByEmail(paymentGroup.customerMail);
 
-    const paymentsGroupsResponse = []
-    const paymentsGroups = await PaymentGroupModel.find()
-    paymentsGroups.forEach(async paymentGroup => {
-        
-        const group = await getGroupsByGroupId(paymentGroup.groupId,userMail);
-        console.log(group)
-        // console.log(groupsNames);
-        if( group != null){
-            const paymentGroupResponse = {
+        if(group.users.includes(userMail)){
+            paymentsGroupsResponse.push({
                 'placesNumber' : paymentGroup.placesNumber,
                 '_id': paymentGroup._id,
                 'bookingId': paymentGroup.bookingId,
-                'customerMail': paymentGroup.customerMail,
+                'customerName': customer["firstName"].concat(" ", customer["lastName"].toString()),
                 'trainId': paymentGroup.trainId,
                 'price': paymentGroup.price,
                 'groupId': paymentGroup.groupId,
-                'groupName' : group.groupName
-    
-            }
-            console.log(paymentGroupResponse)
+                'groupName' : group.groupName,
+                "isGroup": true
+            });
         }
-        
-    //     paymentsGroupsResponse.push(paymentGroupResponse)
-    });
-    // return paymentsGroupsResponse;
-
+    }
+    return paymentsGroupsResponse;
 }
 
 async function getGroupsByGroupId(groupId, customerMail){
@@ -108,14 +102,3 @@ module.exports = {
     payGroup,
     getAllPaymentsGroupByEmail
 };
-
-
-// console.log(`the result ${paymentGroup.groupId}`)
-        // GroupModel.findOne({_id:paymentGroup.groupId}, (err,group) => {
-        //     if (err) {return 'Error not found group'}
-        //     // console.log(`the result ${group.groupName}`);
-        //     paymentGroup.groupName = group.groupName;
-        //     console.log(`the result ${paymentGroup.groupName}`)
-        //     // console.log(`the result ${paymentGroup}`)
-        // });
-        // console.log(`the result ${typeof paymentGroup.groupName}`)

@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Reservation} from "../../../models/reservation";
-import {ReservationService} from "../../../services/reservation/reservation.service";
-import {Ticket} from "../../../models/ticket";
-import {UserService} from "../../../services/user/user.service";
-import {CurrencyPipe, DatePipe, DecimalPipe} from "@angular/common";
-import {tick} from "@angular/core/testing";
+import {Reservation} from '../../../models/reservation';
+import {ReservationService} from '../../../services/reservation/reservation.service';
+import {Ticket} from '../../../models/ticket';
+import {UserService} from '../../../services/user/user.service';
+import {CurrencyPipe, DatePipe, DecimalPipe} from '@angular/common';
+import {tick} from '@angular/core/testing';
 
 @Component({
   selector: 'app-ticket-page',
@@ -30,38 +30,38 @@ export class ReservationsTicketPageComponent implements OnInit {
 
     this.reservationService.reservation$.subscribe(async (res) => {
       this.propositions = [];
-      for (let entry of res) {
+      for (const entry of res) {
         let routes = [];
         let price = 0;
-        // let isGroupReservation = entry["isGroup"];
+        const isGroupReservation = entry['isGroup'];
 
 
-        this.reservationService.getTrainById(entry["trainId"]).subscribe(re => {
-          routes = re[0]["routes"];
-          price = re[0]["price"];
+        this.reservationService.getTrainById(entry['trainId']).subscribe(re => {
+          routes = re[0].routes;
+          price = re[0].price;
           let r: Ticket;
 
-          // if (isGroupReservation){
-          //   r  = {
-          //     price: price.toString(),
-          //     seats: entry["placeNumber"],
-          //     id: entry["bookingId"],
-          //     routes: routes,
-          //     group: false,
-          //     name: entry["groupName"],
-          //     date: this._date.transform(re[0]["date"], 'dd.MM.yyyy HH:mm')
-          //   };
-          // }else{
-          r = {
-            price: price.toString(),
-            seats: entry["placeNumber"],
-            id: entry["bookingId"],
-            routes: routes,
-            group: false,
-            name: this.userService.getCurrentUserName(),
-            date: this._date.transform(re[0]["date"], 'dd.MM.yyyy HH:mm')
-          };
-          // }
+          if (isGroupReservation) {
+            r = {
+              price: entry.price.toString(),
+              id: entry['bookingId'],
+              routes,
+              group: true,
+              name: entry['customerName'],
+              groupName :  entry['groupName'],
+              date: this._date.transform(re[0].date, 'dd.MM.yyyy HH:mm')
+            };
+          } else {
+            r = {
+              price: price.toString(),
+              seats: entry['placeNumber'],
+              id: entry['bookingId'],
+              routes,
+              group: false,
+              name: this.userService.getCurrentUserName(),
+              date: this._date.transform(re[0].date, 'dd.MM.yyyy HH:mm')
+            };
+          }
 
 
           if (!(this.propositions.find(x =>
@@ -90,20 +90,20 @@ export class ReservationsTicketPageComponent implements OnInit {
 
     this.reservationService.getMyReservationPaidList().subscribe(async res => {
       // alert(res.length);
-      for (let entry of res) {
+      for (const entry of res) {
         let routes = [];
         let price = 0;
-        this.reservationService.getTrainById(entry["trainId"]).subscribe(re => {
-          routes = re[0]["routes"];
-          price = re[0]["price"];
-          let r: Ticket = {
+        this.reservationService.getTrainById(entry.trainId).subscribe(re => {
+          routes = re[0].routes;
+          price = re[0].price;
+          const r: Ticket = {
             price: price.toString(),
-            seats: entry["placeNumber"],
-            id: entry["bookingId"],
-            routes: routes,
+            seats: entry.placeNumber,
+            id: entry.bookingId,
+            routes,
             group: false,
             name: this.userService.getCurrentUserName(),
-            date: this._date.transform(re[0]["date"], 'dd.MM.yyyy HH:mm')
+            date: this._date.transform(re[0].date, 'dd.MM.yyyy HH:mm')
           };
           this.propositions.push(r);
         }, error => {
