@@ -1,5 +1,23 @@
 # ----------------- 2021 -----------------
 
+# Week 7 :
+
+### Achieved
+- Group payment functionality again in process
+- scaling tests also in process
+
+### For the following week
+- finalize scaling tests with a representation of the results by graphs
+- continue and finalize group payment functionality on the two frontends
+
+### Risks
+- same that last week
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 6 :
 
 ### Achieved
