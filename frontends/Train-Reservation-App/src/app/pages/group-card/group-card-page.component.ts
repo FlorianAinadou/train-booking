@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostBinding, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +8,9 @@ import {UserService} from "../../../services/user/user.service";
 import {Alert} from "../../../models/alert";
 import {ReservationService} from "../../../services/reservation/reservation.service";
 import {NgbTabsetConfig} from "@ng-bootstrap/ng-bootstrap";
-import {TeamsService} from "../../teams.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Reservation} from "../../../models/reservation";
+import {Groups} from "../../../models/groups";
 
 @Component({
   selector: 'app-group-card',
@@ -24,17 +25,11 @@ export class GroupCardPageComponent implements OnInit, AfterViewInit {
 
   emptyList = true;
   @ViewChild('prog') progress;
-  tab = ["a", "b", "c", "d", "e"];
-  tof: string[] = ["https://randomuser.me/api/portraits/women/9.jpg"];
-  // var nums:number[] = [1,2,3,3]
+  @Input()
+  group: Groups;
 
-  private value: number;
-
-  constructor(private teamsService: TeamsService, public reservationService: ReservationService, public router: Router, config: NgbTabsetConfig, private sanitizer: DomSanitizer) {
+  constructor( public reservationService: ReservationService, public router: Router, config: NgbTabsetConfig, private sanitizer: DomSanitizer) {
     document.body.style.backgroundColor = '#fff';
-    // customize default values of tabsets used by this component tree
-
-
   }
 
 
@@ -49,7 +44,42 @@ export class GroupCardPageComponent implements OnInit, AfterViewInit {
     // console.log('Clicking the button', evt); boolAdmin
     // if (this.changeIcon) {
     //   this.icon.nativeElement.classList.remove('fa-bars');
-    this.progress.nativeElement.classList.add('progess2');
+    switch (this.group.usersnames.length) {
+      case 1:
+        this.progress.nativeElement.classList.add('progess1');
+        break;
+      case 2:
+        this.progress.nativeElement.classList.add('progess2');
+        break;
+      case 3:
+        this.progress.nativeElement.classList.add('progess3');
+        break;
+      case 4:
+        this.progress.nativeElement.classList.add('progess4');
+        break;
+      case 5:
+        this.progress.nativeElement.classList.add('progess5');
+        break;
+      case 6:
+        this.progress.nativeElement.classList.add('progess6');
+        break;
+      case 7:
+        this.progress.nativeElement.classList.add('progess7');
+        break;
+      case 8:
+        this.progress.nativeElement.classList.add('progess8');
+        break;
+      case 9:
+        this.progress.nativeElement.classList.add('progess9');
+        break;
+      case 10:
+        this.progress.nativeElement.classList.add('progess10');
+        break;
+      default:
+        break;
+    }
+
+
     // console.table(this.tof);
     // this.tab.forEach(function (value) {
     //   // console.log(v);

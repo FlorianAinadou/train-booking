@@ -100,9 +100,7 @@
       </div>
       <div class="listA">
         <div class="num">
-          <app-group-card></app-group-card>
-          <app-group-card></app-group-card>
-          <app-group-card></app-group-card>
+          <app-group-card  *ngFor="let p of groupList" [group]="p"></app-group-card>
       </div>
     </div>
 

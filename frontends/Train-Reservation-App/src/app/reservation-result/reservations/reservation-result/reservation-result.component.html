@@ -36,8 +36,22 @@
     <!--</p>-->
     <!--<span style="font-size: 15px;">{{contrat.etudiant.nom}}</span>-->
   </div>
-  <div class="col-lg-4" (click)="select()"  style="font-size: 15px; text-align: center; ">
+  <div class="col-lg-4" style="font-size: 15px; text-align: center; " >
     💸{{reservation.price}} €<br> 💺 {{reservation.seats}} places restantes <br> 🗺 {{reservation.routes}}
+    <p class="policeHobo" *ngIf="groupList.length!==0">
+      <label for="group">
+        Group<br>
+        <input type="text" list="universityList" class="form-control" [(ngModel)]="groupS"
+        />
+        <datalist id="universityList">
+          <select>
+            <option *ngFor="let g of groupList" [value]="g.groupName">
+              {{g.groupName}}
+            </option>
+          </select>
+        </datalist>
+      </label>
+    </p>
   </div>
   <div class="col-lg-4"  style="font-size: 15px; text-align: center; margin-top: 20px">
 
@@ -46,6 +60,7 @@
 <!--    <i class="fas fa-times-circle fa-2x myButton zoom"  (click)="successOrFailure(0)" *ngIf="contrat.validation===2" style="padding-left: 10px; color: #f23d32;" [ngbTooltip]="tipContentR" placement="left"></i>-->
 
     <!--### Valider / Echec-->
+
     <i class="fas fa-plus-circle fa-2x  myButton zoom"   style="color: black" (click)="select()"></i>
 <!--    <i class="fas fa-file-signature fa-2x  myButton"  *ngIf="contrat.validation===0" style="color: darkred" [ngbTooltip]="tipContentFailed" placement="left"></i>-->
 <!--    <i class="fas fa-2x fa-eye myButton zoom"   *ngIf="contrat.validation===0" style="padding-left: 10px" [ngbTooltip]="tipContentRE  " placement="left"></i>-->
