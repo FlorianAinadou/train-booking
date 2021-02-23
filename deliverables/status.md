@@ -1,5 +1,22 @@
 # ----------------- 2021 -----------------
 
+# Week 8 :
+
+### Achieved
+- Group payment functionality finished
+- scaling tests and graph reports in process
+
+### For the following week
+- finalize results of scaling tests with graphs
+
+### Risks
+- None
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 7 :
 
 ### Achieved
