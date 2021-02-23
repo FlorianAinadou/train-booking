@@ -282,8 +282,8 @@ class _TrainCardState extends State<TrainCard> {
                 color: Colors.white,
               ),
               onClick: () async {
-                // final action = await Dialogs.yesAbortDialog(context, "Réservation de votre voyage", "Voulez-vous effectuer la réservation de ce voyage?");
-                final action = await Dialogs.reservationDialog(context, parentState);
+                final action = await Dialogs.yesAbortDialog(context, "Réservation de votre voyage", "Voulez-vous effectuer la réservation de ce voyage?");
+                // final action = await Dialogs.reservationDialog(context, parentState);
                 if (action == DialogAction.yes) {
                   await _bookATrip();
                   parentState.setState(() {});
