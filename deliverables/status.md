@@ -1,5 +1,21 @@
 # ----------------- 2021 -----------------
 
+# Week 9 :
+
+### Achieved
+- we progressed on the graphs representing the results of scaling tests
+
+### For the following week
+- still finalize graphs of scaling tests
+
+### Risks
+- None
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 8 :
 
 ### Achieved
