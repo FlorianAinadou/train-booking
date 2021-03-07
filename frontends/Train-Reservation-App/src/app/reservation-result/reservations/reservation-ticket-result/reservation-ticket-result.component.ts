@@ -16,8 +16,6 @@ export class ReservationTicketResultComponent implements OnInit,AfterViewInit {
   reservation: Ticket;
   //
   // output
-  @Output() OnSelect = new EventEmitter<Reservation>();
-  private obj: any;
 
   img = ["4-49353_fast-train-png-clipart-transparent-trains-png.png", "146-1467979_subway-clipart-maglev-train-maglev-train-transparent-background.png", "images.png", "327-3276254_high-speed-rail-png-download-high-speed-rail.png"];
   i = 0;
@@ -36,11 +34,4 @@ export class ReservationTicketResultComponent implements OnInit,AfterViewInit {
   ngAfterViewInit(): void {
 
   }
-
-  select() {
-    console.log("event");
-    this.OnSelect.emit(this.reservation);
-  }
-
-
 }

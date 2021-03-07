@@ -8,13 +8,15 @@ async function sendAnInvitation(userMail, groupName){
     /** */
 }
 
-async function createAGroup(groupName, username, userMail){
+async function createAGroup(agroupName, username, userMail){
     /** */
-    const alreadyexist = await GroupModel.find({'groupName': groupName});
-    console.log(`the rsult is ${alreadyexist}`)
-    if (alreadyexist === null){
+    const alreadyexist = await GroupModel.findOne({'groupName': agroupName});
+    // const name = alreadyexist.groupName
+    // console.log(`the result is ${alreadyexist}`)
+    // console.log(`the result is ${name}`)
+    if (alreadyexist === null || alreadyexist === undefined){
         await GroupModel.create({
-            "groupName": groupName,
+            "groupName": agroupName,
             "owner": userMail,
             "users": [userMail],
             "usersnames": [username],
