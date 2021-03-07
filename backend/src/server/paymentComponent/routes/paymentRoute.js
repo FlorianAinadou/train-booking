@@ -38,7 +38,7 @@ router.post('pay', async (ctx) => {
 router.post('/payment/payReservationMobile', async (ctx) => {
     const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId, ctx.request.body.userMail, ctx.request.body.price);
     const users = await customerFinderSdk.getUserByEmail(ctx.request.body.userMail);
-    if (bookings && users !== null && users !== undefined) {
+    if (bookings && users !== null && users !== undefined && users.fireBaseIdMobile.length!==0) {
         const sub = {
             endpoint: users.endpoint,
             expirationTime: null,
