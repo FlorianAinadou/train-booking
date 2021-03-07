@@ -1,5 +1,25 @@
 # ----------------- 2021 -----------------
 
+# Week 6 :
+
+### Achieved
+- Group payment functionality in process
+- scaling tests in process
+
+### For the following week
+- continue and finalize scaling tests on our ssh server with Apache Benchmark
+- continue and finalize group payment functionality on the two frontends
+
+### Risks
+- With the results obtained on the first scaling tests, we now know that our monolithic architecture supports the load 
+  and does not need to go into micro-services to achieve the planned functions. 
+  We just need to translate these results into a graph so that they are easily understandable.
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 5 :
 
 ### Achieved

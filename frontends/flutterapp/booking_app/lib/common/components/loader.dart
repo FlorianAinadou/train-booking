@@ -5,9 +5,9 @@ enum DotType {
   square, circle, diamond, icon
 }
 
-final Color dotOneColor = Colors.black;
-final Color dotTwoColor = Colors.black;
-final Color dotThreeColor = Colors.black;
+final Color dotOneColor = Colors.white;
+final Color dotTwoColor = Colors.white;
+final Color dotThreeColor = Colors.white;
 final Duration duration = const Duration(milliseconds: 1000);
 final DotType dotType = DotType.circle;
 final Icon dotIcon = const Icon(Icons.blur_on);
@@ -119,7 +119,7 @@ class _LoaderState extends State<Loader>
             "Chargement",
             style: TextStyle(
               fontFamily: 'Pacifico',
-              color: Colors.black,
+              color: Colors.white,
               fontSize: 24,
             ),
           ),
