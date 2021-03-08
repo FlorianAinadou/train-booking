@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Reservation} from "../../../../models/reservation";
+import {Groups} from "../../../../models/groups";
+import {GroupsService} from "../../../../services/groups/groups.service";
 // import {Contrat} from '../../../../models/contrat';
 // import {ContratService} from '../../../../services/contrat/contrat.service.';
 
@@ -9,31 +11,50 @@ import {Reservation} from "../../../../models/reservation";
   styleUrls: ['./reservation-result.component.scss']
 })
 
-export class ReservationResultComponent implements OnInit,AfterViewInit {
+export class ReservationResultComponent implements OnInit, AfterViewInit {
 
   @Input()
   reservation: Reservation;
   //
   // output
   @Output() OnSelect = new EventEmitter<Reservation>();
+  @Output() OnSelectReservationGroup = new EventEmitter<{ reservationId: string, groupId: string , nb: number}>();
   private obj: any;
+
+  groupList: Groups[] = [];
+  groupS: string;
 
   // output
   // @Output() OnSelect = new EventEmitter<Contrat>();
 
 
-  constructor() {
+  constructor(public groupService: GroupsService) {
     // document.body.style.backgroundColor = '#fff';
     // this.contratService.getContrat();
-    // for (let index = 0; index < 40; index++) {
-    //   this.numbers.push(index);
-    // }
-    // console.table(this.reservation);
-    // this.reservation = {
-    //   price: "19",
-    //   seats: "4",
-    //   id: "45555"
-    // };
+    this.groupS = '';
+    this.groupService.getMyGroups().subscribe(res => {
+      let compt = 1;
+      for (const entry of res) {
+        const r: Groups = {
+          groupName: entry.groupName,
+          id: entry._id,
+          usersnames: entry.usersnames,
+          travelsNumber: entry.travelsNumber,
+          pictures: [],
+          title: "Group " + compt.toString()
+        };
+        // tslint:disable-next-line:only-arrow-functions
+        r.usersnames.forEach(function (value) {
+          const a = Math.floor((Math.random() * 100) + 1);
+          //   alert(a);
+          r.pictures.push('https://randomuser.me/api/portraits/men/' + a.toString() + '.jpg');
+        });
+        this.groupList.push(r);
+        compt = compt + 1;
+      }
+    }, error => {
+
+    });
 
   }
 
@@ -73,8 +94,19 @@ export class ReservationResultComponent implements OnInit,AfterViewInit {
 
   // ### Selection d'un contrat
   select() {
-    console.log("event");
-    this.OnSelect.emit(this.reservation);
+    if (this.groupS.length !== 0 && this.groupList.find(({groupName}) => groupName === this.groupS)) {
+      if (+this.reservation.seats < this.groupList.find(({groupName}) => groupName === this.groupS).usersnames.length){
+        alert("Nombre de places insuffisantes 😣");
+      }else {
+        this.OnSelectReservationGroup.emit({reservationId: this.reservation.id,
+          groupId: this.groupList.find(({groupName}) => groupName === this.groupS).id,
+          nb: this.groupList.find(({groupName}) => groupName === this.groupS).usersnames.length });
+        this.groupS = '';
+      }
+    }else{
+      this.OnSelect.emit(this.reservation);
+    }
+    // console.log("event");
   }
 
   // ### Validation / Echec d'un contrat

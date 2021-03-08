@@ -1,8 +1,10 @@
 export interface Ticket {
   price: string;
-  seats: string;
+  seats?: string;
   id: string;
-  routes : string[];
+  routes: string[];
   name: string;
-  date: string
+  date: string;
+  group: boolean;
+  groupName?: string;
 }

@@ -176,7 +176,10 @@ class _HomePageState extends State<HomePage> {
                                 }
                                 _formKey.currentState.save();
                                 setState(() {
-                                  trains = TrainPage(departureCity: departureCity, arrivalCity: arrivalCity,);
+                                  trains = TrainPage(
+                                    departureCity: departureCity,
+                                    arrivalCity: arrivalCity,
+                                  );
                                 });
                               },
                               text: 'Rechercher',

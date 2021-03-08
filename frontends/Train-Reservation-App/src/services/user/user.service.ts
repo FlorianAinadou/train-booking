@@ -11,7 +11,7 @@ import {catchError, retry} from "rxjs/operators";
 })
 export class UserService {
 
-  private userUrl = ' http://paulkoffi.com:9000/api/user/';
+  private userUrl = 'http://paulkoffi.com:9000/api/user/';
   // private user = null;
   private user: User = {};
   public user$: AsyncSubject<User> = new AsyncSubject();

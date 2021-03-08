@@ -11,23 +11,25 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
+import 'bookings_page.dart';
+
 class BookingsCard extends StatefulWidget {
   final Train train;
   final String bookingId;
-  final BuildContext parent;
+  final State<BookingsPage> parentState;
 
-  const BookingsCard({Key key, this.train, this.bookingId, this.parent}) : super(key: key);
+  const BookingsCard({Key key, this.train, this.bookingId, this.parentState}) : super(key: key);
 
   @override
-  _BookingsCardState createState() => _BookingsCardState(this.parent, this.train, this.bookingId);
+  _BookingsCardState createState() => _BookingsCardState(this.parentState, this.train, this.bookingId);
 }
 
 class _BookingsCardState extends State<BookingsCard> {
-  final BuildContext parent;
+  final State<BookingsPage> parentState;
   final Train train;
   final String bookingId;
 
-  _BookingsCardState(this.parent, this.train, this.bookingId);
+  _BookingsCardState(this.parentState, this.train, this.bookingId);
 
 
   Future<String> _payReservation() async {
@@ -271,6 +273,7 @@ class _BookingsCardState extends State<BookingsCard> {
                   final action = await Dialogs.yesAbortDialog(context, "Annulation de votre réservation", "Voulez-vous effectuer l'annulation de votre réservation?");
                   if (action == DialogAction.yes) {
                     await _cancelReservation();
+                    parentState.setState(() {});
                     SnackBar snackbar = new SnackBar(
                         content: Text("Réservation annulée avec succès."));
                     Scaffold.of(context).showSnackBar(snackbar);
@@ -292,6 +295,7 @@ class _BookingsCardState extends State<BookingsCard> {
                   final action = await Dialogs.yesAbortDialog(context, "Paiement de votre voyage", "Voulez-vous effectuer le paiement de votre voyage?");
                   if (action == DialogAction.yes) {
                     await _payReservation();
+                    parentState.setState(() {});
                     SnackBar snackbar = new SnackBar(
                         content: Text("Paiement effectué avec succès."));
                     Scaffold.of(context).showSnackBar(snackbar);

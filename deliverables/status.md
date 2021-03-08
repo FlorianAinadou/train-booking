@@ -1,5 +1,95 @@
 # ----------------- 2021 -----------------
 
+# Week 9 :
+
+### Achieved
+- we progressed on the graphs representing the results of scaling tests
+
+### For the following week
+- still finalize graphs of scaling tests
+
+### Risks
+- None
+
+### Flag
+```diff
++ (Green)
+```
+
+# Week 8 :
+
+### Achieved
+- Group payment functionality finished
+- scaling tests and graph reports in process
+
+### For the following week
+- finalize results of scaling tests with graphs
+
+### Risks
+- None
+
+### Flag
+```diff
++ (Green)
+```
+
+# Week 7 :
+
+### Achieved
+- Group payment functionality again in process
+- scaling tests also in process
+
+### For the following week
+- finalize scaling tests with a representation of the results by graphs
+- continue and finalize group payment functionality on the two frontends
+
+### Risks
+- same that last week
+
+### Flag
+```diff
++ (Green)
+```
+
+# Week 6 :
+
+### Achieved
+- Group payment functionality in process
+- scaling tests in process
+
+### For the following week
+- continue and finalize scaling tests on our ssh server with Apache Benchmark
+- continue and finalize group payment functionality on the two frontends
+
+### Risks
+- With the results obtained on the first scaling tests, we now know that our monolithic architecture supports the load 
+  and does not need to go into micro-services to achieve the planned functions. 
+  We just need to translate these results into a graph so that they are easily understandable.
+
+### Flag
+```diff
++ (Green)
+```
+
+# Week 5 :
+
+### Achieved
+- system architecture diagram updated and available [here](./train-booking-components-diagram.png)
+- Notification functionality implemented for both web and mobile
+- scaling tests in process
+
+### For the following week
+- continuing scaling tests on our ssh server with tools like Apache Benchmark
+- implement group payment functionality
+
+### Risks
+- Modifying our architecture without taking into account scaling tests
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 4 :
 
 ### Achieved

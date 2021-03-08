@@ -48,7 +48,7 @@ class _TrainPageState extends State<TrainPage> {
     for (dynamic d in trains) {
       items.add(Column(
         children: <Widget>[
-          TrainCard(train: d, parent: context,),
+          TrainCard(train: d, parentState: this,),
         ],
       ));
     }
@@ -70,7 +70,7 @@ class _TrainPageState extends State<TrainPage> {
               "\n\n\nVoyagez en toute sécurité avec Booking train.\nTrouvez votre itinéraire dans la barre de recherche.",
               style: TextStyle(
                 fontFamily: 'Pacifico',
-                color: Colors.black,
+                color: Colors.black54,
                 fontSize: 24,
               ),
               textAlign: TextAlign.center,

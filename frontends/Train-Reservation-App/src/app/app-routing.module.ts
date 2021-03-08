@@ -8,6 +8,7 @@ import {HomeBodyComponent} from "./home/home-body";
 import {ReservationsPageComponent} from "./pages/reservations-page";
 import {ReservationsDisplayPageComponent} from "./pages/reservations-display-page";
 import {ReservationsTicketPageComponent} from "./pages/reservations-ticket-page";
+import {GroupDisplayPageComponent} from "./pages/group-display-page";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'reservations', component: ReservationsPageComponent},
       {path: 'displayReservations', component: ReservationsDisplayPageComponent},
       {path: 'tickets', component: ReservationsTicketPageComponent},
+      {path: 'groups', component: GroupDisplayPageComponent},
       {path: '**', redirectTo: '/404'},
       {path: '404', component: NotFoundPageComponent},
     ]
