@@ -6,8 +6,8 @@ const customerFinderSdk = require('../sdk/customerFinder');
 var jwt = require('jsonwebtoken');
 var crypto = require('crypto');
 const KEY = "m yincredibl y(!!1!11!)<'SECRET>)Key'!";
-const PUBLIC_VAPID = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
-const PRIVATE_VAPID = '_kRzHiscHBIGftfA7IehH9EA3RvBl8SBYhXBAMz6GrI';
+const PUBLIC_VAPID = 'BBIl6lGgE5hzKW13pnO0sqrVChYUL0H3EfbfytkZ7O0FdZ9vBnOMhfPTZzTImag9s7rcNM4RSXfBZLjGCVoVIe0';
+const PRIVATE_VAPID = 'fcUJ3CI8iEXM7qCTUCRDW6KzTGJ_huJvEJ4kttBoktE';
 const webpush = require('web-push');
 webpush.setVapidDetails('mailto:you@domain.com', PUBLIC_VAPID, PRIVATE_VAPID);
 

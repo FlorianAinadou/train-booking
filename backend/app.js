@@ -9,6 +9,9 @@ const customerRegistration  = require('./src/server/customerRegistration/routes/
 const bookingComponent = require('./src/server/bookingComponent/routes/bookingRoutes');
 const config = require("./config");
 const mongoose = require('mongoose');
+// const webpush = require('web-push');
+// let v = webpush.generateVAPIDKeys();
+// console.log(v);
 
 const paymentComponent = require('./src/server/paymentComponent/routes/paymentRoute');
 
