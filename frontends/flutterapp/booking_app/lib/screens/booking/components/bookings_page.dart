@@ -41,8 +41,11 @@ class _BookingsPageState extends State<BookingsPage> {
           bookingId: t["bookingId"],
           trainId: t["trainId"],
           userMail: t["userMail"],
-          paid: t["routes"],
-          placeNumber: t["placeNumber"]);
+          paid: t["paid"],
+          placeNumber: t["placeNumber"],
+          isGroup: t["isGroup"],
+          price: t["price"],
+          groupName: t["groupName"]);
       bookingPaids.add(bookingPaid);
     }
     print(bookingPaids);
@@ -61,9 +64,10 @@ class _BookingsPageState extends State<BookingsPage> {
               trainId: t["trainId"],
               date: t["date"],
               routes: t["routes"],
-              full: t["full"],
-              price: t["price"],
-              remainingSeats: t["remainingSeats"]);
+              price: d.isGroup ? d.price : t["price"],
+              isGroup: d.isGroup,
+              remainingSeats: t["remainingSeats"],
+              groupName: d.groupName);
           //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
           items.add(Column(
             children: <Widget>[
@@ -82,7 +86,7 @@ class _BookingsPageState extends State<BookingsPage> {
     return items;
   }
 
-  Future<List<Widget>> _getGroupBookingTrains() async {
+  /*Future<List<Widget>> _getGroupBookingTrains() async {
     dynamic items = <Widget>[];
     // get from backend
     String url = host + bookingRoute + defaultUser;
@@ -135,7 +139,7 @@ class _BookingsPageState extends State<BookingsPage> {
       }
     }
     return items;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +190,7 @@ class _BookingsPageState extends State<BookingsPage> {
           },
         );
         break;
-      case 2:
+      /*case 2:
         return FutureBuilder(
           future: _getGroupBookingTrains(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -231,7 +235,7 @@ class _BookingsPageState extends State<BookingsPage> {
             );
           },
         );
-        break;
+        break;*/
       default:
         print('unexpected number error');
         break;

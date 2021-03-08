@@ -224,7 +224,7 @@ class _TrainCardState extends State<TrainCard> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: 'Correspondances\n',
+                        text: 'Correspondance\n',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -244,7 +244,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: '?\n',
+                            text: (this.train.routes.length > 2) ? 'Oui\n' : 'Non\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,

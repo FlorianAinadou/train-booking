@@ -67,7 +67,7 @@ class _BookingsCardState extends State<BookingsCard> {
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Color(0xFFB3E5FC),
+        color: this.train.isGroup ? Color(0xFFF0F4C3) : Color(0xFFB3E5FC),
         borderRadius: BorderRadius.circular(60),
       ),
       child: Column(
@@ -212,7 +212,7 @@ class _BookingsCardState extends State<BookingsCard> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: 'Correspondances\n',
+                        text: 'Correspondance\n',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -232,7 +232,7 @@ class _BookingsCardState extends State<BookingsCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: '?\n',
+                            text: (this.train.routes.length > 2) ? 'Oui\n' : 'Non\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
@@ -247,6 +247,31 @@ class _BookingsCardState extends State<BookingsCard> {
                 ),
               ),
             ],
+          ),
+          Visibility(
+            visible: train.isGroup,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 8.0, top: 8.0),
+              child: Divider(
+                color: Colors.grey,
+                height: 3,
+                thickness: 1,
+              ),
+            ),
+          ),
+          Visibility(
+            visible: train.isGroup,
+            child: RichText(
+              text: TextSpan(
+                text: this.train.groupName,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  //height: 1.5,
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

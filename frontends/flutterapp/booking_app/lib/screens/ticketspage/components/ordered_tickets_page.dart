@@ -32,18 +32,21 @@ class _OrderedTicketsPageState extends State<OrderedTicketsPage> {
     dynamic items = <Widget>[];
     // get from backend
     String url = host + paidBookingRoute + defaultUser;
-    //print(url);
+    print(url);
     var data = await http.get(url);
     var jsonData = json.decode(utf8.decode(data.bodyBytes));
     List<Booking> bookingPaids = [];
-    //print(data.body);
+    print(data.body);
     for (var t in jsonData) {
       Booking bookingPaid = Booking(
           bookingId: t["bookingId"],
           trainId: t["trainId"],
           userMail: t["userMail"],
-          paid: t["routes"],
-          placeNumber: t["placeNumber"]);
+          paid: t["paid"],
+          placeNumber: t["placeNumber"],
+          isGroup: t["isGroup"],
+          price: t["price"],
+          groupName: t["groupName"]);
       bookingPaids.add(bookingPaid);
     }
     //print(bookingPaids);
@@ -52,6 +55,8 @@ class _OrderedTicketsPageState extends State<OrderedTicketsPage> {
       url = host + trainSelectorRoute + d.trainId.toString();
       data = await http.get(url);
       jsonData = json.decode(utf8.decode(data.bodyBytes));
+      print("cic");
+      print(jsonData);
       List<Train> trains = [];
       for (var t in jsonData) {
         //print(t["trainId"]);
@@ -61,8 +66,10 @@ class _OrderedTicketsPageState extends State<OrderedTicketsPage> {
             date: t["date"],
             routes: t["routes"],
             full: t["full"],
-            price: t["price"],
-            remainingSeats: t["remainingSeats"]);
+            price: d.isGroup ? d.price : t["price"],
+            isGroup: d.isGroup,
+            remainingSeats: t["remainingSeats"],
+            groupName: d.groupName);
         //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
         switch (this.period) {
           case 1:
