@@ -6,8 +6,8 @@ const customerFinderSdk = require('../sdk/customerFinder');
 var jwt = require('jsonwebtoken');
 var crypto = require('crypto');
 const KEY = "m yincredibl y(!!1!11!)<'SECRET>)Key'!";
-const PUBLIC_VAPID = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
-const PRIVATE_VAPID = '_kRzHiscHBIGftfA7IehH9EA3RvBl8SBYhXBAMz6GrI';
+const PUBLIC_VAPID = 'BBIl6lGgE5hzKW13pnO0sqrVChYUL0H3EfbfytkZ7O0FdZ9vBnOMhfPTZzTImag9s7rcNM4RSXfBZLjGCVoVIe0';
+const PRIVATE_VAPID = 'fcUJ3CI8iEXM7qCTUCRDW6KzTGJ_huJvEJ4kttBoktE';
 const webpush = require('web-push');
 webpush.setVapidDetails('mailto:you@domain.com', PUBLIC_VAPID, PRIVATE_VAPID);
 
@@ -156,11 +156,18 @@ router.post('/api/data', async (ctx) => {
 
 router.post('/api/sendTest', async (ctx) => {
     const sub = {
-        endpoint: 'https://fcm.googleapis.com/fcm/send/ej-NkX2UvlI:APA91bEaBLhiseNS9UJPkWR4QILzwslAXthdcYTZFDfIiZiiifPTYjTz663nIVzjjviT1JE-vTAIFDqC-Z1b8PxZ-5g0iixiCFkN0uMFs0O_gfH44nLm6g2hlhUeTqswTb-48TmkDeoq',
+        endpoint: 'https://fcm.googleapis.com/fcm/send/cDCG8lU6z74:APA91bF1DiJLwXqwIjOsHMayfqLt9SGQnbVLqz1UE6SWaF517hZXiVEl8HRX5CidXRBJpkX_FjILJir5RWo_T0zWqwY3FKheDypEFeIumf2I3o9t1buG9slRAqrBpwUkyXXOx75uEOmo',
         expirationTime: null,
         keys: {
-            p256dh: 'BLUkvtfBoI_aMt32MwOHKe4-2zDVX92sLi8Rc05odiN11W2Lhk9_7uMTLLQDt4QOYb9VNUIw8EncdiLcGlGxnZk',
-            auth: '71NVEaCc_Dw_w5Ig4lsUjg'
+            p256dh: 'BEX7dYU04xNVIEgnqX74g3dIIkokXfVys3fZACm8x7xRAoR2clGNCgKvjY5lN-o__wcnIDwdWR8tngHXcPOobDE',
+            auth: '0cBtSkY73-CG4cIXQ4oaog'
+        }
+    };
+    const options = {
+        vapidDetails: {
+            subject: 'mailto:email@gmail.com',
+            publicKey: PUBLIC_VAPID,
+            privateKey: PRIVATE_VAPID
         }
     };
     const notificationPayload = {
@@ -170,7 +177,11 @@ router.post('/api/sendTest', async (ctx) => {
             icon: 'assets/icons/icon-512x512.png'
         }
     };
-    webpush.sendNotification(sub, JSON.stringify(notificationPayload));
+    try{
+        webpush.sendNotification(sub, JSON.stringify(notificationPayload), options);
+    }catch(e){
+        console.log(e);
+    }
     f.success(ctx, "OK");
 });
 

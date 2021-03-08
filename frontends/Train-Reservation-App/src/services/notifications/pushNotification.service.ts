@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {catchError, retry} from "rxjs/operators";
 import {throwError} from "rxjs";
 
-const SERVER_URL = 'http://localhost:3000/subscription';
+const SERVER_URL = 'http://paulkoffi.com:3000/subscription';
 
 @Injectable()
 export class PushNotificationService {
@@ -18,6 +18,8 @@ export class PushNotificationService {
   }
 
   public sendSubscriptionToTheServer2(subscription: PushSubscription) {
+    // console.log("ici2222222");
+    console.table(subscription);
     const r = {
       sub: subscription,
       mail: localStorage.getItem('currentUserEmail')

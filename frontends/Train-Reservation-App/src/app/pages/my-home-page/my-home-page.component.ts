@@ -10,7 +10,7 @@ import {SwPush} from '@angular/service-worker';
 import {PushNotificationService} from "../../../services/notifications/pushNotification.service";
 import {ReservationService} from "../../../services/reservation/reservation.service";
 
-const VAPID_PUBLIC = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
+const VAPID_PUBLIC = 'BBIl6lGgE5hzKW13pnO0sqrVChYUL0H3EfbfytkZ7O0FdZ9vBnOMhfPTZzTImag9s7rcNM4RSXfBZLjGCVoVIe0';
 
 
 @Component({
