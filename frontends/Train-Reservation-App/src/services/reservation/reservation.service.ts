@@ -12,6 +12,10 @@ import {Ticket} from "../../models/ticket";
 })
 export class ReservationService {
 
+  // private userUrl = 'http://localhost:9000/trainSelector/';
+  // private reservationUrl = 'http://localhost:9000/booking/';
+  // private paymentUrl = 'http://localhost:9000/payment/';
+
   private userUrl = ' http://paulkoffi.com:9000/trainSelector/';
   private reservationUrl = ' http://paulkoffi.com:9000/booking/';
   private paymentUrl = ' http://paulkoffi.com:9000/payment/';
@@ -72,6 +76,7 @@ export class ReservationService {
       );
   }
 
+
   public getMyReservationPaidList2() {
     this.http.get<Ticket[]>(this.reservationUrl + 'getPaidBookingByMail/' + this.getCurrentUserMail()).subscribe(s => {
       // alert(s);
@@ -112,7 +117,7 @@ export class ReservationService {
       'groupId' : groupId
     };
     console.table(myReservation);
-    return this.http.post<any>(this.paymentUrl + 'payReservationGroupWeb', myReservation)
+    return this.http.post<any>(this.paymentUrl + 'paygroup', myReservation)
       .pipe(
         retry(1),
         catchError(this.errorHandl)

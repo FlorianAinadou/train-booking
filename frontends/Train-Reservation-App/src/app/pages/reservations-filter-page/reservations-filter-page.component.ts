@@ -28,6 +28,8 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
   public searchForm: FormGroup;
   formSubmitted = false;
   alert: Alert[] = [];
+  alertSuccess: Alert[] = [];
+
   propositions: Reservation[] = [];
   groupList: Groups[] = [];
   display = false;
@@ -49,9 +51,8 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
           pictures: [],
           title: "Group " + compt.toString()
         };
-        // tslint:disable-next-line:only-arrow-functions
         r.usersnames.forEach(function (value) {
-          const a = Math.floor((Math.random() * 100) + 1);
+          const a = Math.floor((Math.random() * 95) + 1);
           //   alert(a);
           r.pictures.push('https://randomuser.me/api/portraits/men/' + a.toString() + '.jpg');
         });
@@ -62,6 +63,7 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
 
     });
     this.alert.push({'type': 'danger', 'message': null});
+    this.alertSuccess.push({'type': 'success', 'message': null});
   }
 
 
@@ -159,23 +161,22 @@ export class ReservationsFilterPageComponent implements OnInit, AfterViewInit {
     let reservationId = data.reservationId;
     let price = +this.propositions.find(({id}) => id === reservationId).price * this.groupList.find(({id}) => id === groupId).usersnames.length;
     let placesNumber = [];
-
+    let inc = 0;
     this.groupList.find(({id}) => id === groupId).usersnames.forEach(function (value) {
-      placesNumber.push(Date.now().toString());
+      placesNumber.push(Date.now().toString()+inc.toString());
+      inc++;
     });
 
     this.reservationService.purchaseGroupReservation(reservationId, price, placesNumber, groupId).subscribe(res => {
-      console.log("RES " + res);
       if(res){
         // update seats available number
-        this.propositions.find(({id}) => id === reservationId).seats = (+this.propositions.find(({id}) => id === reservationId).seats - nb()).toString();
+        this.propositions.find(({id}) => id === reservationId).seats = (+this.propositions.find(({id}) => id === reservationId).seats - nb).toString();
         if ((+this.propositions.find(({id}) => id === reservationId).seats === 0)) {
           this.propositions = this.propositions.filter(({id}) => id !== reservationId);
         }
-        this.alert[0].type = "success";
-        this.alert[0].message = "Payement effectué avec succès !!";
+        this.alertSuccess[0].message = "Payement effectué avec succès !!";
         setTimeout(() => {
-          this.alert[0].message = null;
+          this.alertSuccess[0].message = null;
         }, 2000);
       }else{
         this.alert[0].message = "Votre payement a été refusé !!";

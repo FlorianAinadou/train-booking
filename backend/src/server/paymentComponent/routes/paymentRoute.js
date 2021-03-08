@@ -19,26 +19,26 @@ router.get('/pay/:idCard/:price', async (ctx) => {
     }
 });
 
-router.post('pay'), async (ctx) => {
-    try{
+router.post('pay', async (ctx) => {
+    try {
         const isGroup = ctx.request.body.isGroup;
-        const bankResponse;
-        if(isGroup){
-            bankResponse = await sdk.groupPay(ctx.request.body.groupId, ctx.request.body.price, ctx.request.body.userMail);
-        }else{
+        let bankResponse;
+        if (isGroup) {
+            bankResponse = await sdk.payGroup(ctx.request.body.groupId, ctx.request.body.price, ctx.request.body.userMail);
+        } else {
             bankResponse = await sdk.pay(ctx.request.body.idCard, ctx)
         }
 
-    }catch {
-        f.failure(ctx,"failed");
+    } catch {
+        f.failure(ctx, "failed");
     }
-}
+});
 
 
 router.post('/payment/payReservationMobile', async (ctx) => {
     const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId, ctx.request.body.userMail, ctx.request.body.price);
     const users = await customerFinderSdk.getUserByEmail(ctx.request.body.userMail);
-    if (bookings && users !== null && users !== undefined) {
+    if (bookings && users !== null && users !== undefined && users.fireBaseIdMobile.length!==0) {
         const sub = {
             endpoint: users.endpoint,
             expirationTime: null,
@@ -69,38 +69,77 @@ router.post('/payment/payReservationWeb', async (ctx) => {
             priority: "high",
             timeToLive: 60 * 60 * 24
         };
-        if(users.fireBaseIdMobile !== null){
-          const message_notification = {
-            notification: {
-              title: "Nouvelle Reservation !!!",
-              body: "😎 GO GO GO !!!!!",
-              icon: "https://subtlepatterns.com/patterns/geometry2.png",
-              click_action: 'FLUTTER_NOTIFICATION_CLICK'
-            }
-            // },
-            // data: {
-            //     groupId: result.groupId,
-            //     act: act,
-            //     time: result.delay + " min"
-            // }
-          };
-          await fireBaseConfig.admin.messaging().sendToDevice(users.fireBaseIdMobile, message_notification, notification_options)
-              .then(response => {
-                  console.log("NOTIF SEND OK");
-              })
-              .catch(error => {
-                console.log(error);
-              });
+        if (users.fireBaseIdMobile !== null) {
+            const message_notification = {
+                notification: {
+                    title: "Nouvelle Reservation !!!",
+                    body: "😎 GO GO GO !!!!!",
+                    icon: "https://subtlepatterns.com/patterns/geometry2.png",
+                    click_action: 'FLUTTER_NOTIFICATION_CLICK',
+
+                }
+                // },
+                // data: {
+                //     groupId: result.groupId,
+                //     act: act,
+                //     time: result.delay + " min"
+                // }
+            };
+            await fireBaseConfig.admin.messaging().sendToDevice(users.fireBaseIdMobile, message_notification, notification_options)
+                .then(response => {
+                    console.log("NOTIF SEND OK");
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     }
     f.success(ctx, JSON.stringify(bookings));
 });
 
-router.post('payment/paygroup', (ctx) => {
+router.post('/payment/paygroup', async (ctx) => {
     try {
         const paymentGroup = await sdk.payGroup(ctx.request.body.trainId, ctx.request.body.customer, ctx.request.body.price,
-                                                ctx.request.body.placesNumber, ctx.request.body.groupId);
-        f.success(ctx, paymentGroup.toString())
+            ctx.request.body.placesNumber, ctx.request.body.groupId);
+        const group = await sdk.getGroupById(ctx.request.body.groupId);
+        const mails = group.users;
+        const customer = await customerFinderSdk.getUserByEmail(ctx.request.body.customer);
+        const name = customer["firstName"].concat(" ", customer["lastName"].toString());
+        for (const mail of mails) {
+            const users = await customerFinderSdk.getUserByEmail(mail);
+            const fireBaseConfig = require('../../../../firebase-config');
+            const notification_options = {
+                priority: "high",
+                timeToLive: 60 * 60 * 24
+            };
+            if (users.fireBaseIdMobile !== null && users.fireBaseIdMobile !== undefined && users.fireBaseIdMobile.length!==0) {
+                const message_notification = {
+                    notification: {
+                        title: "Nouvelle réservation de Groupe !!!",
+                        body: "😎 ".concat(group["groupName"], " : payé par : ",name.toString()),
+                        icon: "https://subtlepatterns.com/patterns/geometry2.png",
+                        click_action: 'FLUTTER_NOTIFICATION_CLICK',
+                    }
+                };
+                await fireBaseConfig.admin.messaging().sendToDevice(users.fireBaseIdMobile, message_notification, notification_options)
+                    .then(response => {
+                        console.log("NOTIF SEND OK");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        }
+        f.success(ctx, paymentGroup)
+    } catch {
+        f.failure(ctx, 'failed')
+    }
+})
+
+router.get('/payment/:userMail', async (ctx) => {
+    try {
+        const paymentGroup = await sdk.getAllPaymentsGroupByEmail(ctx.params.userMail);
+        f.success(ctx, paymentGroup)
     } catch {
         f.failure(ctx, 'failed')
     }

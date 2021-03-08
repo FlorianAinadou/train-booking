@@ -2,7 +2,7 @@ name: Back End projet actions
 
 on:
   push:
-    branches: [ master,develop]
+    branches: [ master,develop,angularFront]
   pull_request:
     branches: [ master,develop,nodeJsBack,angularFront,flutter]
 
