@@ -4,8 +4,8 @@ const f = require('../../utils/functions');
 const sdk = require('../sdk/paymentsdk');
 const customerFinderSdk = require('../../customerRegistration/sdk/customerFinder');
 
-const PUBLIC_VAPID = 'BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg';
-const PRIVATE_VAPID = '_kRzHiscHBIGftfA7IehH9EA3RvBl8SBYhXBAMz6GrI';
+const PUBLIC_VAPID = 'BBIl6lGgE5hzKW13pnO0sqrVChYUL0H3EfbfytkZ7O0FdZ9vBnOMhfPTZzTImag9s7rcNM4RSXfBZLjGCVoVIe0';
+const PRIVATE_VAPID = 'fcUJ3CI8iEXM7qCTUCRDW6KzTGJ_huJvEJ4kttBoktE';
 const webpush = require('web-push');
 webpush.setVapidDetails('mailto:you@domain.com', PUBLIC_VAPID, PRIVATE_VAPID);
 
@@ -38,6 +38,13 @@ router.post('pay', async (ctx) => {
 router.post('/payment/payReservationMobile', async (ctx) => {
     const bookings = await sdk.payReservationByIdAndEmail(ctx.request.body.bookingId, ctx.request.body.userMail, ctx.request.body.price);
     const users = await customerFinderSdk.getUserByEmail(ctx.request.body.userMail);
+    const options = {
+        vapidDetails: {
+            subject: 'mailto:email@gmail.com',
+            publicKey: PUBLIC_VAPID,
+            privateKey: PRIVATE_VAPID
+        }
+    };
     if (bookings && users !== null && users !== undefined && users.fireBaseIdMobile.length!==0) {
         const sub = {
             endpoint: users.endpoint,
@@ -54,7 +61,7 @@ router.post('/payment/payReservationMobile', async (ctx) => {
                 icon: 'assets/icons/icon-512x512.png'
             }
         };
-        webpush.sendNotification(sub, JSON.stringify(notificationPayload));
+        webpush.sendNotification(sub, JSON.stringify(notificationPayload),options);
     }
     // f.success(ctx, "OK");
     f.success(ctx, JSON.stringify(bookings));
@@ -121,6 +128,8 @@ router.post('/payment/paygroup', async (ctx) => {
                         click_action: 'FLUTTER_NOTIFICATION_CLICK',
                     }
                 };
+
+
                 await fireBaseConfig.admin.messaging().sendToDevice(users.fireBaseIdMobile, message_notification, notification_options)
                     .then(response => {
                         console.log("NOTIF SEND OK");
