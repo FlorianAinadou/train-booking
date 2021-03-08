@@ -18,7 +18,7 @@ export class PushNotificationService {
   }
 
   public sendSubscriptionToTheServer2(subscription: PushSubscription) {
-    console.log("ici");
+    // console.log("ici2222222");
     console.table(subscription);
     const r = {
       sub: subscription,
