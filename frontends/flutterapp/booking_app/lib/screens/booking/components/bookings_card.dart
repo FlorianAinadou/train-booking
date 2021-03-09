@@ -40,7 +40,7 @@ class _BookingsCardState extends State<BookingsCard> {
       'userMail': defaultUser,
       'price' : this.train.price
     };
-    print(data);
+    // print(data);
     var body = json.encode(data);
     var res = await http.post(
       url,
@@ -67,7 +67,7 @@ class _BookingsCardState extends State<BookingsCard> {
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: this.train.isGroup ? Color(0xFFF0F4C3) : Color(0xFFB3E5FC),
+        color: Color(0xFFB3E5FC),
         borderRadius: BorderRadius.circular(60),
       ),
       child: Column(
@@ -247,31 +247,6 @@ class _BookingsCardState extends State<BookingsCard> {
                 ),
               ),
             ],
-          ),
-          Visibility(
-            visible: train.isGroup,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 8.0, top: 8.0),
-              child: Divider(
-                color: Colors.grey,
-                height: 3,
-                thickness: 1,
-              ),
-            ),
-          ),
-          Visibility(
-            visible: train.isGroup,
-            child: RichText(
-              text: TextSpan(
-                text: this.train.groupName,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  //height: 1.5,
-                ),
-              ),
-            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

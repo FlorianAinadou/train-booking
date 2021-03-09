@@ -36,7 +36,7 @@ class _TrainCardState extends State<TrainCard> {
       'userMail': defaultUser,
       'price' : this.train.price
     };
-    print(data);
+    // print(data);
     var body = json.encode(data);
     var res = await http.post(
       url,
@@ -61,7 +61,7 @@ class _TrainCardState extends State<TrainCard> {
       'placeNumber': (new Random()).nextInt(1000000000),
       'trainId' : train.id
     };
-    print(data);
+    // print(data);
     var body = json.encode(data);
     var res = await http.post(
       url,

@@ -27,7 +27,7 @@ class _TrainPageState extends State<TrainPage> {
     dynamic items = <Widget>[];
     // get from backend
     String url = host + trainSelectorRoute + widget.departureCity.trim() + '/' + widget.arrivalCity.trim();
-    print(url);
+    // print(url);
     var data = await http.get(url);
     var jsonData = json.decode(utf8.decode(data.bodyBytes));
     List<Train> trains = [];

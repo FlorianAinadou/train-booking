@@ -31,7 +31,7 @@ class _BookingsPageState extends State<BookingsPage> {
     dynamic items = <Widget>[];
     // get from backend
     String url = host + bookingRoute + defaultUser;
-    print('1 --> ' + url);
+    // print('1 --> ' + url);
     var data = await http.get(url);
     var jsonData = json.decode(utf8.decode(data.bodyBytes));
     List<Booking> bookingPaids = [];
@@ -54,9 +54,10 @@ class _BookingsPageState extends State<BookingsPage> {
       url = host + trainSelectorRoute + d.trainId.toString();
       print('2 --> ' + url);
       data = await http.get(url);
-      //print(data.statusCode);
+      // print(data.statusCode);
       if (data.statusCode == 200) {
         jsonData = json.decode(utf8.decode(data.bodyBytes));
+        // print(jsonData);
         //List<Train> trains = [];
         for (var t in jsonData) {
           Train train = Train(
@@ -64,11 +65,11 @@ class _BookingsPageState extends State<BookingsPage> {
               trainId: t["trainId"],
               date: t["date"],
               routes: t["routes"],
-              price: d.isGroup ? d.price : t["price"],
-              isGroup: d.isGroup,
-              remainingSeats: t["remainingSeats"],
-              groupName: d.groupName);
+              full: t["full"],
+              price: t["price"],
+              remainingSeats: t["remainingSeats"]);
           //print(DateTime.parse(train.date).difference(DateTime.now()).inDays);
+          // print("train" + train.toString());
           items.add(Column(
             children: <Widget>[
               BookingsCard(
@@ -83,6 +84,7 @@ class _BookingsPageState extends State<BookingsPage> {
         }
       }
     }
+    // print(items);
     return items;
   }
 
@@ -145,6 +147,7 @@ class _BookingsPageState extends State<BookingsPage> {
   Widget build(BuildContext context) {
     switch (this.type) {
       case 1:
+        // print("ok");
         return FutureBuilder(
           future: _getBookingTrains(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -152,6 +155,7 @@ class _BookingsPageState extends State<BookingsPage> {
               List<Widget> availableTrains = snapshot.data;
               if (availableTrains != null) {
                 int taille = availableTrains.length;
+                print("taille : " + taille.toString());
                 if (taille != 0)
                   return LiquidPullToRefresh(
                     //key: _refreshIndicatorKey,	// key if you want to add

@@ -32,11 +32,11 @@ class _OrderedTicketsPageState extends State<OrderedTicketsPage> {
     dynamic items = <Widget>[];
     // get from backend
     String url = host + paidBookingRoute + defaultUser;
-    print(url);
+    // print(url);
     var data = await http.get(url);
     var jsonData = json.decode(utf8.decode(data.bodyBytes));
     List<Booking> bookingPaids = [];
-    print(data.body);
+    // print(data.body);
     for (var t in jsonData) {
       Booking bookingPaid = Booking(
           bookingId: t["bookingId"],
@@ -55,8 +55,8 @@ class _OrderedTicketsPageState extends State<OrderedTicketsPage> {
       url = host + trainSelectorRoute + d.trainId.toString();
       data = await http.get(url);
       jsonData = json.decode(utf8.decode(data.bodyBytes));
-      print("cic");
-      print(jsonData);
+      // print("cic");
+      // print(jsonData);
       List<Train> trains = [];
       for (var t in jsonData) {
         //print(t["trainId"]);

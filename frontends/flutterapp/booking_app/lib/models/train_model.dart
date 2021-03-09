@@ -15,13 +15,13 @@ class Train {
   Train({
     @required this.id,
     @required this.trainId,
-    @required this.date,
-    @required this.routes,
-    @required this.full,
-    @required this.price,
-    @required this.isGroup,
-    @required this.remainingSeats,
-    @required this.groupName
+    this.date,
+    this.routes,
+    this.full,
+    this.price,
+    this.isGroup,
+    this.remainingSeats,
+    this.groupName
   })  : assert(trainId != null);
 
   Train.fromMap(Map<String, dynamic> map)
