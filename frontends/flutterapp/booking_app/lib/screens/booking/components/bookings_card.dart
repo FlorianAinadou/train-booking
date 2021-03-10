@@ -40,7 +40,7 @@ class _BookingsCardState extends State<BookingsCard> {
       'userMail': defaultUser,
       'price' : this.train.price
     };
-    print(data);
+    // print(data);
     var body = json.encode(data);
     var res = await http.post(
       url,
@@ -212,7 +212,7 @@ class _BookingsCardState extends State<BookingsCard> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: 'Correspondances\n',
+                        text: 'Correspondance\n',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -232,7 +232,7 @@ class _BookingsCardState extends State<BookingsCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: '?\n',
+                            text: (this.train.routes.length > 2) ? 'Oui\n' : 'Non\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,

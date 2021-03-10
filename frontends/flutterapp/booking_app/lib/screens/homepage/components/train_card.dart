@@ -36,7 +36,7 @@ class _TrainCardState extends State<TrainCard> {
       'userMail': defaultUser,
       'price' : this.train.price
     };
-    print(data);
+    // print(data);
     var body = json.encode(data);
     var res = await http.post(
       url,
@@ -61,7 +61,7 @@ class _TrainCardState extends State<TrainCard> {
       'placeNumber': (new Random()).nextInt(1000000000),
       'trainId' : train.id
     };
-    print(data);
+    // print(data);
     var body = json.encode(data);
     var res = await http.post(
       url,
@@ -224,7 +224,7 @@ class _TrainCardState extends State<TrainCard> {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: 'Correspondances\n',
+                        text: 'Correspondance\n',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -244,7 +244,7 @@ class _TrainCardState extends State<TrainCard> {
                             ),
                           ),*/
                           TextSpan(
-                            text: '?\n',
+                            text: (this.train.routes.length > 2) ? 'Oui\n' : 'Non\n',
                             style: TextStyle(
                               color: Colors.black45,
                               fontWeight: FontWeight.w400,
