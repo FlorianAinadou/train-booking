@@ -4,11 +4,13 @@
     * DJEKINOU Paul-Marie
     * KOFFI Paul
     * NABAGOU Djotiham
-* Version actuelle: POC
+* Version actuelle: Démo finale
 * Livrables:
+    * [final demo (09-03-2021) ](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_10)
     * [POC](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_46)
 * Tags: 
     * **Year 2021**
+        * [Week 10 (final demo)](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_10)
         * [Week 9](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_9)
         * [Week 8](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_8)
         * [Week 7](https://github.com/wak-nda/train-booking-al-20-21-team-c/releases/tag/tag_7)
@@ -40,7 +42,7 @@
     
   L'architecture logicielle à développer dans ce projet s'appuiera sur la pile suivante :
   <p align="center">
-      <img src="./deliverables/train-booking-components-diagram.png"/>
+      <img src="./deliverables/train-booking-components-diagram(latest).png"/>
   </p>
   
   ## Fonctionnement de la CI

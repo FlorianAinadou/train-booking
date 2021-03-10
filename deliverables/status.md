@@ -1,5 +1,23 @@
 # ----------------- 2021 -----------------
 
+# Week 10 :
+
+### Achieved
+- final demo
+- [project video presentation link](https://drive.google.com/file/d/1ttFqgT0rZkLQaCJQ8OD7BMvqpkks1nis/view?usp=sharing)
+- [complete video with all scenarios](https://drive.google.com/file/d/1ri-sviZOFK54mUqqbXRZjoKcgHJHN9O7/view?usp=sharing)
+
+### For the following week
+- None
+
+### Risks
+- None
+
+### Flag
+```diff
++ (Green)
+```
+
 # Week 9 :
 
 ### Achieved
@@ -74,7 +92,7 @@
 # Week 5 :
 
 ### Achieved
-- system architecture diagram updated and available [here](./train-booking-components-diagram.png)
+- system architecture diagram updated and available [here](train-booking-components-diagram(latest).png)
 - Notification functionality implemented for both web and mobile
 - scaling tests in process
 
@@ -181,7 +199,7 @@
 # Week 43:
 
 ### Achieved
-- We made new modifications of the component diagram for more details on different machines used, shared online database and more description about shared data between components. The picture of architecture is available [here](./train-booking-components-diagram.png).
+- We made new modifications of the component diagram for more details on different machines used, shared online database and more description about shared data between components. The picture of architecture is available [here](train-booking-components-diagram(latest).png).
 - Architecture document updated for technical justifications. Available from page 7 of [architecture.pdf](./architecture.pdf) document.
 - The backend has been set up and components like CustomerRegistration, TrainSelector and the bank extern are done.
 - The flutter mobile app has been set up, and the homepage is in progress
@@ -204,7 +222,7 @@
 # Week 42:
 
 ### Achieved
-- New modification of the component diagram available [here](./train-booking-components-diagram.png).
+- New modification of the component diagram available [here](train-booking-components-diagram(latest).png).
 - Detailed description of the component diagram available from page 6 of the [architecture.pdf](./architecture.pdf) document.
 - Architectural choices made for frontend, backend, database and API documentation.
 
