@@ -92,7 +92,7 @@
 # Week 5 :
 
 ### Achieved
-- system architecture diagram updated and available [here](train-booking-components-diagram(latest).png)
+- system architecture diagram updated and available [here](./train-booking-components-diagram.png)
 - Notification functionality implemented for both web and mobile
 - scaling tests in process
 
@@ -199,7 +199,7 @@
 # Week 43:
 
 ### Achieved
-- We made new modifications of the component diagram for more details on different machines used, shared online database and more description about shared data between components. The picture of architecture is available [here](train-booking-components-diagram(latest).png).
+- We made new modifications of the component diagram for more details on different machines used, shared online database and more description about shared data between components. The picture of architecture is available [here](./train-booking-components-diagram.png).
 - Architecture document updated for technical justifications. Available from page 7 of [architecture.pdf](./architecture.pdf) document.
 - The backend has been set up and components like CustomerRegistration, TrainSelector and the bank extern are done.
 - The flutter mobile app has been set up, and the homepage is in progress
@@ -222,8 +222,7 @@
 # Week 42:
 
 ### Achieved
-- New modification of the component diagram available [here](train-booking-components-diagram(latest).png).
-- Detailed description of the component diagram available from page 6 of the [architecture.pdf](./architecture.pdf) document.
+- New modification of the component diagram available [here](./train-booking-components-diagram.png) - Detailed description of the component diagram available from page 6 of the [architecture.pdf](./architecture.pdf) document.
 - Architectural choices made for frontend, backend, database and API documentation.
 
 ### For the following week
